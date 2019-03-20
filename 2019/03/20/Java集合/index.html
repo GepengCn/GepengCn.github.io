@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-8-22/33120488.jpg">
 <meta property="og:image" content="http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-8-22/97739220.jpg">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/3/2/161e717d734f3b23?w=896&h=363&f=jpeg&s=205536">
-<meta property="og:updated_time" content="2019-03-20T13:42:29.016Z">
+<meta property="og:updated_time" content="2019-03-20T14:26:55.760Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java集合">
 <meta name="twitter:description" content="HashMap的底层实现JDK1.8之前JDK1.8 之前 HashMap 底层是数组和链表结合在一起使用也就是链表散列。HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值，然后通过(n - 1) &amp;amp; hash判断当前元素存放的位置（这里的 n 指的是数组的长度），如果当前位置存在元素的话，就判断该元素与要存入的元素的 hash 值以及 key 是否">
@@ -335,9 +335,8 @@
       
 
       
-        <h2 id="HashMap的底层实现"><a href="#HashMap的底层实现" class="headerlink" title="HashMap的底层实现"></a>HashMap的底层实现</h2><h3 id="JDK1-8之前"><a href="#JDK1-8之前" class="headerlink" title="JDK1.8之前"></a>JDK1.8之前</h3><p>JDK1.8 之前 HashMap 底层是<strong>数组和链表</strong>结合在一起使用也就是<strong>链表散列</strong>。HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值，然后通过<code>(n - 1) &amp; hash</code>判断当前元素存放的位置（这里的 n 指的是数组的长度），如果当前位置存在元素的话，就判断该元素与要存入的元素的 hash 值以及 key 是否相同，如果相同的话，直接覆盖，不相同就通过拉链法解决冲突。</p>
+        <h2 id="HashMap的底层实现"><a href="#HashMap的底层实现" class="headerlink" title="HashMap的底层实现"></a>HashMap的底层实现</h2><h3 id="JDK1-8之前"><a href="#JDK1-8之前" class="headerlink" title="JDK1.8之前"></a>JDK1.8之前</h3><p>JDK1.8 之前 HashMap 底层是<strong>数组和链表</strong>结合在一起使用也就是<strong>链表散列</strong>。HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值，然后通过<code>(n - 1) &amp; hash</code>判断当前元素存放的位置（这里的 n 指的是数组的长度），如果当前位置存在元素的话，就判断该元素与要存入的元素的 hash 值以及 key 是否相同，如果相同的话，直接覆盖，不相同就通过拉链法解决冲突。<br><a id="more"></a></p>
 <p>所谓扰动函数指的就是 HashMap 的 hash 方法。使用 hash 方法也就是扰动函数是为了防止一些实现比较差的 hashCode() 方法 换句话说使用扰动函数之后可以减少碰撞。</p>
-<a id="more"></a>
 <p>JDK 1.8 HashMap 的 hash 方法源码:</p>
 <p>JDK 1.8 的 hash方法 相比于 JDK 1.7 hash 方法更加简化，但是原理不变。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(Object key)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> h;</span><br><span class="line">    <span class="comment">// key.hashCode()：返回散列值也就是hashcode</span></span><br><span class="line">    <span class="comment">// ^ ：按位异或</span></span><br><span class="line">    <span class="comment">// &gt;&gt;&gt;:无符号右移，忽略符号位，空位都以0补齐</span></span><br><span class="line">    <span class="keyword">return</span> (key == <span class="keyword">null</span>) ? <span class="number">0</span> : (h = key.hashCode()) ^ (h &gt;&gt;&gt; <span class="number">16</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>对比一下 JDK1.7的 HashMap 的 hash 方法源码.</p>
