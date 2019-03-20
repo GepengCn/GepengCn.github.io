@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-8-22/33120488.jpg">
 <meta property="og:image" content="http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-8-22/97739220.jpg">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/3/2/161e717d734f3b23?w=896&h=363&f=jpeg&s=205536">
-<meta property="og:updated_time" content="2019-03-20T14:59:15.772Z">
+<meta property="og:updated_time" content="2019-03-20T15:03:07.747Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java集合">
 <meta name="twitter:description" content="HashMap的底层实现JDK1.8之前JDK1.8 之前 HashMap 底层是数组和链表结合在一起使用也就是链表散列。HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值，然后通过(n - 1) &amp;amp; hash判断当前元素存放的位置（这里的 n 指的是数组的长度），如果当前位置存在元素的话，就判断该元素与要存入的元素的 hash 值以及 key 是否">
@@ -396,6 +396,13 @@
 <h2 id="HashMap-的长度为什么是2的幂次方"><a href="#HashMap-的长度为什么是2的幂次方" class="headerlink" title="HashMap 的长度为什么是2的幂次方"></a>HashMap 的长度为什么是2的幂次方</h2><p>为了能让 HashMap 存取高效，尽量较少碰撞，也就是要尽量把数据分配均匀。我们上面也讲到了过了，Hash 值的范围值-2147483648到2147483647，前后加起来大概40亿的映射空间，只要哈希函数映射得比较均匀松散，一般应用是很难出现碰撞的。但问题是一个40亿长度的数组，内存是放不下的。所以这个散列值是不能直接拿来用的。用之前还要先做对数组的长度取模运算，得到的余数才能用来要存放的位置也就是对应的数组下标。这个数组下标的计算方法是“ <code>(n - 1) &amp; hash</code>”。（n代表数组长度）。这也就解释了 HashMap 的长度为什么是2的幂次方。</p>
 <p><strong>这个算法应该如何设计呢？</strong></p>
 <p>我们首先可能会想到采用%取余的操作来实现。但是，重点来了：<strong>“取余(%)操作中如果除数是2的幂次则等价于与其除数减一的与(&amp;)操作（也就是说 hash%length==hash&amp;(length-1)的前提是 length 是2的 n 次方；）。” 并且 采用二进制位操作 &amp;，相对于%能够提高运算效率，这就解释了 HashMap 的长度为什么是2的幂次方。</strong></p>
+<h5 id="推荐阅读："><a href="#推荐阅读：" class="headerlink" title="推荐阅读："></a>推荐阅读：</h5><ul>
+<li><a href="https://blog.csdn.net/fjse51/article/details/55260493" target="_blank" rel="noopener">jdk1.8中ConcurrentHashMap的实现原理</a></li>
+<li><a href="https://crossoverjie.top/2018/07/23/java-senior/ConcurrentHashMap/" target="_blank" rel="noopener">HashMap? ConcurrentHashMap? 相信看完这篇没人能难住你！</a></li>
+<li><a href="http://www.yuanrengu.com/index.php/2017-01-17.html" target="_blank" rel="noopener">HASHMAP、HASHTABLE、CONCURRENTHASHMAP的原理与区别</a></li>
+<li><a href="https://www.cnblogs.com/chengxiao/p/6842045.html" target="_blank" rel="noopener">ConcurrentHashMap实现原理及源码分析</a></li>
+<li><a href="https://blog.csdn.net/jianghuxiaojin/article/details/52006118#commentBox" target="_blank" rel="noopener">java-并发-ConcurrentHashMap高并发机制-jdk1.8</a></li>
+</ul>
 
       
     </div>
@@ -582,7 +589,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap的底层实现"><span class="nav-number">1.</span> <span class="nav-text">HashMap的底层实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK1-8之前"><span class="nav-number">1.1.</span> <span class="nav-text">JDK1.8之前</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK1-8之后"><span class="nav-number">1.2.</span> <span class="nav-text">JDK1.8之后</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ConcurrentHashMap线程安全的具体实现方式-底层具体实现"><span class="nav-number">2.</span> <span class="nav-text">ConcurrentHashMap线程安全的具体实现方式/底层具体实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK7"><span class="nav-number">2.1.</span> <span class="nav-text">JDK7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK8"><span class="nav-number">2.2.</span> <span class="nav-text">JDK8</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashSet-和-HashMap-区别"><span class="nav-number">3.</span> <span class="nav-text">HashSet 和 HashMap 区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap-和-Hashtable-的区别"><span class="nav-number">4.</span> <span class="nav-text">HashMap 和 Hashtable 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arraylist-与-LinkedList-异同"><span class="nav-number">5.</span> <span class="nav-text">Arraylist 与 LinkedList 异同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap-的长度为什么是2的幂次方"><span class="nav-number">6.</span> <span class="nav-text">HashMap 的长度为什么是2的幂次方</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap的底层实现"><span class="nav-number">1.</span> <span class="nav-text">HashMap的底层实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK1-8之前"><span class="nav-number">1.1.</span> <span class="nav-text">JDK1.8之前</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK1-8之后"><span class="nav-number">1.2.</span> <span class="nav-text">JDK1.8之后</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ConcurrentHashMap线程安全的具体实现方式-底层具体实现"><span class="nav-number">2.</span> <span class="nav-text">ConcurrentHashMap线程安全的具体实现方式/底层具体实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK7"><span class="nav-number">2.1.</span> <span class="nav-text">JDK7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK8"><span class="nav-number">2.2.</span> <span class="nav-text">JDK8</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashSet-和-HashMap-区别"><span class="nav-number">3.</span> <span class="nav-text">HashSet 和 HashMap 区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap-和-Hashtable-的区别"><span class="nav-number">4.</span> <span class="nav-text">HashMap 和 Hashtable 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Arraylist-与-LinkedList-异同"><span class="nav-number">5.</span> <span class="nav-text">Arraylist 与 LinkedList 异同</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap-的长度为什么是2的幂次方"><span class="nav-number">6.</span> <span class="nav-text">HashMap 的长度为什么是2的幂次方</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#推荐阅读："><span class="nav-number">6.0.0.1.</span> <span class="nav-text">推荐阅读：</span></a></li></ol></li></ol></div>
             
 
           </div>
