@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -79,18 +86,18 @@
 
 
 
-<meta name="description" content="面向对象简单理解如果你遇到一个问题，你思考的方式不是第一应该做什么，第二应该做什么，这是面向过程的思维。 面向对象思维考虑的是，这个问题里包含哪些类和对象；类里面有哪些属性和方法；类和类之间有哪些联系。 设计思想面向对象的基本思想是，从现实世界中客观存在的事物出发来构造软件系统，并在系统的构造中尽可能运用人类的自然思维方式。 面向对象更加强调运用人类在日常生活的逻辑思维中经常采用的思想方法与原则，">
+<meta name="description" content="面向对象简单理解如果你遇到一个问题，你思考的方式不是第一应该做什么，第二应该做什么，这是面向过程的思维。 面向对象思维考虑的是，这个问题里包含哪些类和对象；类里面有哪些属性和方法；类和类之间有哪些联系。">
 <meta name="keywords" content="基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java基础">
 <meta property="og:url" content="https://github.com/GepengCn/2019/03/20/Java基础/index.html">
 <meta property="og:site_name" content="技术博客">
-<meta property="og:description" content="面向对象简单理解如果你遇到一个问题，你思考的方式不是第一应该做什么，第二应该做什么，这是面向过程的思维。 面向对象思维考虑的是，这个问题里包含哪些类和对象；类里面有哪些属性和方法；类和类之间有哪些联系。 设计思想面向对象的基本思想是，从现实世界中客观存在的事物出发来构造软件系统，并在系统的构造中尽可能运用人类的自然思维方式。 面向对象更加强调运用人类在日常生活的逻辑思维中经常采用的思想方法与原则，">
+<meta property="og:description" content="面向对象简单理解如果你遇到一个问题，你思考的方式不是第一应该做什么，第二应该做什么，这是面向过程的思维。 面向对象思维考虑的是，这个问题里包含哪些类和对象；类里面有哪些属性和方法；类和类之间有哪些联系。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-20T02:32:33.536Z">
+<meta property="og:updated_time" content="2019-03-20T02:46:02.444Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java基础">
-<meta name="twitter:description" content="面向对象简单理解如果你遇到一个问题，你思考的方式不是第一应该做什么，第二应该做什么，这是面向过程的思维。 面向对象思维考虑的是，这个问题里包含哪些类和对象；类里面有哪些属性和方法；类和类之间有哪些联系。 设计思想面向对象的基本思想是，从现实世界中客观存在的事物出发来构造软件系统，并在系统的构造中尽可能运用人类的自然思维方式。 面向对象更加强调运用人类在日常生活的逻辑思维中经常采用的思想方法与原则，">
+<meta name="twitter:description" content="面向对象简单理解如果你遇到一个问题，你思考的方式不是第一应该做什么，第二应该做什么，这是面向过程的思维。 面向对象思维考虑的是，这个问题里包含哪些类和对象；类里面有哪些属性和方法；类和类之间有哪些联系。">
 
 
 
@@ -324,6 +331,7 @@
       
         <h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><h3 id="简单理解"><a href="#简单理解" class="headerlink" title="简单理解"></a>简单理解</h3><p>如果你遇到一个问题，你思考的方式不是第一应该做什么，第二应该做什么，这是面向过程的思维。</p>
 <p>面向对象思维考虑的是，这个问题里包含哪些类和对象；类里面有哪些属性和方法；类和类之间有哪些联系。</p>
+<a id="more"></a>
 <h3 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h3><p><strong>面向对象的基本思想是，从现实世界中客观存在的事物出发来构造软件系统，并在系统的构造中尽可能运用人类的自然思维方式。</strong></p>
 <p>面向对象更加强调运用人类在日常生活的逻辑思维中经常采用的思想方法与原则，如抽象、分类，继承、聚合、多态等。</p>
 <p>人在思考的时候，首先眼睛里看到的是一个一个的对象。</p>
@@ -370,6 +378,7 @@
 <li><p>接口</p>
 </li>
 </ul>
+<hr>
 <h2 id="接口和抽象类"><a href="#接口和抽象类" class="headerlink" title="接口和抽象类"></a>接口和抽象类</h2><h3 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h3><blockquote>
 <p>抽象类是用来捕捉子类的通用特性的 。它不能被实例化，只能被用作子类的超类</p>
 </blockquote>
@@ -467,6 +476,7 @@
 <li>String 中的 equals 方法是被重写过的，因为 object 的 equals 方法是比较的对象的内存地址，而 String 的 equals 方法比较的是对象的值。</li>
 <li>当创建 String 类型的对象时，虚拟机会在常量池中查找有没有已经存在的值和要创建的值相同的对象，如果有就把它赋给当前引用。如果没有就在常量池中重新创建一个 String 对象</li>
 </ul>
+<hr>
 <h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><h3 id="字符串常量池"><a href="#字符串常量池" class="headerlink" title="字符串常量池"></a>字符串常量池</h3><blockquote>
 <p>字符串常量池存在运行时常量池之中（在JDK7之前存在运行时常量池之中，在JDK7已经将其转移到堆中）。</p>
 </blockquote>

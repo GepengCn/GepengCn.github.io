@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -324,204 +331,15 @@
 
       
         
-          
-            <h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><h3 id="简单理解"><a href="#简单理解" class="headerlink" title="简单理解"></a>简单理解</h3><p>如果你遇到一个问题，你思考的方式不是第一应该做什么，第二应该做什么，这是面向过程的思维。</p>
+          <h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><h3 id="简单理解"><a href="#简单理解" class="headerlink" title="简单理解"></a>简单理解</h3><p>如果你遇到一个问题，你思考的方式不是第一应该做什么，第二应该做什么，这是面向过程的思维。</p>
 <p>面向对象思维考虑的是，这个问题里包含哪些类和对象；类里面有哪些属性和方法；类和类之间有哪些联系。</p>
-<h3 id="设计思想"><a href="#设计思想" class="headerlink" title="设计思想"></a>设计思想</h3><p><strong>面向对象的基本思想是，从现实世界中客观存在的事物出发来构造软件系统，并在系统的构造中尽可能运用人类的自然思维方式。</strong></p>
-<p>面向对象更加强调运用人类在日常生活的逻辑思维中经常采用的思想方法与原则，如抽象、分类，继承、聚合、多态等。</p>
-<p>人在思考的时候，首先眼睛里看到的是一个一个的对象。</p>
-<hr>
-<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>封装可以被认为是一个保护屏障，防止该类的代码和数据被外部类定义的代码随机访问。</p>
-<p>要访问该类的代码和数据，必须通过严格的接口控制。</p>
-<p>封装最主要的功能在于我们能修改自己的实现代码，而不用修改那些调用我们代码的程序片段。</p>
-<p>适当的封装可以让程序更容易理解与维护，也更加的安全。</p>
-<h3 id="封装的优点"><a href="#封装的优点" class="headerlink" title="封装的优点"></a>封装的优点</h3><ul>
-<li><p>良好的封装能够减少耦合。</p>
-</li>
-<li><p>类内部的结构可以自由修改。</p>
-</li>
-<li><p>可以对成员变量进行更精确的控制。</p>
-</li>
-<li><p>隐藏信息，实现细节。</p>
-</li>
-</ul>
-<hr>
-<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>继承就是子类继承父类的特征和行为，使得子类具有父类相同的行为。</p>
-<h3 id="继承的特性"><a href="#继承的特性" class="headerlink" title="继承的特性"></a>继承的特性</h3><ul>
-<li><p>子类拥有父类非 private 的属性、方法。</p>
-</li>
-<li><p>子类可以拥有自己的属性和方法，即子类可以对父类进行扩展。</p>
-</li>
-<li><p>子类可以用自己的方式实现父类的方法。</p>
-</li>
-<li><p>Java 的继承是单继承，但是可以多重继承，单继承就是一个子类只能继承一个父类，多重继承就是，例如 A 类继承 B 类，B 类继承 C 类，所以按照关系就是 C 类是 B 类的父类，B 类是 A 类的父类，这是 Java 继承区别于 C++ 继承的一个特性。</p>
-</li>
-<li><p>提高了类之间的耦合性（继承的缺点，耦合度高就会造成代码之间的联系越紧密，代码独立性越差）</p>
-</li>
-</ul>
-<blockquote>
-<p>子类是不能够继承父类的构造器，但是要注意的是，如果父类的构造器都是带有参数的，则必须在子类的构造器中显示地通过super关键字调用父类的构造器并配以适当的参数列表。如果父类有无参构造器，则在子类的构造器中用super关键字调用父类构造器不是必须的，如果没有使用super关键字，系统会自动调用父类的无参构造器。</p>
-</blockquote>
-<hr>
-<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>引用变量所指向的具体类型或者该引用的发起的方法调用编译器是不确定的，而是在运行期才确定</p>
-<p>多态是同一个行为具有多个不同表现形式或形态的能力。</p>
-<p>多态就是同一个接口，使用不同的实例而执行不同操作。</p>
-<h3 id="存在的必要条件"><a href="#存在的必要条件" class="headerlink" title="存在的必要条件"></a>存在的必要条件</h3><p>继承、重写、父类引用指向子类对象</p>
-<h3 id="实现形式"><a href="#实现形式" class="headerlink" title="实现形式"></a>实现形式</h3><ul>
-<li><p>继承</p>
-</li>
-<li><p>接口</p>
-</li>
-</ul>
-<h2 id="接口和抽象类"><a href="#接口和抽象类" class="headerlink" title="接口和抽象类"></a>接口和抽象类</h2><h3 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h3><blockquote>
-<p>抽象类是用来捕捉子类的通用特性的 。它不能被实例化，只能被用作子类的超类</p>
-</blockquote>
-<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><blockquote>
-<p>接口是抽象方法的集合。如果一个类实现了某个接口，那么它就继承了这个接口的抽象方法。这就像契约模式，如果实现了这个接口，那么就必须确保使用这些方法。接口只是一种形式，接口自身不能做任何事情。</p>
-</blockquote>
-<h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><table>
-<thead>
-<tr>
-<th>特性比较</th>
-<th>抽象类</th>
-<th>接口</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>默认的方法实现</td>
-<td>它可以有默认的方法实现</td>
-<td>接口完全是抽象的。它根本不存在方法的实现</td>
-</tr>
-<tr>
-<td>实现</td>
-<td>子类使用extends关键字来继承抽象类。如果子类不是抽象类的话，它需要提供抽象类中所有声明的方法的实现。</td>
-<td>子类使用关键字implements来实现接口。它需要提供接口中所有声明的方法的实现</td>
-</tr>
-<tr>
-<td>构造器</td>
-<td>抽象类可以有构造器</td>
-<td>接口不能有构造器</td>
-</tr>
-<tr>
-<td>访问修饰符</td>
-<td>抽象方法可以使用public,protected和默认修饰符</td>
-<td>接口只能用public和默认修饰符</td>
-</tr>
-<tr>
-<td>多继承</td>
-<td>抽象方法可以继承一个类和实现多个接口</td>
-<td>接口只可以继承一个或多个其它接口</td>
-</tr>
-</tbody>
-</table>
-<h3 id="什么时候使用抽象类和接口"><a href="#什么时候使用抽象类和接口" class="headerlink" title="什么时候使用抽象类和接口"></a>什么时候使用抽象类和接口</h3><p>接口表示一种能力。</p>
-<p>接口表示一种约定。</p>
-<p>抽象类是对事物的抽象，接口是对行为的抽象。</p>
-<p>抽象类作为很多子类的父类，它是一种模板式设计。</p>
-<p>接口是一种行为规范，它是一种辐射式设计。</p>
-<hr>
-<h2 id="重载和重写"><a href="#重载和重写" class="headerlink" title="重载和重写"></a>重载和重写</h2><h3 id="重写-Override"><a href="#重写-Override" class="headerlink" title="重写(Override)"></a>重写(Override)</h3><blockquote>
-<p>从字面上看，重写就是 重新写一遍的意思。其实就是在子类中把父类本身有的方法重新写一遍。子类继承了父类原有的方法，但有时子类并不想原封不动的继承父类中的某个方法，所以在方法名，参数列表，返回类型(除过子类中方法的返回值是父类中方法返回值的子类时)都相同的情况下， 对方法体进行修改或重写，这就是重写。但要注意子类函数的访问修饰权限不能少于父类的。</p>
-</blockquote>
-<h3 id="重写-总结："><a href="#重写-总结：" class="headerlink" title="重写 总结："></a>重写 总结：</h3><ul>
-<li>发生在父类与子类之间</li>
-<li>方法名，参数列表，返回类型（除过子类中方法的返回类型是父类中返回类型的子类）必须相同</li>
-<li>访问修饰符的限制一定要大于被重写方法的访问修饰符（public&gt;protected&gt;default&gt;private)</li>
-<li>重写方法一定不能抛出新的检查异常或者比被重写方法申明更加宽泛的检查型异常</li>
-</ul>
-<h3 id="重载-Overload"><a href="#重载-Overload" class="headerlink" title="重载(Overload)"></a>重载(Overload)</h3><p>在一个类中，同名的方法如果有不同的参数列表（参数类型不同、参数个数不同甚至是参数顺序不同）则视为重载。同时，重载对返回类型没有要求，可以相同也可以不同，但不能通过返回类型是否相同来判断重载。</p>
-<h3 id="重载-总结："><a href="#重载-总结：" class="headerlink" title="重载 总结："></a>重载 总结：</h3><ul>
-<li>重载Overload是一个类中多态性的一种表现</li>
-<li>重载要求同名方法的参数列表不同(参数类型，参数个数甚至是参数顺序)</li>
-<li>重载的时候，返回值类型可以相同也可以不相同。无法以返回型别作为重载函数的区分标准</li>
-</ul>
-<h3 id="面试时，问：重载（Overload）和重写（Override）的区别？"><a href="#面试时，问：重载（Overload）和重写（Override）的区别？" class="headerlink" title="面试时，问：重载（Overload）和重写（Override）的区别？"></a>面试时，问：重载（Overload）和重写（Override）的区别？</h3><blockquote>
-<p>答：方法的重载和重写都是实现多态的方式，区别在于前者实现的是编译时的多态性，而后者实现的是运行时的多态性。重载发生在一个类中，同名的方法如果有不同的参数列表（参数类型不同、参数个数不同或者二者都不同）则视为重载；重写发生在子类与父类之间，重写要求子类被重写方法与父类被重写方法有相同的参数列表，有兼容的返回类型，比父类被重写方法更好访问，不能比父类被重写方法声明更多的异常（里氏代换原则）。重载对返回类型没有特殊的要求，不能根据返回类型进行区分。</p>
-</blockquote>
-<hr>
-<h2 id="hashCode-与-equals"><a href="#hashCode-与-equals" class="headerlink" title="hashCode 与 equals"></a>hashCode 与 equals</h2><h3 id="hashCode（）介绍"><a href="#hashCode（）介绍" class="headerlink" title="hashCode（）介绍"></a>hashCode（）介绍</h3><p>hashCode() 的作用是获取哈希码，也称为散列码；它实际上是返回一个int整数。这个哈希码的作用是确定该对象在哈希表中的索引位置。hashCode() 定义在JDK的Object.java中，这就意味着Java中的任何类都包含有hashCode() 函数。</p>
-<p>散列表存储的是键值对(key-value)，它的特点是：能根据“键”快速的检索出对应的“值”。这其中就利用到了散列码！（可以快速找到所需要的对象）</p>
-<h3 id="为什么要有-hashCode"><a href="#为什么要有-hashCode" class="headerlink" title="为什么要有 hashCode"></a>为什么要有 hashCode</h3><p>我们以“HashSet 如何检查重复”为例子来说明为什么要有 hashCode：</p>
-<blockquote>
-<p>当你把对象加入 HashSet 时，HashSet 会先计算对象的 hashcode 值来判断对象加入的位置，同时也会与其他已经加入的对象的 hashcode 值作比较，如果没有相符的hashcode，HashSet会假设对象没有重复出现。但是如果发现有相同 hashcode 值的对象，这时会调用 equals（）方法来检查 hashcode 相等的对象是否真的相同。如果两者相同，HashSet 就不会让其加入操作成功。如果不同的话，就会重新散列到其他位置。（摘自我的Java启蒙书《Head first java》第二版）。这样我们就大大减少了 equals 的次数，相应就大大提高了执行速度。</p>
-</blockquote>
-<h3 id="hashCode（）与equals（）的相关规定"><a href="#hashCode（）与equals（）的相关规定" class="headerlink" title="hashCode（）与equals（）的相关规定"></a>hashCode（）与equals（）的相关规定</h3><ul>
-<li>如果两个对象相等，则hashcode一定也是相同的</li>
-<li>两个对象相等,对两个对象分别调用equals方法都返回true</li>
-<li>两个对象有相同的hashcode值，它们也不一定是相等的</li>
-<li>因此，equals 方法被覆盖过，则 hashCode 方法也必须被覆盖</li>
-<li>hashCode() 的默认行为是对堆上的对象产生独特值。如果没有重写 hashCode()，则该 class 的两个对象无论如何都不会相等（即使这两个对象指向相同的数据）</li>
-</ul>
-<h3 id="为什么重写equals时必须重写hashCode方法"><a href="#为什么重写equals时必须重写hashCode方法" class="headerlink" title="为什么重写equals时必须重写hashCode方法"></a>为什么重写equals时必须重写hashCode方法</h3><p>比如向HashSet加入一个对象，首先它会计算对象的hashcode值并与HashSet里的对象的hashcode值做比较。</p>
-<ul>
-<li>如果有没有相符的，说明没有重复元素，对象会被插入到HashSet中，不会调用equals方法</li>
-<li>如果有相符的，会调用equals方法再比较一次，如果相等，跳过。如果不等，则插入。</li>
-<li>hashcode默认是确定对象在哈希表中的索引位置，即默认情况下，不同对象，hashcode肯定不同，相同对象，hashcode一定相同。</li>
-</ul>
-<hr>
-<h2 id="与equals"><a href="#与equals" class="headerlink" title="==与equals"></a>==与equals</h2><h3 id><a href="#" class="headerlink" title="=="></a>==</h3><p>它的作用是判断两个对象的地址是不是相等。即，判断两个对象是不是同一个对象。(基本数据类型==比较的是值，引用数据类型==比较的是内存地址)</p>
-<h3 id="equals"><a href="#equals" class="headerlink" title="equals()"></a>equals()</h3><p>它的作用也是判断两个对象是否相等。但它一般有两种使用情况：</p>
-<ul>
-<li>情况1：类没有覆盖 equals() 方法。则通过 equals() 比较该类的两个对象时，等价于通过“==”比较这两个对象。</li>
-<li>情况2：类覆盖了 equals() 方法。一般，我们都覆盖 equals() 方法来两个对象的内容相等；若它们的内容相等，则返回 true (即，认为这两个对象相等)。</li>
-</ul>
-<h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><ul>
-<li>String 中的 equals 方法是被重写过的，因为 object 的 equals 方法是比较的对象的内存地址，而 String 的 equals 方法比较的是对象的值。</li>
-<li>当创建 String 类型的对象时，虚拟机会在常量池中查找有没有已经存在的值和要创建的值相同的对象，如果有就把它赋给当前引用。如果没有就在常量池中重新创建一个 String 对象</li>
-</ul>
-<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><h3 id="字符串常量池"><a href="#字符串常量池" class="headerlink" title="字符串常量池"></a>字符串常量池</h3><blockquote>
-<p>字符串常量池存在运行时常量池之中（在JDK7之前存在运行时常量池之中，在JDK7已经将其转移到堆中）。</p>
-</blockquote>
-<p>字符串常量池的存在使JVM提高了性能和减少了内存开销。</p>
-<p><strong>使用字符串常量池，每当我们使用字面量（String s=”1”;）创建字符串常量时，JVM会首先检查字符串常量池，如果该字符串已经存在常量池中，那么就将此字符串对象的地址赋值给引用s（引用s在Java栈中）。如果字符串不存在常量池中，就会实例化该字符串并且将其放到常量池中，并将此字符串对象的地址赋值给引用s（引用s在Java栈中）。</strong></p>
-<p><strong>使用字符串常量池，每当我们使用关键字new（String s=new String(”1”);）创建字符串常量时，JVM会首先检查字符串常量池，如果该字符串已经存在常量池中，那么不再在字符串常量池创建该字符串对象，而直接堆中复制该对象的副本，然后将堆中对象的地址赋值给引用s，如果字符串不存在常量池中，就会实例化该字符串并且将其放到常量池中，然后在堆中复制该对象的副本，然后将堆中对象的地址赋值给引用s。</strong></p>
-<h3 id="String的成员属性"><a href="#String的成员属性" class="headerlink" title="String的成员属性"></a>String的成员属性</h3><ul>
-<li><p><strong>value[]：</strong>char数组用于储存String的内容。</p>
-</li>
-<li><p><strong>offset：</strong>存储的第一个索引。</p>
-</li>
-<li><p><strong>count：</strong>字符串中的字符数。</p>
-</li>
-<li><p><strong>hash：</strong>String实例化的hashcode的一个缓存，String的哈希码被频繁使用，将其缓存起来，每次使用就没必要再次去计算，这也是一种性能优化的手段。这也是String被设计为不可变的原因之一，后面会讲到。</p>
-</li>
-</ul>
-<h3 id="String被设计成不可变和不能被继承的原因"><a href="#String被设计成不可变和不能被继承的原因" class="headerlink" title="String被设计成不可变和不能被继承的原因"></a>String被设计成不可变和不能被继承的原因</h3><blockquote>
-<p>String是不可变和不能被继承的（final修饰），这样设计的原因主要是为了设计考虑、效率和安全性。</p>
-</blockquote>
-<p><strong>字符串常量池的需要</strong></p>
-<p>只有当字符串是不可变的，字符串池才有可能实现。字符串池的实现可以在运行时节约很多heap空间，因为不同的字符串变量都指向池中的同一个字符串。假若字符串对象允许改变,那么将会导致各种逻辑错误,比如改变一个对象会影响到另一个独立对象. 严格来说，这种常量池的思想,是一种优化手段。</p>
-<p><strong>String对象缓存HashCode</strong></p>
-<p>上面解析String类的源码的时候已经提到了HashCode。Java中的String对象的哈希码被频繁地使用，字符串的不可变性保证了hash码的唯一性。</p>
-<p><strong>安全性</strong></p>
-<ul>
-<li><p>首先String被许多Java类用来当参数，如果字符串可变，那么会引起各种严重错误和安全漏洞。</p>
-</li>
-<li><p>再者String作为核心类，很多的内部方法的实现都是本地调用的，即调用操作系统本地API，其和操作系统交流频繁，假如这个类被继承重写的话，难免会使操作系统造成巨大的隐患。</p>
-</li>
-<li><p>最后字符串的不可变性使得同一字符串实例被多个线程共享，所以保障了多线程的安全性。而且类加载器要用到字符串，不可变性提供了安全性，以便正确的类被加载。</p>
-</li>
-</ul>
-<hr>
-<h2 id="String、StringBuffer与StringBuilder区别"><a href="#String、StringBuffer与StringBuilder区别" class="headerlink" title="String、StringBuffer与StringBuilder区别"></a>String、StringBuffer与StringBuilder区别</h2><h3 id="运行速度"><a href="#运行速度" class="headerlink" title="运行速度"></a>运行速度</h3><p>StringBuilder &gt; StringBuffer &gt; String</p>
-<p>String每次追加字符串都会创建新的对象，而StringBuilder和StringBuffer每次追加对象都是同一个对象进行更改，不需要创建对象与回收，所以性能更好。</p>
-<p>但是由于StringBuffer支持同步锁，所以性能比StringBuilder要差。</p>
-<h3 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h3><p>String与StringBuffer是线程安全的。</p>
-<ul>
-<li>String是不可变的</li>
-<li>StringBuffer方法中被同步锁synchronized修饰</li>
-<li>Stringbuilder是线程不安全的</li>
-</ul>
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ul>
-<li><p>String：适用于少量的字符串操作的情况</p>
-</li>
-<li><p>StringBuilder：适用于单线程下在字符缓冲区进行大量操作的情况</p>
-</li>
-<li><p>StringBuffer：适用多线程下在字符缓冲区进行大量操作的情况</p>
-</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/03/20/Java基础/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
