@@ -372,8 +372,7 @@
 
       
         
-          <h2 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h2><h3 id="三种使用方式"><a href="#三种使用方式" class="headerlink" title="三种使用方式"></a>三种使用方式</h3><ul>
-<li><strong>修饰实例方法，作用于当前对象实例加锁，进入同步代码前要获得当前对象实例的锁。</strong>
+          <p><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2211488957,103959579&amp;fm=26&amp;gp=0.jpg" alt="thread_0"><br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/03/22/Java多线程/#more" rel="contents">
@@ -383,7 +382,7 @@
           <!--/noindex-->
         
       
-    </li></ul></div>
+    </p></div>
     
     
     
@@ -560,7 +559,7 @@
 
       
         
-          <h2 id="HashMap的底层实现"><a href="#HashMap的底层实现" class="headerlink" title="HashMap的底层实现"></a>HashMap的底层实现</h2><h3 id="JDK1-8之前"><a href="#JDK1-8之前" class="headerlink" title="JDK1.8之前"></a>JDK1.8之前</h3><p>JDK1.8 之前 HashMap 底层是<strong>数组和链表</strong>结合在一起使用也就是<strong>链表散列</strong>。HashMap 通过 key 的 hashCode 经过扰动函数处理过后得到 hash 值，然后通过<code>(n - 1) &amp; hash</code>判断当前元素存放的位置（这里的 n 指的是数组的长度），如果当前位置存在元素的话，就判断该元素与要存入的元素的 hash 值以及 key 是否相同，如果相同的话，直接覆盖，不相同就通过拉链法解决冲突。<br>
+          <p><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1553430792520&amp;di=71c5f13a0adbfa3625e2e6934346beb1&amp;imgtype=0&amp;src=http%3A%2F%2Fi2.hdslb.com%2Fbfs%2Farchive%2F9706d2ee4da04a9d0fd82ff469bb5d7a54e9a4c6.jpg" alt="collection_0"><br>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/03/20/Java集合/#more" rel="contents">
