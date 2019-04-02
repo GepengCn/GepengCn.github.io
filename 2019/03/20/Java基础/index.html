@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Wing">
 <meta property="og:description" content="面向对象简单理解如果你遇到一个问题，你思考的方式不是第一应该做什么，第二应该做什么，这是面向过程的思维。 面向对象思维考虑的是，这个问题里包含哪些类和对象；类里面有哪些属性和方法；类和类之间有哪些联系。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-29T04:29:12.610Z">
+<meta property="og:updated_time" content="2019-04-02T01:49:59.263Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java基础">
 <meta name="twitter:description" content="面向对象简单理解如果你遇到一个问题，你思考的方式不是第一应该做什么，第二应该做什么，这是面向过程的思维。 面向对象思维考虑的是，这个问题里包含哪些类和对象；类里面有哪些属性和方法；类和类之间有哪些联系。">
@@ -354,7 +354,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  18
+                  19
                 </span>
               
             </div>
@@ -539,22 +539,13 @@
 <li><p><strong>hash：</strong>String实例化的hashcode的一个缓存，String的哈希码被频繁使用，将其缓存起来，每次使用就没必要再次去计算，这也是一种性能优化的手段。这也是String被设计为不可变的原因之一，后面会讲到。</p>
 </li>
 </ul>
-<h3 id="String被设计成不可变和不能被继承的原因"><a href="#String被设计成不可变和不能被继承的原因" class="headerlink" title="String被设计成不可变和不能被继承的原因"></a>String被设计成不可变和不能被继承的原因</h3><blockquote>
-<p>String是不可变和不能被继承的（final修饰），这样设计的原因主要是为了设计考虑、效率和安全性。</p>
-</blockquote>
-<p><strong>字符串常量池的需要</strong></p>
-<p>只有当字符串是不可变的，字符串池才有可能实现。字符串池的实现可以在运行时节约很多heap空间，因为不同的字符串变量都指向池中的同一个字符串。假若字符串对象允许改变,那么将会导致各种逻辑错误,比如改变一个对象会影响到另一个独立对象. 严格来说，这种常量池的思想,是一种优化手段。</p>
-<p><strong>String对象缓存HashCode</strong></p>
-<p>上面解析String类的源码的时候已经提到了HashCode。Java中的String对象的哈希码被频繁地使用，字符串的不可变性保证了hash码的唯一性。</p>
-<p><strong>安全性</strong></p>
-<ul>
-<li><p>首先String被许多Java类用来当参数，如果字符串可变，那么会引起各种严重错误和安全漏洞。</p>
-</li>
-<li><p>再者String作为核心类，很多的内部方法的实现都是本地调用的，即调用操作系统本地API，其和操作系统交流频繁，假如这个类被继承重写的话，难免会使操作系统造成巨大的隐患。</p>
-</li>
-<li><p>最后字符串的不可变性使得同一字符串实例被多个线程共享，所以保障了多线程的安全性。而且类加载器要用到字符串，不可变性提供了安全性，以便正确的类被加载。</p>
-</li>
-</ul>
+<h3 id="String被设计成不可变和不能被继承的原因"><a href="#String被设计成不可变和不能被继承的原因" class="headerlink" title="String被设计成不可变和不能被继承的原因"></a>String被设计成不可变和不能被继承的原因</h3><ol>
+<li><strong>只有当字符串是不可变的，字符串池才有可能实现。</strong>字符串池的实现可以在运行时节约很多heap空间，因为不同的字符串变量都指向池中的同一个字符串。但如果字符串是可变的，那么String interning将不能实现(译者注：String interning是指对不同的字符串仅仅只保存一个，即不会保存多个相同的字符串。)，因为这样的话，如果变量改变了它的值，那么其它指向这个值的变量的值也会一起改变。</li>
+<li><strong>如果字符串是可变的，那么会引起很严重的安全问题。</strong>譬如，数据库的用户名、密码都是以字符串的形式传入来获得数据库的连接，或者在socket编程中，主机名和端口都是以字符串的形式传入。因为字符串是不可变的，所以它的值是不可改变的，否则黑客们可以钻到空子，改变字符串指向的对象的值，造成安全漏洞。</li>
+<li><strong>因为字符串是不可变的，所以是多线程安全的，同一个字符串实例可以被多个线程共享。</strong>这样便不用因为线程安全问题而使用同步。字符串自己便是线程安全的。</li>
+<li><strong>类加载器要用到字符串，不可变性提供了安全性，以便正确的类被加载。</strong>譬如你想加载java.sql.Connection类，而这个值被改成了myhacked.Connection，那么会对你的数据库造成不可知的破坏。</li>
+<li><strong>因为字符串是不可变的，所以在它创建的时候hashcode就被缓存了，不需要重新计算。</strong>这就使得字符串很适合作为Map中的键，字符串的处理速度要快过其它的键对象。这就是HashMap中的键往往都使用字符串。</li>
+</ol>
 <hr>
 <h2 id="String、StringBuffer与StringBuilder区别"><a href="#String、StringBuffer与StringBuilder区别" class="headerlink" title="String、StringBuffer与StringBuilder区别"></a>String、StringBuffer与StringBuilder区别</h2><h3 id="运行速度"><a href="#运行速度" class="headerlink" title="运行速度"></a>运行速度</h3><p>StringBuilder &gt; StringBuffer &gt; String</p>
 <p>String每次追加字符串都会创建新的对象，而StringBuilder和StringBuffer每次追加对象都是同一个对象进行更改，不需要创建对象与回收，所以性能更好。</p>
@@ -739,7 +730,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -844,7 +835,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">21k</span>
+    <span title="Site words total count">26.5k</span>
   
 </div>
 
