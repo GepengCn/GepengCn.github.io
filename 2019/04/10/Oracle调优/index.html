@@ -86,16 +86,17 @@
 
 
 
-<meta name="description" content="树欲静而风不止，子欲养而亲不待">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Wing">
-<meta property="og:url" content="https://github.com/GepengCn/categories/面试之旅/index.html">
+<meta name="description" content="语句方面 oracle采用自下而上的解析顺序，因而能过滤掉最大记录数量的条件应放在where语句的末尾，如id=？。 避免使用select *。  索引 适当的用索引，能大大提高检索效率。但索引需要空间存储及定期维护，每当有记录在表中增减或索引列被修改时, 索引本身也会被修改。  索引需要注意。避免在索引上使用not，使用计算，使用is null或is not null及通配符%，他们将促使ora">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Oracle调优">
+<meta property="og:url" content="https://github.com/GepengCn/2019/04/10/Oracle调优/index.html">
 <meta property="og:site_name" content="Wing">
-<meta property="og:description" content="树欲静而风不止，子欲养而亲不待">
+<meta property="og:description" content="语句方面 oracle采用自下而上的解析顺序，因而能过滤掉最大记录数量的条件应放在where语句的末尾，如id=？。 避免使用select *。  索引 适当的用索引，能大大提高检索效率。但索引需要空间存储及定期维护，每当有记录在表中增减或索引列被修改时, 索引本身也会被修改。  索引需要注意。避免在索引上使用not，使用计算，使用is null或is not null及通配符%，他们将促使ora">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-10T08:03:01.549Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Wing">
-<meta name="twitter:description" content="树欲静而风不止，子欲养而亲不待">
+<meta name="twitter:title" content="Oracle调优">
+<meta name="twitter:description" content="语句方面 oracle采用自下而上的解析顺序，因而能过滤掉最大记录数量的条件应放在where语句的末尾，如id=？。 避免使用select *。  索引 适当的用索引，能大大提高检索效率。但索引需要空间存储及定期维护，每当有记录在表中增减或索引列被修改时, 索引本身也会被修改。  索引需要注意。避免在索引上使用not，使用计算，使用is null或is not null及通配符%，他们将促使ora">
 
 
 
@@ -125,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="https://github.com/GepengCn/categories/面试之旅/">
+  <link rel="canonical" href="https://github.com/GepengCn/2019/04/10/Oracle调优/">
 
 
 
 
 
-  <title>分类: 面试之旅 | Wing</title>
+  <title>Oracle调优 | Wing</title>
   
 
 
@@ -150,7 +151,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -224,291 +225,210 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>面试之旅<small>分类</small>
-        </h1>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/GepengCn/2019/04/10/Oracle调优/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ge Peng">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Wing">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2019/04/10/Mybatis/" itemprop="url">
-              
-                <span itemprop="name">Mybatis</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">Oracle调优</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-10T14:57:38+08:00" content="2019-04-10">
-          04-10
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-10T15:36:08+08:00">
+                2019-04-10
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/10/Oracle调优/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/04/10/Oracle调优/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">本文总阅读量
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  207
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/10/JPA/" itemprop="url">
-              
-                <span itemprop="name">JPA</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-10T14:51:25+08:00" content="2019-04-10">
-          04-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/10/Hibernate/" itemprop="url">
-              
-                <span itemprop="name">Hibernate</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-10T14:33:04+08:00" content="2019-04-10">
-          04-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/10/Spring-Bean/" itemprop="url">
-              
-                <span itemprop="name">Spring Bean</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-10T12:30:11+08:00" content="2019-04-10">
-          04-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/10/Spring-IOC/" itemprop="url">
-              
-                <span itemprop="name">Spring IOC</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-10T12:24:31+08:00" content="2019-04-10">
-          04-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/10/Spring-AOP/" itemprop="url">
-              
-                <span itemprop="name">Spring AOP</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-10T12:06:21+08:00" content="2019-04-10">
-          04-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/10/SpringMVC/" itemprop="url">
-              
-                <span itemprop="name">SpringMVC</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-10T11:55:19+08:00" content="2019-04-10">
-          04-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/04/02/Java垃圾回收/" itemprop="url">
-              
-                <span itemprop="name">Java垃圾回收</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-04-02T11:24:37+08:00" content="2019-04-02">
-          04-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/25/Java虚拟机/" itemprop="url">
-              
-                <span itemprop="name">Java虚拟机</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-25T16:10:33+08:00" content="2019-03-25">
-          03-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/22/Java多线程/" itemprop="url">
-              
-                <span itemprop="name">Java多线程</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-22T22:34:27+08:00" content="2019-03-22">
-          03-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <h2 id="语句方面"><a href="#语句方面" class="headerlink" title="语句方面"></a>语句方面</h2><ol>
+<li>oracle采用自下而上的解析顺序，因而能过滤掉最大记录数量的条件应放在where语句的末尾，如id=？。</li>
+<li>避免使用select *。</li>
+</ol>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ol>
+<li><p>适当的用索引，能大大提高检索效率。但索引需要空间存储及定期维护，每当有记录在表中增减或索引列被修改时, 索引本身也会被修改。</p>
+</li>
+<li><p>索引需要注意。避免在索引上使用not，使用计算，使用is null或is not null及通配符%，他们将促使oracle停用索引。</p>
+</li>
+<li><p>如果检索数量超过表中30%的记录数，则该索引没有显著的效率提高。</p>
+</li>
+</ol>
+<h2 id="其他注意事项"><a href="#其他注意事项" class="headerlink" title="其他注意事项"></a>其他注意事项</h2><ol>
+<li><p>使用exists代替distinct。</p>
+</li>
+<li><p>使用union all(union)替换or。</p>
+</li>
+<li><p>order by 语句加在索引列，最好是主键上。</p>
+</li>
+</ol>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/10/Mybatis/" rel="next" title="Mybatis">
+                <i class="fa fa-chevron-left"></i> Mybatis
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/10/Spring-Boot/" rel="prev" title="Spring Boot">
+                Spring Boot <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/categories/面试之旅/page/2/">2</a><a class="extend next" rel="next" href="/categories/面试之旅/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -516,6 +436,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -536,8 +463,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -613,6 +549,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#语句方面"><span class="nav-number">1.</span> <span class="nav-text">语句方面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引"><span class="nav-number">2.</span> <span class="nav-text">索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他注意事项"><span class="nav-number">3.</span> <span class="nav-text">其他注意事项</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -763,6 +715,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
