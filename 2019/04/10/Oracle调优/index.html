@@ -86,17 +86,17 @@
 
 
 
-<meta name="description" content="语句方面 oracle采用自下而上的解析顺序，因而能过滤掉最大记录数量的条件应放在where语句的末尾，如id=？。 避免使用select *。  索引 适当的用索引，能大大提高检索效率。但索引需要空间存储及定期维护，每当有记录在表中增减或索引列被修改时, 索引本身也会被修改。  索引需要注意。避免在索引上使用not，使用计算，使用is null或is not null及通配符%，他们将促使ora">
+<meta name="description" content="语句方面 oracle采用自下而上的解析顺序，因而能过滤掉最大记录数量的条件应放在where语句的末尾，如id=？。 避免使用select *。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Oracle调优">
 <meta property="og:url" content="https://github.com/GepengCn/2019/04/10/Oracle调优/index.html">
 <meta property="og:site_name" content="Wing">
-<meta property="og:description" content="语句方面 oracle采用自下而上的解析顺序，因而能过滤掉最大记录数量的条件应放在where语句的末尾，如id=？。 避免使用select *。  索引 适当的用索引，能大大提高检索效率。但索引需要空间存储及定期维护，每当有记录在表中增减或索引列被修改时, 索引本身也会被修改。  索引需要注意。避免在索引上使用not，使用计算，使用is null或is not null及通配符%，他们将促使ora">
+<meta property="og:description" content="语句方面 oracle采用自下而上的解析顺序，因而能过滤掉最大记录数量的条件应放在where语句的末尾，如id=？。 避免使用select *。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-10T08:03:01.549Z">
+<meta property="og:updated_time" content="2019-04-10T09:14:42.323Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Oracle调优">
-<meta name="twitter:description" content="语句方面 oracle采用自下而上的解析顺序，因而能过滤掉最大记录数量的条件应放在where语句的末尾，如id=？。 避免使用select *。  索引 适当的用索引，能大大提高检索效率。但索引需要空间存储及定期维护，每当有记录在表中增减或索引列被修改时, 索引本身也会被修改。  索引需要注意。避免在索引上使用not，使用计算，使用is null或is not null及通配符%，他们将促使ora">
+<meta name="twitter:description" content="语句方面 oracle采用自下而上的解析顺序，因而能过滤掉最大记录数量的条件应放在where语句的末尾，如id=？。 避免使用select *。">
 
 
 
@@ -354,7 +354,8 @@
       
         <h2 id="语句方面"><a href="#语句方面" class="headerlink" title="语句方面"></a>语句方面</h2><ol>
 <li>oracle采用自下而上的解析顺序，因而能过滤掉最大记录数量的条件应放在where语句的末尾，如id=？。</li>
-<li>避免使用select *。</li>
+<li>避免使用select *。<a id="more"></a>
+</li>
 </ol>
 <h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ol>
 <li><p>适当的用索引，能大大提高检索效率。但索引需要空间存储及定期维护，每当有记录在表中增减或索引列被修改时, 索引本身也会被修改。</p>
