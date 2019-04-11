@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-9-17/1188352.jpg">
 <meta property="og:image" content="http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-9-17/48376272.jpg">
 <meta property="og:image" content="http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-9-17/5496407.jpg">
-<meta property="og:updated_time" content="2019-04-10T09:17:57.872Z">
+<meta property="og:updated_time" content="2019-04-11T02:21:30.875Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Bean">
 <meta name="twitter:description" content="简介在 Spring 中，那些组成应用程序的主体及由 Spring IOC 容器所管理的对象，被称之为 bean。简单地讲，bean 就是由 IOC 容器初始化、装配及管理的对象，除此之外，bean 就与应用程序中的其他对象没有什么区别了。而 bean 的定义以及 bean 相互间的依赖关系将通过配置元数据来描述。">
@@ -379,7 +379,8 @@
       
 
       
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在 Spring 中，那些组成应用程序的主体及由 Spring IOC 容器所管理的对象，被称之为 bean。简单地讲，bean 就是由 IOC 容器初始化、装配及管理的对象，除此之外，bean 就与应用程序中的其他对象没有什么区别了。而 bean 的定义以及 bean 相互间的依赖关系将通过配置元数据来描述。<br><a id="more"></a></p>
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>在 Spring 中，那些组成应用程序的主体及由 Spring IOC 容器所管理的对象，被称之为 bean。简单地讲，bean 就是由 IOC 容器初始化、装配及管理的对象，除此之外，bean 就与应用程序中的其他对象没有什么区别了。而 bean 的定义以及 bean 相互间的依赖关系将通过配置元数据来描述。</p>
+<a id="more"></a>
 <h2 id="bean的作用域"><a href="#bean的作用域" class="headerlink" title="bean的作用域"></a>bean的作用域</h2><p><img src="http://my-blog-to-use.oss-cn-beijing.aliyuncs.com/18-9-17/1188352.jpg" alt="springbean_0"></p>
 <h2 id="bean的生命周期"><a href="#bean的生命周期" class="headerlink" title="bean的生命周期"></a>bean的生命周期</h2><ul>
 <li>Bean容器找到配置文件中 Spring Bean 的定义。</li>
@@ -387,7 +388,7 @@
 <li>如果涉及到一些属性值 利用set方法设置一些属性值。</li>
 <li>如果Bean实现了BeanNameAware接口，调用setBeanName()方法，传入Bean的名字。</li>
 <li>如果Bean实现了BeanClassLoaderAware接口，调用setBeanClassLoader()方法，传入ClassLoader对象的实例。</li>
-<li>如果Bean实现了BeanFactoryAware接口，调用setBeanClassLoader()方法，传入ClassLoader对象的实例。</li>
+<li>如果Bean实现了BeanFactoryAware接口，调用setBeanFactory()方法，传入BeanFactory对象的实例。</li>
 <li>与上面的类似，如果实现了其他*Aware接口，就调用相应的方法。</li>
 <li>如果有和加载这个Bean的Spring容器相关的BeanPostProcessor对象，执行postProcessBeforeInitialization()方法</li>
 <li>如果Bean实现了InitializingBean接口，执行afterPropertiesSet()方法。</li>
@@ -648,7 +649,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">35.2k</span>
+    <span title="Site words total count">35.3k</span>
   
 </div>
 
