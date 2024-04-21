@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base : '/visionOS/',
   title: "visionOS",
   description: "visionOS From Scratch",
   themeConfig: {
@@ -9,7 +10,6 @@ export default defineConfig({
     nav: [
       { text: 'Home', link: '/' }
     ],
-    base : '/visionOS/',
     sidebar: [
       {
         text: 'Swift',
