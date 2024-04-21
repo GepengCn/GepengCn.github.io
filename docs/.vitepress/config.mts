@@ -9,7 +9,7 @@ export default defineConfig({
     nav: [
       { text: 'Home', link: '/' }
     ],
-
+    base : '/repo/',
     sidebar: [
       {
         text: 'Swift',
