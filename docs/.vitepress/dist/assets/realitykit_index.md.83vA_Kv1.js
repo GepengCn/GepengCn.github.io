@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as a}from"./chunks/framework.BfyHOpF-.js";const l=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"realitykit/index.md","filePath":"realitykit/index.md"}'),r={name:"realitykit/index.md"};function i(n,o,s,c,d,p){return a(),t("div")}const m=e(r,[["render",i]]);export{l as __pageData,m as default};

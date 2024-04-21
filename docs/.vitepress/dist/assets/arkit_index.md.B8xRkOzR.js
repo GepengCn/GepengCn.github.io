@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as a}from"./chunks/framework.BfyHOpF-.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"arkit/index.md","filePath":"arkit/index.md"}'),r={name:"arkit/index.md"};function n(i,o,s,c,d,p){return a(),t("div")}const f=e(r,[["render",n]]);export{m as __pageData,f as default};
