@@ -5,6 +5,9 @@ export default defineConfig({
   base : '/visionOS/',
   title: "visionOS",
   description: "visionOS From Scratch",
+  markdown: {
+    math: true
+  },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
@@ -14,7 +17,8 @@ export default defineConfig({
       {
         text: 'Swift',
         items: [
-          { text: 'Swift Index', link: '/swift/index.md' }
+          { text: '序', link: '/swift/index.md' },
+          { text: 'Swift基础', link: '/swift/basic.md' },
         ]
       },
       {
