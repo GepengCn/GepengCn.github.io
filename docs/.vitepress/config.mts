@@ -17,7 +17,7 @@ export default defineConfig({
       {
         text: 'Swift',
         items: [
-          { text: '序', link: '/swift/index.md' },
+          { text: '导航', link: '/swift/index.md' },
           { text: 'Swift基础', link: '/swift/basic.md' },
         ]
       },
