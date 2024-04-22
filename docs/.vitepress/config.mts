@@ -8,8 +8,10 @@ export default defineConfig({
   markdown: {
     math: true
   },
+  head: [['link', { rel: 'icon', href: 'favicon.ico' }]],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
+    logo: '/favicon.ico',
     nav: [
       { text: 'Home', link: '/' }
     ],
@@ -21,6 +23,7 @@ export default defineConfig({
           { text: '基础部分', link: '/swift/basic.md' },
           { text: '基本运算符', link: '/swift/basic_operators.md' },
           { text: '字符串和字符', link: '/swift/string.md' },
+          { text: '集合类型', link: '/swift/collection.md' },
         ]
       },
       {
@@ -50,12 +53,12 @@ export default defineConfig({
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: 'https://github.com/GepengCn/visionOS' }
     ],
     
     footer: {
       message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2019-present Evan You'
+      copyright: 'Copyright © 2024-present Gepeng'
     },
     search: {
       provider: 'local'
