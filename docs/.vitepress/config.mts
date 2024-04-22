@@ -20,6 +20,7 @@ export default defineConfig({
           { text: '导航', link: '/swift/index.md' },
           { text: '基础部分', link: '/swift/basic.md' },
           { text: '基本运算符', link: '/swift/basic_operators.md' },
+          { text: '字符串和字符', link: '/swift/string.md' },
         ]
       },
       {
