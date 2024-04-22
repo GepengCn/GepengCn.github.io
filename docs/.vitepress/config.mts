@@ -8,10 +8,10 @@ export default defineConfig({
   markdown: {
     math: true
   },
-  head: [['link', { rel: 'icon', href: './docs/favicon.ico' }]],
+  head: [['link', { rel: 'icon', href: './public/favicon.ico' }]],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: '/favicon.ico',
+    logo: './public/favicon.ico',
     nav: [
       { text: 'Home', link: '/' }
     ],
