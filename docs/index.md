@@ -8,15 +8,16 @@ hero:
   tagline: 我的 visionOS 自学成长之路
   actions:
     - theme: brand
-      text: SwiftUI
-      link: /swiftui/index
-    - theme: alt
       text: Swift
       link: /swift/index
+    - theme: alt
+      text: SwiftUI
+      link: /swiftui/index
+
 
 features:
   - title: 深入解析原理
-    details: 深入理解 Swift、SwiftUI、RealityKit、ARKit以及 Accessibility
+    details: 深入理解 Swift、SwiftUI、RealityKit、ARKit 以及 Accessibility
   - title: 大量示例
     details: 每个技术点都配备了实际示例、详细代码和动态图解
   - title: 解决 visionOS 中的挑战与问题
