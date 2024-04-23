@@ -6,3 +6,5 @@
 - [基本运算符](/swift/basic_operators)
 - [字符串和字符](/swift/string)
 - [集合类型](/swift/collection)
+- [控制流](/swift/flow)
+- [函数](/swift/function)

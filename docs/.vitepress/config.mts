@@ -8,7 +8,7 @@ export default defineConfig({
   markdown: {
     math: true
   },
-  head: [['link', { rel: 'icon', type: 'image/x-icon', href: '/visionOS/favicon.ico' }]],
+  head: [['link', { rel: 'icon', href: '/visionOS/favicon.ico' }]],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: '/favicon.png',
