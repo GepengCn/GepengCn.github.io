@@ -1,6 +1,6 @@
 # 基本运算符
 
-<iframe style="border:none" width="800" height="450" src="https://whimsical.com/embed/Jts7qH6rFWspiCXCndLjVC"></iframe>
+<iframe style="border:none" width="100%" height="450" src="https://whimsical.com/embed/Jts7qH6rFWspiCXCndLjVC"></iframe>
 
 
 运算符是用于检查、修改或合并值的特殊符号或短语。例如，加号（+）用于将两个数字相加（如：`let i = 1 + 2`）。更复杂的运算示例包括逻辑与运算符（&&），它在两个条件都满足时返回真（例如：`if enteredDoorCode && passedRetinaScan`）。

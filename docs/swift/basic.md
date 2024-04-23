@@ -1,6 +1,6 @@
 # 基础部分
 
-<iframe style="border:none" width="800" height="450" src="https://whimsical.com/embed/TAXMEpqr8PiJExMXoqmtN1"></iframe>
+<iframe style="border:none" width="100%" height="450" src="https://whimsical.com/embed/TAXMEpqr8PiJExMXoqmtN1"></iframe>
 
 ## 常量和变量
 

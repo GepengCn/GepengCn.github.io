@@ -1,6 +1,6 @@
 # 控制流
 
-<iframe style="border:none" width="800" height="450" src="https://whimsical.com/embed/HYAsbk6C3hKrhMpCtexkzz"></iframe>
+<iframe style="border:none" width="100%" height="450" src="https://whimsical.com/embed/HYAsbk6C3hKrhMpCtexkzz"></iframe>
 
 ## For-In 循环
 

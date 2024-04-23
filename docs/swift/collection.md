@@ -1,6 +1,6 @@
 # 集合类型
 
-<iframe style="border:none" width="800" height="450" src="https://whimsical.com/embed/2EnCepoK8djjmqmgJMwCQP"></iframe>
+<iframe style="border:none" width="100%" height="450" src="https://whimsical.com/embed/2EnCepoK8djjmqmgJMwCQP"></iframe>
 
 Swift 语言提供了三种基本的集合类型来存储数据集：数组（Array）、集合（Set）和字典（Dictionary）。数组用于存储有序的数据集合，集合用于存储一个无序且不包含重复元素的数据集，而字典则存储无序的键值对数据集。
 

@@ -1,6 +1,6 @@
 # 字符串和字符
 
-<iframe style="border:none" width="800" height="450" src="https://whimsical.com/embed/3qocuAP4bXRcDLirztX7Rj"></iframe>
+<iframe style="border:none" width="100%" height="450" src="https://whimsical.com/embed/3qocuAP4bXRcDLirztX7Rj"></iframe>
 
 ## 字符串字面量
 
