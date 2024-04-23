@@ -26,6 +26,7 @@ export default defineConfig({
           { text: '集合类型', link: '/swift/collection.md' },
           { text: '控制流', link: '/swift/flow.md' },
           { text: '函数', link: '/swift/function.md' },
+          { text: '闭包', link: '/swift/closure.md' },
         ]
       },
       {

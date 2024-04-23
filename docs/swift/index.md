@@ -8,3 +8,4 @@
 - [集合类型](/swift/collection)
 - [控制流](/swift/flow)
 - [函数](/swift/function)
+- [闭包](/swift/closure)
