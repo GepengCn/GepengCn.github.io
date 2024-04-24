@@ -45,6 +45,8 @@ export default defineConfig({
                         {text: '类和结构体', link: '/swift/classandstruct.md'},
                         {text: '属性', link: '/swift/property.md'},
                         {text: '方法', link: '/swift/method.md'},
+                        {text: '下标', link: '/swift/subscript.md'},
+                        {text: '继承', link: '/swift/extend.md'},
                     ]
                 },
             ],

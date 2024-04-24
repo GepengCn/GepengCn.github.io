@@ -13,3 +13,5 @@
 - [类和结构体](/swift/classandstruct)
 - [属性](/swift/property)
 - [方法](/swift/method)
+- [下标](/swift/subscript)
+- [继承](/swift/extend)
