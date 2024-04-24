@@ -42,6 +42,7 @@ export default defineConfig({
                         {text: '函数', link: '/swift/function.md'},
                         {text: '闭包', link: '/swift/closure.md'},
                         {text: '枚举', link: '/swift/enum.md'},
+                        {text: '类和结构体', link: '/swift/classandstruct.md'},
                     ]
                 },
             ],
