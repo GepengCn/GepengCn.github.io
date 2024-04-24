@@ -48,6 +48,7 @@ export default defineConfig({
                         {text: '下标', link: '/swift/subscript.md'},
                         {text: '继承', link: '/swift/extend.md'},
                         {text: '构造过程', link: '/swift/init.md'},
+                        {text: '析构过程', link: '/swift/deinit.md'},
                     ]
                 },
             ],

@@ -16,3 +16,4 @@
 - [下标](/swift/subscript)
 - [继承](/swift/extend)
 - [构造过程](/swift/init)
+- [析构过程](/swift/deinit)
