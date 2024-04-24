@@ -47,6 +47,7 @@ export default defineConfig({
                         {text: '方法', link: '/swift/method.md'},
                         {text: '下标', link: '/swift/subscript.md'},
                         {text: '继承', link: '/swift/extend.md'},
+                        {text: '构造过程', link: '/swift/init.md'},
                     ]
                 },
             ],

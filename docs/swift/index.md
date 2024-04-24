@@ -15,3 +15,4 @@
 - [方法](/swift/method)
 - [下标](/swift/subscript)
 - [继承](/swift/extend)
+- [构造过程](/swift/init)
