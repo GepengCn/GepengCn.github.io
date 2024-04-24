@@ -11,3 +11,5 @@
 - [闭包](/swift/closure)
 - [枚举](/swift/enum)
 - [类和结构体](/swift/classandstruct)
+- [属性](/swift/property)
+- [方法](/swift/method)
