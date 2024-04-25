@@ -50,6 +50,7 @@ export default defineConfig({
                         {text: '构造过程', link: '/swift/init.md'},
                         {text: '析构过程', link: '/swift/deinit.md'},
                         {text: '可选链', link: '/swift/optional.md'},
+                        {text: '错误处理', link: '/swift/error.md'},
                     ]
                 },
             ],
