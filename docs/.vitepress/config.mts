@@ -55,6 +55,7 @@ export default defineConfig({
                         {text: '类型转换', link: '/swift/type_casting.md'},
                         {text: '嵌套类型', link: '/swift/nested_type.md'},
                         {text: '扩展', link: '/swift/extension.md'},
+                        {text: '协议', link: '/swift/protocol.md'},
                     ]
                 },
             ],

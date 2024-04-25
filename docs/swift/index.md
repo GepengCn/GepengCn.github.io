@@ -23,3 +23,4 @@
 - [类型转换](/swift/type_casting)
 - [嵌套类型](/swift/nested_type)
 - [扩展](/swift/extension)
+- [协议](/swift/protocol)
