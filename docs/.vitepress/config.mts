@@ -51,6 +51,7 @@ export default defineConfig({
                         {text: '析构过程', link: '/swift/deinit.md'},
                         {text: '可选链', link: '/swift/optional.md'},
                         {text: '错误处理', link: '/swift/error.md'},
+                        {text: '并发', link: '/swift/concurrency.md'},
                     ]
                 },
             ],
