@@ -1,6 +1,6 @@
 # 导航
 
-<iframe style="border:none" width="100%" height="450" src="https://whimsical.com/embed/F8jsLi13MhSZN1tyafwXTu"></iframe>
+<iframe style="border:none" width="100%" height="1200" src="https://whimsical.com/embed/F8jsLi13MhSZN1tyafwXTu"></iframe>
 
 - [基础部分](/swift/basic)
 - [基本运算符](/swift/basic_operators)
@@ -26,3 +26,4 @@
 - [协议](/swift/protocol)
 - [泛型](/swift/generic)
 - [不透明类型](/swift/opaque_type)
+- [自动引用计数](/swift/arc)
