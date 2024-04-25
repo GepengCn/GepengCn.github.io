@@ -28,3 +28,5 @@
 - [不透明类型](/swift/opaque_type)
 - [自动引用计数](/swift/arc)
 - [内存安全](/swift/memory_safety)
+- [访问控制](/swift/access_control)
+- [高级运算符](/swift/advanced_operators)
