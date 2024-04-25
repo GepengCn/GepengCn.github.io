@@ -24,3 +24,4 @@
 - [嵌套类型](/swift/nested_type)
 - [扩展](/swift/extension)
 - [协议](/swift/protocol)
+- [泛型](/swift/generic)
