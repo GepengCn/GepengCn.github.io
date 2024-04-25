@@ -60,6 +60,7 @@ export default defineConfig({
                         {text: '不透明类型', link: '/swift/opaque_type.md'},
                         {text: '自动引用计数', link: '/swift/arc.md'},
                         {text: '内存安全', link: '/swift/memory_safety.md'},
+                        {text: '访问控制', link: '/swift/access_control.md'},
                     ]
                 },
             ],
