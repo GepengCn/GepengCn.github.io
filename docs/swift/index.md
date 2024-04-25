@@ -25,3 +25,4 @@
 - [扩展](/swift/extension)
 - [协议](/swift/protocol)
 - [泛型](/swift/generic)
+- [不透明类型](/swift/opaque_type)

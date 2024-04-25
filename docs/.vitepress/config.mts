@@ -57,6 +57,7 @@ export default defineConfig({
                         {text: '扩展', link: '/swift/extension.md'},
                         {text: '协议', link: '/swift/protocol.md'},
                         {text: '泛型', link: '/swift/generic.md'},
+                        {text: '不透明类型', link: '/swift/opaque_type.md'},
                     ]
                 },
             ],
