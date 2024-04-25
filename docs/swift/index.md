@@ -20,3 +20,4 @@
 - [可选链](/swift/optional)
 - [错误处理](/swift/error)
 - [并发](/swift/concurrency)
+- [类型转换](/swift/type_casting)

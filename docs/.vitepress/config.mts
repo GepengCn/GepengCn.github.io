@@ -52,6 +52,7 @@ export default defineConfig({
                         {text: '可选链', link: '/swift/optional.md'},
                         {text: '错误处理', link: '/swift/error.md'},
                         {text: '并发', link: '/swift/concurrency.md'},
+                        {text: '类型转换', link: '/swift/type_casting.md'},
                     ]
                 },
             ],
