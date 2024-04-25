@@ -53,6 +53,7 @@ export default defineConfig({
                         {text: '错误处理', link: '/swift/error.md'},
                         {text: '并发', link: '/swift/concurrency.md'},
                         {text: '类型转换', link: '/swift/type_casting.md'},
+                        {text: '嵌套类型', link: '/swift/nested_type.md'},
                     ]
                 },
             ],
