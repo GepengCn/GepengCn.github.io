@@ -2,44 +2,73 @@
 
 <iframe style="border:none" width="100%" height="450" src="https://whimsical.com/embed/LozDVBMW5qwKauBpEQV3zm"></iframe>
 
-除了之前介绍过的 基本运算符，Swift 还提供了数种可以对数值进行复杂运算的高级运算符。它们包含了在 C 和 Objective-C 中已经被大家所熟知的位运算符和移位运算符。
+除了之前介绍过的「基本运算符」，Swift 还提供了数种可以对数值进行复杂运算的高级运算符。
 
-与 C 语言中的算术运算符不同，Swift 中的算术运算符默认是不会溢出的。所有溢出行为都会被捕获并报告为错误。如果想让系统允许溢出行为，可以选择使用 Swift 中另一套默认支持溢出的运算符，比如溢出加法运算符（`&+`）。所有的这些溢出运算符都是以 `&` 开头的。
+- 它们包含了在 C 和 Objective-C 中已经被大家所熟知的**位运算符**和**移位运算符**。
 
-自定义结构体、类和枚举时，如果也为它们提供标准 Swift 运算符的实现，将会非常有用。在 Swift 中为这些运算符提供自定义的实现非常简单，运算符也会针对不同类型使用对应实现。
+::: info 与 C 语言中的算术运算符不同，Swift 中的算术运算符默认是不会溢出的。
 
-我们不用被预定义的运算符所限制。在 Swift 中可以自由地定义中缀、前缀、后缀和赋值运算符，它们具有自定义的优先级与关联值。这些运算符在代码中可以像预定义的运算符一样使用，你甚至可以扩展已有的类型以支持自定义运算符。
+所有溢出行为都会被捕获并报告为错误。
 
+如果想让系统**允许溢出行为**，可以选择使用 Swift 中另一套默认支持溢出的运算符，比如溢出加法运算符（ `&+` ）。
+
+所有的这些溢出运算符都是以 `&` 开头的。
+:::
+
+
+自定义结构体、类和枚举时，如果也为它们提供标准 Swift 运算符的实现，将会非常有用。
+
+在 Swift 中为这些运算符提供自定义的实现非常简单，运算符也会针对不同类型使用对应实现。
+
+::: info 我们不用被预定义的运算符所限制。
+
+在 Swift 中可以自由地定义中缀、前缀、后缀和赋值运算符，它们具有自定义的优先级与关联值。
+
+这些运算符在代码中可以像预定义的运算符一样使用，你甚至可以扩展已有的类型以支持自定义运算符。
+:::
 ## 位运算符
 
-位运算符可以操作数据结构中每个独立的比特位。它们通常被用在底层开发中，比如图形编程和创建设备驱动。位运算符在处理外部资源的原始数据时也十分有用，比如对自定义通信协议传输的数据进行编码和解码。
+位运算符可以**操作数据结构中每个独立的比特位**。
+
+- 它们通常被用在底层开发中，比如图形编程和创建设备驱动。
+- 位运算符在处理外部资源的原始数据时也十分有用，比如对自定义通信协议传输的数据进行编码和解码。
 
 Swift 支持 C 语言中的全部位运算符，接下来会一一介绍。
 
 ### Bitwise NOT Operator（按位取反运算符）
 
-按位取反运算符（`~`） 对一个数值的全部比特位进行取反：
+按位取反运算符（ `~` ） 对一个数值的全部比特位进行**取反**：
 
 ![bitwiseNOT@2x](../images/bitwiseNOT@2x.png)
 
-按位取反运算符是一个前缀运算符，直接放在运算数之前，并且它们之间不能添加任何空格：
+按位取反运算符是一个**前缀运算符**，直接放在运算数之前，并且它们之间不能添加任何空格：
 
 ```swift
 let initialBits: UInt8 = 0b00001111
 let invertedBits = ~initialBits // 等于 0b11110000
 ```
 
-`UInt8` 类型的整数有 `8` 个比特位，可以存储 `0 ~ 255` 之间的任意整数。这个例子初始化了一个 `UInt8` 类型的整数，并赋值为二进制的 `00001111`，它的前 `4` 位为 `0`，后 `4` 位为 `1`。这个值等价于十进制的 `15`。
+`UInt8` 类型的整数有 $8$ 个比特位，可以存储 $0$ ~ $255$ 之间的任意整数。
 
-接着使用按位取反运算符创建了一个名为 `invertedBits` 的常量，这个常量的值与全部位取反后的 `initialBits` 相等。即所有的 `0` 都变成了 `1`，同时所有的 `1` 都变成 `0`。`invertedBits` 的二进制值为 `11110000`，等价于无符号十进制数的 `240`。
+这个例子初始化了一个 `UInt8` 类型的整数，并赋值为二进制的 `00001111`，它的前 $4$ 位为 `0`，后 $4$ 位为 `1`。这个值等价于十进制的 $15$。
+
+接着使用按位取反运算符（ `~` ）创建了一个名为 `invertedBits` 的常量，这个常量的值与全部位取反后的 `initialBits` 相等。
+
+- 即所有的 `0` 都变成了 `1`，同时所有的 `1` 都变成 `0`。
+
+`invertedBits` 的二进制值为 `11110000`，等价于无符号十进制数的 $240$。
 
 ### Bitwise AND Operator（按位与运算符）
 
-按位与运算符（`&`） 对两个数的比特位进行合并。它返回一个新的数，只有当两个数的对应位都为 `1` 的时候，新数的对应位才为 `1`：
+按位与运算符（ `&` ） **对两个数的比特位进行合并**。
+
+它返回一个新的数，只有**当两个数的对应位都为 `1` 的时候，新数的对应位才为 `1`**：
 
 ![bitwiseAND@2x](../images/bitwiseAND@2x.png)
 
-在下面的示例当中，`firstSixBits` 和 `lastSixBits` 中间 `4` 个位的值都为 `1`。使用按位与运算符之后，得到二进制数值 `00111100`，等价于无符号十进制数的 `60`：
+在下面的示例当中，`firstSixBits` 和 `lastSixBits` 中间 $4$ 个位的值都为 `1`。
+
+使用按位与运算符之后，得到二进制数值 `00111100`，等价于无符号十进制数的 $60$：
 
 ```swift
 let firstSixBits: UInt8 = 0b11111100
@@ -49,11 +78,15 @@ let middleFourBits = firstSixBits & lastSixBits // 等于 00111100
 
 ### Bitwise OR Operator（按位或运算符）
 
-按位或运算符（`|`）可以对两个数的比特位进行比较。它返回一个新的数，只要两个数的对应位中有任意一个为 `1` 时，新数的对应位就为 `1`：
+按位或运算符（ `|` ）可以对两个数的比特位进行比较。
+
+它返回一个新的数，只要**两个数的对应位中有任意一个为 `1` 时，新数的对应位就为 `1`**：
 
 ![bitwiseOR@2x](../images/bitwiseOR@2x.png)
 
-在下面的示例中，`someBits` 和 `moreBits` 存在不同的位被设置为 `1`。使用按位或运算符之后，得到二进制数值 `11111110`，等价于无符号十进制数的 `254`：
+在下面的示例中，`someBits` 和 `moreBits` 存在不同的位被设置为 `1`。
+
+使用按位或运算符之后，得到二进制数值 `11111110`，等价于无符号十进制数的 $254$：
 
 ```swift
 let someBits: UInt8 = 0b10110010
@@ -63,11 +96,16 @@ let combinedbits = someBits | moreBits // 等于 11111110
 
 ### Bitwise XOR Operator（按位异或运算符）
 
-按位异或运算符，或称「排外的或运算符」（`^`），可以对两个数的比特位进行比较。它返回一个新的数，当两个数的对应位不相同时，新数的对应位就为 `1`，并且对应位相同时则为 `0`：
+按位异或运算符，或称「排外的或运算符」（ `^` ），可以对两个数的比特位进行比较。
+
+它返回一个新的数，当**两个数的对应位不相同时，新数的对应位就为 `1`，并且对应位相同时则为 `0`**：
 
 ![bitwiseXOR@2x](../images/bitwiseXOR@2x.png)
 
-在下面的示例当中，`firstBits` 和 `otherBits` 都有一个自己为 `1`，而对方为 `0` 的位。按位异或运算符将新数的这两个位都设置为 `1`。在其余的位上 `firstBits` 和 `otherBits` 是相同的，所以设置为 `0`：
+在下面的示例当中，`firstBits` 和 `otherBits` 都有一个自己为 `1`，而对方为 `0` 的位。
+
+- 按位异或运算符将新数的这两个位都设置为 `1`。
+- 在其余的位上 `firstBits` 和 `otherBits` 是相同的，所以设置为 `0`：
 
 ```swift
 let firstBits: UInt8 = 0b00010100
@@ -77,9 +115,11 @@ let outputBits = firstBits ^ otherBits // 等于 00010001
 
 ### Bitwise Left and Right Shift Operators（按位左移、右移运算符）
 
-按位左移运算符（`<<`） 和 按位右移运算符（`>>`） 可以对一个数的所有位进行指定位数的左移和右移，但是需要遵守下面定义的规则。
+按位左移运算符（ `<<` ） 和 按位右移运算符（ `>>` ） 可以对一个数的所有位进行指定位数的左移和右移，但是需要遵守下面定义的规则。
 
-对一个数进行按位左移或按位右移，相当于对这个数进行乘以 `2` 或除以 `2` 的运算。将一个整数左移一位，等价于将这个数乘以 `2`，同样地，将一个整数右移一位，等价于将这个数除以 `2`。
+- 对一个数进行按位左移或按位右移，相当于对这个数进行乘以 $2$ 或除以 $2$ 的运算。
+- 将一个整数**左移**一位，等价于将这个数乘以 $2$，等价于$x \times  2$。
+- 将一个整数**右移**一位，等价于将这个数除以 $2$，等价于$x \div  2$。
 
 **无符号整数的移位运算**
 
@@ -89,9 +129,11 @@ let outputBits = firstBits ^ otherBits // 等于 00010001
 - 任何因移动而超出整型存储范围的位都会被丢弃。
 - 用 `0` 来填充移位后产生的空白位。
 
-这种方法称为逻辑移位。
+这种方法称为**逻辑移位**。
 
-以下这张图展示了 `11111111 << 1`（即把 `11111111` 向左移动 `1` 位），和 `11111111 >> 1`（即把 `11111111` 向右移动 `1` 位）的结果。蓝色的数字是被移位的，灰色的数字是被抛弃的，橙色的 `0` 则是被填充进来的：
+以下这张图展示了 `11111111 << 1`（即把 `11111111` 向左移动 `1` 位），和 `11111111 >> 1`（即把 `11111111` 向右移动 `1` 位）的结果。
+
+蓝色的数字是被移位的，灰色的数字是被抛弃的，橙色的 `0` 则是被填充进来的：
 
 ![bitshiftUnsigned@2x](../images/bitshiftUnsigned@2x.png)
 
@@ -117,45 +159,73 @@ let blueComponent = pink & 0x0000FF         // blueComponent 是 0x99，即 153
 
 **有符号整数的移位运算**
 
-对比无符号整数，有符号整数的移位运算相对复杂得多，这种复杂性源于有符号整数的二进制表现形式。（为了简单起见，以下的示例都是基于 `8` 比特的有符号整数，但是其中的原理对任何位数的有符号整数都是通用的。）
+对比无符号整数，有符号整数的移位运算相对复杂得多，这种复杂性源于有符号整数的二进制表现形式（为了简单起见，以下的示例都是基于 $8$ 比特的有符号整数，但是其中的原理对任何位数的有符号整数都是通用的）。
 
-有符号整数使用第 `1` 个比特位（通常被称为符号位）来表示这个数的正负。符号位为 `0` 代表正数，为 `1` 代表负数。
+- 有符号整数使用第 $1$ 个比特位（通常被称为符号位）来表示这个数的正负。
+- 符号位为 `0` 代表正数，为 `1` 代表负数。
+- 其余的比特位（通常被称为数值位）存储了实际的值。
+- 有符号正整数和无符号数的存储方式是一样的，都是从 `0` 开始算起。
 
-其余的比特位（通常被称为数值位）存储了实际的值。有符号正整数和无符号数的存储方式是一样的，都是从 `0` 开始算起。这是值为 `4` 的 `Int8` 型整数的二进制位表现形式：
+这是值为 $4$ 的 `Int8` 型整数的二进制位表现形式：
 
 ![bitshiftSignedFour@2x](../images/bitshiftSignedFour@2x.png)
 
-符号位为 `0`（代表这是一个「正数」），另外 `7` 位则代表了十进制数值 `4` 的二进制表示。
+符号位为 `0`（代表这是一个「正数」），另外 $7$ 位则代表了十进制数值 $4$ 的二进制表示。
 
-负数的存储方式略有不同。它存储 `2` 的 `n` 次方减去其实际值的绝对值，这里的 `n` 是数值位的位数。一个 `8` 比特位的数有 `7` 个比特位是数值位，所以是 `2` 的 `7` 次方，即 `128`。
+负数的存储方式略有不同。
 
-这是值为 `-4` 的 `Int8` 型整数的二进制表现形式：
+它存储 $2^n$ 减去其实际值的绝对值，这里的 $n$ 是数值位的位数。一个 $8$ 比特位的数有 $7$ 个比特位是数值位，所以是 $2^7$，即 $128$。
+
+这是值为 $-4$ 的 `Int8` 型整数的二进制表现形式：
 
 ![bitshiftSignedMinusFour@2x](../images/bitshiftSignedMinusFour@2x.png)
 
-这次的符号位为 `1`，说明这是一个负数，另外 `7` 个位则代表了数值 `124`（即 `128` - `4`）的二进制表示：
+这次的符号位为 `1`，说明这是一个负数，另外 $7$ 个位则代表了数值 $124$（即 $128 - 4$）的二进制表示：
 
 ![bitshiftSignedMinusFourValue@2x](../images/bitshiftSignedMinusFourValue@2x.png)
 
-负数的表示通常被称为二进制补码。用这种方法来表示负数乍看起来有点奇怪，但它有几个优点。
+负数的表示通常被称为**二进制补码**。
 
-首先，如果想对 `-1` 和 `-4` 进行加法运算，我们只需要对这两个数的全部 `8` 个比特位执行标准的二进制相加（包括符号位），并且将计算结果中超出 `8` 位的数值丢弃：
+::: info 用这种方法来表示负数乍看起来有点奇怪，但它有几个优点
+
+首先，如果想对 $-1$ 和 $-4$ 进行加法运算，我们只需要对这两个数的全部 $8$ 个比特位执行标准的二进制相加（包括符号位），并且将计算结果中超出 $8$ 位的数值丢弃：
 
 ![bitshiftSignedAddition@2x](../images/bitshiftSignedAddition@2x.png)
 
-其次，使用二进制补码可以使负数的按位左移和右移运算得到跟正数同样的效果，即每向左移一位就将自身的数值乘以 `2`，每向右移一位就将自身的数值除以 `2`。要达到此目的，对有符号整数的右移有一个额外的规则：当对有符号整数进行按位右移运算时，遵循与无符号整数相同的规则，但是对于移位产生的空白位使用符号位进行填充，而不是用 `0`。
+其次，使用二进制补码可以使负数的按位左移和右移运算得到跟正数同样的效果：
+- 每向左移一位就将自身的数值乘以 $2$
+- 每向右移一位就将自身的数值除以 $2$
+
+
+要达到此目的，对有符号整数的右移有一个额外的规则：
+
+- 当对有符号整数进行按位右移运算时，遵循与无符号整数相同的规则
+- 但是对于移位产生的**空白位使用「符号位」进行填充**，而不是用 `0`
 
 ![bitshiftSigned@2x](../images/bitshiftSigned@2x.png)
 
-这个行为可以确保有符号整数的符号位不会因为右移运算而改变，这通常被称为算术移位。
 
-由于正数和负数的特殊存储方式，在对它们进行右移的时候，会使它们越来越接近 `0`。在移位的过程中保持符号位不变，意味着负整数在接近 `0` 的过程中会一直保持为负。
+这个行为可以确保有符号整数的符号位不会因为右移运算而改变，这通常被称为**算术移位**。
+
+
+:::
+
+
+由于正数和负数的特殊存储方式，在对它们进行右移的时候，会使它们越来越接近 $0$。
+
+在移位的过程中保持符号位不变，意味着负整数在接近 $0$ 的过程中会一直保持为负。
 
 ## 溢出运算符
 
-当向一个整数类型的常量或者变量赋予超过它容量的值时，Swift 默认会报错，而不是允许生成一个无效的数。这个行为为我们在运算过大或者过小的数时提供了额外的安全性。
+::: danger 当向一个整数类型的常量或者变量赋予超过它容量的值时，Swift 默认会报错，而不是允许生成一个无效的数
 
-例如，`Int16` 型整数能容纳的有符号整数范围是 `-32768` 到 `32767`。当为一个 `Int16` 类型的变量或常量赋予的值超过这个范围时，系统就会报错：
+这个行为为我们在运算过大或者过小的数时提供了额外的安全性。
+
+:::
+
+例如，`Int16` 型整数能容纳的有符号整数范围是 $-32768$ 到 $32767$。
+
+当为一个 `Int16` 类型的变量或常量赋予的值超过这个范围时，系统就会报错：
 
 ```swift
 var potentialOverflow = Int16.max
@@ -166,7 +236,9 @@ potentialOverflow += 1 // [!code error]
 
 在赋值时为过大或者过小的情况提供错误处理，能让我们在处理边界值时更加灵活。
 
-然而，当你希望的时候也可以选择让系统在数值溢出的时候采取截断处理，而非报错。Swift 提供的三个溢出运算符来让系统支持整数溢出运算。这些运算符都是以 `&` 开头的：
+然而，你也可能希望**让系统在数值溢出的时候采取截断处理，而非报错**。
+
+Swift 提供的三个溢出运算符来让系统支持整数溢出运算。这些运算符都是以 `&` 开头的：
 
 - 溢出加法 `&+`
 - 溢出减法 `&-`
@@ -176,7 +248,7 @@ potentialOverflow += 1 // [!code error]
 
 数值有可能出现上溢或者下溢。
 
-这个示例演示了当我们对一个无符号整数使用溢出加法（`&+`）进行上溢运算时会发生什么：
+这个示例演示了当我们对一个无符号整数使用溢出加法（ `&+` ）进行**上溢**运算时会发生什么：
 
 ```swift
 var unsignedOverflow = UInt8.max
@@ -185,12 +257,20 @@ unsignedOverflow = unsignedOverflow &+ 1
 // 此时 unsignedOverflow 等于 0
 ```
 
-`unsignedOverflow` 被初始化为 `UInt8` 所能容纳的最大整数（`255`，以二进制表示即 `11111111`）。然后使用溢出加法运算符（``&+``）对其进行加 `1` 运算。这使得它的二进制表示正好超出 `UInt8` 所能容纳的位数，也就导致了数值的溢出，如下图所示。数值溢出后，仍然留在 `UInt8` 边界内的值是 `00000000`，也就是十进制数值的 `0`。
+`unsignedOverflow` 被初始化为 `UInt8` 所能容纳的最大整数（$255$，以二进制表示即 `11111111`）。
+
+然后使用溢出加法运算符（ `&+` ）对其进行加 $1$ 运算。
+
+这使得它的二进制表示正好超出 `UInt8` 所能容纳的位数，也就导致了数值的溢出，如下图所示。
+
+数值溢出后，仍然留在 `UInt8` 边界内的值是 `00000000`，也就是十进制数值的 $0$。
 
 
 ![overflowAddition@2x](../images/overflowAddition@2x.png)
 
-当允许对一个无符号整数进行下溢运算时也会产生类似的情况。这里有一个使用溢出减法运算符（`&-`）的例子：
+当允许对一个无符号整数进行**下溢**运算时也会产生类似的情况。
+
+这里有一个使用溢出减法运算符（ `&-` ）的例子：
 
 ```swift
 var unsignedOverflow = UInt8.min
@@ -199,11 +279,15 @@ unsignedOverflow = unsignedOverflow &- 1
 // 此时 unsignedOverflow 等于 255
 ```
 
-`UInt8` 型整数能容纳的最小值是 `0`，以二进制表示即 `00000000`。当使用溢出减法运算符对其进行减 `1` 运算时，数值会产生下溢并被截断为 `11111111`， 也就是十进制数值的 `255`。
+`UInt8` 型整数能容纳的最小值是 $0$，以二进制表示即 `00000000`。
+
+当使用溢出减法运算符对其进行减 $1$ 运算时，数值会产生下溢并被截断为 `11111111`， 也就是十进制数值的 $255$。
 
 ![overflowUnsignedSubtraction@2x](../images/overflowUnsignedSubtraction@2x.png)
 
-溢出也会发生在有符号整型上。针对有符号整型的所有溢出加法或者减法运算都是按位运算的方式执行的，符号位也需要参与计算。
+**溢出也会发生在有符号整型上**。
+
+针对有符号整型的所有溢出加法或者减法运算都是**按位运算**的方式执行的，符号位也需要参与计算。
 
 ```swift
 var signedOverflow = Int8.min
@@ -212,287 +296,459 @@ signedOverflow = signedOverflow &- 1
 // 此时 signedOverflow 等于 127
 ```
 
-`Int8`型整数能容纳的最小值是`-128`，以二进制表示即 `10000000`。当使用溢出减法运算符对其进行减 `1` 运算时，符号位被翻转，得到二进制数值 `01111111`，也就是十进制数值的 `127`，这个值也是 `Int8` 型整数所能容纳的最大值。
+`Int8` 型整数能容纳的最小值是 $-128$，以二进制表示即 `10000000`。
+
+当使用溢出减法运算符对其进行减 $1$ 运算时，符号位被翻转，得到二进制数值 `01111111`，也就是十进制数值的 $127$，这个值也是 `Int8` 型整数所能容纳的最大值。
 
 ![overflowSignedSubtraction@2x](../images/overflowSignedSubtraction@2x.png)
 
-对于无符号与有符号整型数值来说，当出现上溢时，它们会从数值所能容纳的最大数变成最小数。同样地，当发生下溢时，它们会从所能容纳的最小数变成最大数。
+- 对于无符号与有符号整型数值来说，当出现上溢时，它们会从数值所能容纳的最大数变成最小数。
+- 同样地，当发生下溢时，它们会从所能容纳的最小数变成最大数。
+
+## 优先级和结合性
+
+运算符的「优先级」使得**一些运算符优先于其他运算符**：它们会先被执行。
+
+「结合性」定义了相同优先级的运算符是如何结合的，也就是说，是与左边结合为一组，还是与右边结合为一组。
+
+可以将其理解为「它们是与左边的表达式结合的」，或者「它们是与右边的表达式结合的」。
+
+当考虑一个复合表达式的计算顺序时，运算符的优先级和结合性是非常重要的。
+
+举例来说，运算符优先级解释了为什么下面这个表达式的运算结果会是 $17$。
+
+```swift
+2 + 3 % 4 * 5
+// 结果是 17
+```
+
+如果你直接从左到右进行运算，你可能认为运算的过程是这样的：
+
+- $2 + 3 = 5$
+- $5\  \% \ 4 = 1$
+- $1 \times 5 = 5$
+
+但是正确答案是 $17$ 而不是 $5$。
+
+优先级高的运算符要先于优先级低的运算符进行计算。
+
+与 C 语言类似，在 Swift 中，乘法运算符（ `*` ）与取余运算符（ `%` ）的优先级高于加法运算符（ `+` ）。因此，它们的计算顺序要先于加法运算。
+
+而乘法运算与取余运算的优先级相同。这时为了得到正确的运算顺序，还需要考虑结合性。
+
+乘法运算与取余运算都是**左结合**的。
+
+可以将这考虑成，从它们的左边开始为这两部分表达式都隐式地加上括号：
+
+```swift
+2 + ((3 % 4) * 5)
+```
+
+$(3 \ \% \ 4)$ 等于 $3$，所以表达式相当于：
+
+```swift
+2 + (3 * 5)
+```
+
+$3 \times 5$ 等于 $15$，所以表达式相当于：
+
+```swift
+2 + 15
+```
+
+因此计算结果为 $17$。
 
 ## 运算符函数
 
-运算符函数是一种特殊的函数，用来定义或重载已有的运算符的行为。这意味着你可以为自定义的数据类型指定加法、减法、乘法等运算符的具体实现方式。使用运算符函数可以让你的代码更加直观和易于理解。
+类和结构体可以**为现有的运算符提供自定义的实现**，这通常被称为**运算符重载**。
 
-例如，如果你有一个自定义的结构体表示二维坐标点，你可能会希望使用加号（`+`）来表示两个坐标点的合并操作。下面是如何实现这个功能的一个例子：
+下面的例子展示了如何让自定义的结构体支持加法运算符（ `+` ）。
 
-```swift
-struct Point {
-    var x: Int
-    var y: Int
+::: info 算术加法运算符
+算术加法运算符是一个二元运算符，因为它是对两个值进行运算，同时它还可以称为中缀运算符，因为它出现在两个值中间。
+:::
+例子中定义了一个名为 `Vector2D` 的结构体用来表示二维坐标向量 $(x, y)$，紧接着定义了一个可以将两个 `Vector2D`  结构体实例进行相加的运算符函数：
+
+```swift{6-8}
+struct Vector2D {
+    var x = 0.0, y = 0.0
 }
 
-// 重载加号运算符
-func +(left: Point, right: Point) -> Point {
-    return Point(x: left.x + right.x, y: left.y + right.y)
+extension Vector2D {
+    static func + (left: Vector2D, right: Vector2D) -> Vector2D {
+        return Vector2D(x: left.x + right.x, y: left.y + right.y)
+    }
 }
-
-let point1 = Point(x: 1, y: 2)
-let point2 = Point(x: 3, y: 4)
-let point3 = point1 + point2  // 结果是 Point(x: 4, y: 6)
 ```
 
-在这个例子中，我们定义了一个 `Point` 结构体，并重载了 `+` 运算符。这样我们就可以直接使用 `+` 运算符来合并两个 `Point` 实例。这种方式使得代码更加直观和自然。
 
-运算符函数通常需要使用 `func` 关键字声明，其函数名就是要定义或重载的运算符，参数通常是要进行运算的类型的实例。返回类型可以根据运算的具体需求来定义。在 Swift 中，你也可以重载比较运算符、逻辑运算符等。
+该运算符函数被定义为 `Vector2D` 上的一个**类方法**，并且函数的名字与它要进行重载的 `+` 名字一致。
+
+::: warning 注意
+- 因为加法运算并不是一个向量必需的功能，所以这个类方法被定义在 `Vector2D` 的一个扩展中，而不是 `Vector2D` 结构体声明内。
+- 而算术加法运算符是二元运算符，所以这个运算符函数接收两个类型为 `Vector2D` 的参数，同时有一个 `Vector2D` 类型的返回值。
+:::
+
+这个类方法可以在任意两个 `Vector2D` 实例中间作为中缀运算符来使用：
+
+```swift{3}
+let vector = Vector2D(x: 3.0, y: 1.0)
+let anotherVector = Vector2D(x: 2.0, y: 4.0)
+let combinedVector = vector + anotherVector
+// combinedVector 是一个新的 Vector2D 实例，值为 (5.0, 5.0)
+```
+
+这个例子实现两个向量 $(3.0，1.0)$ 和 $(2.0，4.0)$ 的相加，并得到新的向量 $(5.0，5.0)$。
 
 ### 前缀和后缀运算符
 
-前缀（Prefix）和后缀（Postfix）运算符是用来修改单个操作数的值的特殊运算符。它们通常用于增加或减少变量的值，例如经典的递增（`++`）和递减（`--`）运算符。虽然 Swift 标准库中不直接支持 `++` 和 `--` 运算符，你可以通过重载前缀和后缀运算符来实现类似的功能。
+上个例子演示了一个二元中缀运算符的自定义实现。类与结构体也能提供标准一元运算符的实现。
 
-#### 前缀运算符
+一元运算符只运算一个值。
 
-前缀运算符紧跟在操作数之前。如果你想自定义一个前缀运算符，比如为一个数值类型添加一个自定义的递增操作，可以这样做：
+- 当运算符出现在值之前时，它就是前缀的（例如 `-a` ）。
+- 而当它出现在值之后时，它就是后缀的（例如 `b!` ）。
+
+要实现前缀或者后缀运算符，需要在声明运算符函数的时候在 `func` 关键字之前指定 `prefix` 或者 `postfix` 修饰符：
+
+```swift{2}
+extension Vector2D {
+    static prefix func - (vector: Vector2D) -> Vector2D {
+        return Vector2D(x: -vector.x, y: -vector.y)
+    }
+}
+```
+
+
+这段代码为 `Vector2D` 类型实现了一元运算符（ `-a` ）。
+
+由于该运算符是**前缀运算符，所以这个函数需要加上 `prefix` 修饰符**。
+
+对于简单数值，一元负号运算符可以对它们的正负性进行改变。
+
+对于 `Vector2D` 来说，该运算将其 `x` 和 `y` 属性的正负性都进行了改变：
 
 ```swift
-prefix operator +++
-
-prefix func +++(number: inout Int) -> Int {
-    number += 3
-    return number
-}
-
-var myNumber = 1
-+++myNumber  // myNumber 现在是 4
+let positive = Vector2D(x: 3.0, y: 4.0)
+let negative = -positive
+// negative 是一个值为 (-3.0, -4.0) 的 Vector2D 实例
+let alsoPositive = -negative
+// alsoPositive 是一个值为 (3.0, 4.0) 的 Vector2D 实例
 ```
-在这个例子中，我们定义了一个前缀运算符 `+++`，它每次调用时将操作数增加 3。
-
-#### 后缀运算符
-
-后缀运算符紧跟在操作数之后。如果你需要自定义一个后缀运算符，如为一个数值类型添加一个自定义的递减操作，可以这样实现：
-
-```swift
-postfix operator ---
-
-postfix func ---(number: inout Int) -> Int {
-    number -= 3
-    return number
-}
-
-var anotherNumber = 10
-anotherNumber---  // anotherNumber 现在是 7
-```
-在这个例子中，我们定义了一个后缀运算符 `---`，它每次调用时将操作数减少 3。
-
-::: warning 注意
-- 前缀和后缀运算符的定义需要明确地使用 `prefix` 和 `postfix` 关键字。
-- 这些运算符函数通常接收一个 `inout` 参数，表示它们可以修改传入的变量。
-- 你可以为任何类型定义前缀和后缀运算符，使得对该类型的操作更符合你的特定需求。
-
-:::
 
 ### 复合赋值运算符
 
-复合赋值运算符是一种将赋值运算符（`=`）与其他运算符结合使用的便捷方式，用以简化代码。常见的复合赋值运算符包括 `+=`、`-=`、`*=` 和 `/=` 等。这些运算符可以在改变变量值的同时进行赋值，使代码更加简洁。
+复合赋值运算符**将赋值运算符（ `=` ）与其它运算符进行结合**。
 
-复合赋值运算符的基本用法如下：
+例如，将加法与赋值结合成加法赋值运算符（ `+=` ）。
 
-```swift
-var a = 10
-a += 5  // 现在 a 是 15，等同于 a = a + 5
+在实现的时候，需要把**运算符的左参数设置成 `inout` 类型，因为这个参数的值会在运算符函数内直接被修改**。
 
-var b = 3
-b *= 2  // 现在 b 是 6，等同于 b = b * 2
+在下面的例子中，对 `Vector2D` 实例实现了一个加法赋值运算符函数：
+
+```swift{2}
+extension Vector2D {
+    static func += (left: inout Vector2D, right: Vector2D) {
+        left = left + right
+    }
+}
 ```
 
-这里，`a += 5` 实际上是 `a = a + 5` 的简写形式，`b *= 2` 则是 `b = b * 2` 的简写。这些运算符提高了代码的可读性和编写效率。
+利用加法运算符函数，用它来对左值和右值进行相加，并再次赋值给左值：
 
-Swift 允许你为自定义类型重载现有的复合赋值运算符，或定义新的复合赋值运算符。这需要使用 `inout` 关键字，因为复合赋值运算符通常会修改左侧操作数的值。下面是一个为自定义类型 `Point` 重载 `+=` 运算符的示例：
-
-```swift
-struct Point {
-    var x: Int
-    var y: Int
-}
-
-func +=(left: inout Point, right: Point) {
-    left.x += right.x
-    left.y += right.y
-}
-
-var p1 = Point(x: 1, y: 1)
-let p2 = Point(x: 2, y: 2)
-p1 += p2  // p1 现在是 Point(x: 3, y: 3)
+```swift{3}
+var original = Vector2D(x: 1.0, y: 2.0)
+let vectorToAdd = Vector2D(x: 3.0, y: 4.0)
+original += vectorToAdd
+// original 的值现在为 (4.0, 6.0)
 ```
 
-在这个例子中，`+=` 被重载来使两个 `Point` 实例的对应坐标相加。这种方式让 `Point` 类型的操作符行为与内置数值类型的复合赋值运算符行为类似，从而增加了代码的直观性和一致性。
+::: danger 注意
+不能对默认的赋值运算符（ `=` ）进行重载。
 
-::: warning 注意
-- 当重载或定义复合赋值运算符时，总是需要考虑操作的安全性和性能。
-- 确保定义的复合赋值运算符不会引入任何意外的副作用，尤其是在处理复杂的数据结构时。
-- 适当使用 `inout` 来确保变量可以被正确地修改。
+只有复合赋值运算符可以被重载。
 
+同样地，也无法对三元条件运算符（ `a ? b : c`）进行重载。
 :::
 
 ### 等价运算符
 
-等价运算符主要用于判断两个实例是否相等或不等。Swift 标准库提供了两种基本的等价运算符：`==` (等于) 和 `!=` (不等于)。这些运算符对于基本数据类型如整数、浮点数、字符串等已经有内置的实现。当你需要为自定义类型判断等价性时，你可以通过实现 `Equatable` 协议来自定义 `==` 运算符的行为。
+通常情况下，自定义的类和结构体没有对等价运算符进行默认实现，等价运算符通常被称为相等运算符（ `==` ）与不等运算符（ `!=` ）。
 
-#### `Equatable` 协议
-`Equatable` 协议要求实现一个静态方法 `==`，该方法接受两个该类型的实例作为参数，并返回一个布尔值，表示这两个实例是否等价。以下是一个实现 `Equatable` 协议的例子：
+为了使用等价运算符对自定义的类型进行判等运算，需要为「相等」运算符**提供自定义实现**，实现的方法与其它中缀运算符一样, 并且**增加对标准库 `Equatable` 协议的遵循**：
 
-```swift
-struct Point: Equatable {
-    var x: Int
-    var y: Int
-
-    static func ==(lhs: Point, rhs: Point) -> Bool {
-        return lhs.x == rhs.x && lhs.y == rhs.y
+```swift{1-2}
+extension Vector2D: Equatable {
+    static func == (left: Vector2D, right: Vector2D) -> Bool {
+        return (left.x == right.x) && (left.y == right.y)
     }
 }
-
-let point1 = Point(x: 1, y: 2)
-let point2 = Point(x: 1, y: 2)
-let point3 = Point(x: 2, y: 3)
-
-print(point1 == point2)  // 输出 true
-print(point1 == point3)  // 输出 false
 ```
 
-在这个例子中，`Point` 结构体实现了 `Equatable` 协议，并定义了 `==` 运算符来判断两个 `Point` 实例是否在 x 和 y 坐标上都相等。
+上述代码实现了「相等」运算符（ `==` ）来判断两个 `Vector2D` 实例是否相等。
 
-#### 自动合成等价性检查
-从 Swift 4.1 开始，如果一个结构体或类的所有属性都遵守 `Equatable` 协议，Swift 可以自动为你合成 `==` 运算符的实现，你只需要声明类型遵守 `Equatable` 协议即可，而不需要显式地实现 `==` 运算符。例如：
+对于 `Vector2D` 来说，「相等」意味着「两个实例的 `x` 和 `y` 都相等」，这也是代码中用来进行判等的逻辑。
 
-```swift
-struct Point: Equatable {
-    var x: Int
-    var y: Int
-}
+::: warning 如果你已经实现了「相等」运算符，通常情况下你并不需要自己再去实现「不等」运算符（ `!=` ）。
 
-let point1 = Point(x: 1, y: 2)
-let point2 = Point(x: 1, y: 2)
-print(point1 == point2)  // 输出 true
-```
+标准库对于「不等」运算符提供了默认的实现，它简单地将「相等」运算符的结果进行取反后返回。
 
-::: warning 注意
-- 当自定义 `==` 运算符时，务必确保其行为符合预期，特别是当结构体或类中包含复杂类型或集合类型时。
-- 实现等价性检查时，应考虑到性能因素，尤其是在涉及大量数据或复杂数据结构的比较时。
 
 :::
+
+现在我们可以使用这两个运算符来判断两个 `Vector2D` 实例是否相等：
+
+```swift{3}
+let twoThree = Vector2D(x: 2.0, y: 3.0)
+let anotherTwoThree = Vector2D(x: 2.0, y: 3.0)
+if twoThree == anotherTwoThree {
+    print("These two vectors are equivalent.")
+}
+// 打印“These two vectors are equivalent.”
+```
 
 ## 自定义运算符
 
-你可以自定义运算符，这提供了极高的灵活性，允许你为特定的数据类型或业务逻辑定义专属的运算逻辑。Swift 支持自定义前缀（prefix）、中缀（infix）和后缀（postfix）运算符。这使得你可以创建完全定制的运算符，比如向量的点乘、矩阵运算或者其他复杂操作。
+除了实现标准运算符，在 Swift 中还可以声明和实现 [自定义运算符](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/lexicalstructure#Operators)。
 
-### 自定义运算符的步骤
-1. **声明运算符**: 首先，你需要使用 `operator` 关键字在全局作用域中声明新的运算符。
-2. **指定运算符类型**: 指定运算符是前缀、中缀还是后缀。
-3. **定义运算符的功能**: 实现一个函数来定义运算符的行为。
-
-### 示例
-下面是一个自定义中缀运算符 `**` 的例子，用于计算幂运算：
+**新的运算符要使用 `operator` 关键字在全局作用域内进行定义，同时还要指定 `prefix`、`infix` 或者 `postfix` 修饰符**：
 
 ```swift
-infix operator **: MultiplicationPrecedence  // 定义运算符并指定优先级组
-
-func **(base: Double, exponent: Int) -> Double {
-    return pow(base, Double(exponent))
-}
-
-let result = 2.0 ** 3  // 计算 2 的 3 次方，结果为 8.0
+prefix operator +++
 ```
 
-在这个例子中，`**` 运算符用于计算幂。通过使用 `infix operator` 关键字和指定优先级组（这里是 `MultiplicationPrecedence`，与乘法和除法具有相同的优先级），你可以确保运算符的行为符合预期。
-
-::: tip 自定义运算符的注意事项
-- **优先级和结合性**: 中缀运算符可以定义优先级和结合性（associativity）。优先级决定了运算符相对于其他运算符的优先执行顺序，而结合性决定了当多个相同的运算符连续出现时的分组方式（比如左结合或右结合）。
-- **命名**: 自定义运算符应该有意义，避免使用难以理解或容易混淆的符号。
-- **使用场景**: 虽然自定义运算符可以提供方便，但过度使用可能会让代码难以理解和维护。建议在确实能提高代码清晰度和效率的情况下使用。
-
+- 上面的代码定义了一个新的名为 `+++` 的前缀运算符。
+- 对于这个运算符，在 Swift 中并没有已知的意义，因此在针对 `Vector2D` 实例的特定上下文中，给予了它自定义的意义。
+::: info 对这个示例来讲，`+++` 被实现为「前缀双自增」运算符。
+它使用了前面定义的复合加法运算符来让矩阵与自身进行相加，从而让 `Vector2D` 实例的 `x` 属性和 `y` 属性值翻倍。
 :::
+你可以像下面这样通过对 `Vector2D` 添加一个 `+++` 类方法，来实现 `+++` 运算符：
+-
+```swift
+extension Vector2D {
+    static prefix func +++ (vector: inout Vector2D) -> Vector2D {
+        vector += vector
+        return vector
+    }
+}
+
+var toBeDoubled = Vector2D(x: 1.0, y: 4.0)
+let afterDoubling = +++toBeDoubled
+// toBeDoubled 现在的值为 (2.0, 8.0)
+// afterDoubling 现在的值也为 (2.0, 8.0)
+```
+
+### 自定义中缀运算符的优先级
+
+::: tip 每个自定义中缀运算符都属于某个优先级组
+- 优先级组指定了这个运算符相对于其他中缀运算符的优先级和结合性。
+- 而没有明确放入某个优先级组的自定义中缀运算符将会被放到一个默认的优先级组内，其优先级高于三元运算符。
+:::
+
+以下例子定义了一个新的自定义中缀运算符 `+-`，此运算符属于 `AdditionPrecedence` 优先组：
+```swift{1}
+infix operator +-: AdditionPrecedence
+extension Vector2D {
+    static func +- (left: Vector2D, right: Vector2D) -> Vector2D {
+        return Vector2D(x: left.x + right.x, y: left.y - right.y)
+    }
+}
+let firstVector = Vector2D(x: 1.0, y: 2.0)
+let secondVector = Vector2D(x: 3.0, y: 4.0)
+let plusMinusVector = firstVector +- secondVector
+// plusMinusVector 是一个 Vector2D 实例，并且它的值为 (4.0, -2.0)
+```
+
+这个运算符把两个向量的 `x` 值相加，同时把两个向量的 `y` 值相减。
+
+因为它本质上是属于「相加型」运算符，所以将它放置在 `+` 和 `-` 等默认中缀「相加型」运算符相同的优先级组中。
+
+::: warning 前后缀优先级
+当定义前缀与后缀运算符的时候，我们并没有指定优先级。
+
+然而，如果对**同一个值同时使用前缀与后缀运算符**，则**后缀运算符会先参与运算**。
+:::
+
 
 ## 结果构造器
 
-结果构造器（Result Builders）是一个强大的特性，主要用于构建复杂的嵌套数据结构，尤其常见于声明性 UI 编程和复杂数据处理场景。结果构造器通过提供一种声明式的方法来组合和构造数据，从而简化了相关代码的编写。它在 SwiftUI 中广泛使用，用于构建用户界面的元素。
+「结果构造器」是一种自定义类型，**支持添加自然的声明式语法来创建类似列表或者树这样的嵌套数据**。
 
-### 结果构造器的基本原理
-结果构造器是一种特殊的编译时功能，它允许你通过连续的函数调用和语句来构建复杂的对象。在 Swift 中，你可以通过标记一个类型为 `@resultBuilder` 来创建自己的结果构造器。结果构造器类型通常包含一系列静态方法，这些方法决定了如何将多个值组合成最终的结果。
+使用结果构造器的代码可以包含普通的 Swift 语法，例如用来处理判断条件的 `if`，或者处理重复数据的 `for`。
 
-### 示例：自定义结果构造器
-下面是一个简单的结果构造器的示例，用于构建字符串列表：
+下面的代码定义了一些类型用于绘制星星线段和文字线段。
 
 ```swift
-@resultBuilder
-struct StringListBuilder {
-    static func buildBlock(_ components: String...) -> [String] {
-        return components
+protocol Drawable {
+    func draw() -> String
+}
+struct Line: Drawable {
+    var elements: [Drawable]
+    func draw() -> String {
+        return elements.map { $0.draw() }.joined(separator: "")
     }
 }
-
-// 使用结果构造器来构建字符串数组
-@StringListBuilder
-func buildStringList() -> [String] {
-    "Apple"
-    "Banana"
-    "Cherry"
+struct Text: Drawable {
+    var content: String
+    init(_ content: String) { self.content = content }
+    func draw() -> String { return content }
 }
-
-let fruits = buildStringList()
-print(fruits)  // 输出：["Apple", "Banana", "Cherry"]
+struct Space: Drawable {
+    func draw() -> String { return " " }
+}
+struct Stars: Drawable {
+    var length: Int
+    func draw() -> String { return String(repeating: "*", count: length) }
+}
+struct AllCaps: Drawable {
+    var content: Drawable
+    func draw() -> String { return content.draw().uppercased() }
+}
 ```
 
-在这个例子中，`StringListBuilder` 是一个结果构造器，它定义了一个 `buildBlock` 方法来处理一系列字符串，并将它们组合成一个数组。使用 `@StringListBuilder` 修饰 `buildStringList` 函数，使得函数体内的多个字符串表达式被自动捕获并传递给结果构造器处理。
 
-### 结果构造器在 SwiftUI 中的应用
-在 SwiftUI 中，结果构造器用于构建视图层次结构。例如，`ViewBuilder` 是 SwiftUI 提供的一个内置的结果构造器，用于构建视图的内容：
+`Drawable` 协议定义了绘制所需要遵循的方法，例如线或者形状都需要实现 `draw()` 方法。
+
+- `Line` 结构体用来表示单行线段绘制，给大多数可绘制的元素提供了顶层容器。绘制 `Line` 时，调用了线段中每个元素的 `draw()`，然后将所有结果字符串连成单个字符串。
+- `Text` 结构体包装了一个字符串作为绘制的一部分。
+- `AllCaps` 结构体包装另一个可绘制元素，并将元素中所有文本转换为大写。
+
+可以组合这些类型的构造器来创建一个可绘制元素。
 
 ```swift
-import SwiftUI
+let name: String? = "Ravi Patel"
+let manualDrawing = Line(elements: [
+    Stars(length: 3),
+    Text("Hello"),
+    Space(),
+    AllCaps(content: Text((name ?? "World") + "!")),
+    Stars(length: 2),
+    ])
+print(manualDrawing.draw())
+// 打印 "***Hello RAVI PATEL!**"
+```
 
-struct ContentView: View {
-    var body: some View {
-        VStack {
-            Text("Hello, world!")
-            Text("SwiftUI is great!")
+
+::: info 代码没问题，但是不够优雅
+
+- `AllCaps` 后面的括号嵌套太深，可读性不佳。
+- `name` 为 `nil` 时使用 `World` 的兜底逻辑必须要依赖 `??` 操作符，这在逻辑复杂的时候会更难以阅读。
+- 如果还需要 `switch` 或者 `for` 循环来构建绘制的一部分，就更难以编写了。
+
+使用结果构造器可以将这样的代码重构得更像普通的 Swift 代码。
+
+:::
+
+
+**在类型的定义上加上 `@resultBuilder` 特性来定义一个结果构造器**。
+
+比如下面的代码定义了允许使用声明式语法来描述绘制的结果构造器 `DrawingBuilder`：
+
+```swift{1}
+@resultBuilder
+struct DrawingBuilder {
+    static func buildBlock(_ components: Drawable...) -> Drawable {
+        return Line(elements: components)
+    }
+    static func buildEither(first: Drawable) -> Drawable {
+        return first
+    }
+    static func buildEither(second: Drawable) -> Drawable {
+        return second
+    }
+}
+```
+
+
+`DrawingBuilder` 结构体定义了三个方法来实现部分结果构造器语法。
+
+- `buildBlock(_:)` 方法添加了在方法块中写多行代码的支持。
+- 它将方法块中的多个元素组合成 `Line`。
+- `buildEither(first:)` 和 `buildEither(second:)` 方法添加了对 `if-else` 的支持。
+
+可以在函数形参上应用 `@DrawingBuilder` 特性，它会将传递给函数的闭包转换为用结果构造器创建的值。
+
+例如：
+
+```swift
+func draw(@DrawingBuilder content: () -> Drawable) -> Drawable {
+    return content()
+}
+func caps(@DrawingBuilder content: () -> Drawable) -> Drawable {
+    return AllCaps(content: content())
+}
+
+func makeGreeting(for name: String? = nil) -> Drawable {
+    let greeting = draw {
+        Stars(length: 3)
+        Text("Hello")
+        Space()
+        caps {
+            if let name = name {
+                Text(name + "!")
+            } else {
+                Text("World!")
+            }
         }
+        Stars(length: 2)
     }
+    return greeting
 }
+let genericGreeting = makeGreeting()
+print(genericGreeting.draw())
+// 打印 "***Hello WORLD!**"
+
+let personalGreeting = makeGreeting(for: "Ravi Patel")
+print(personalGreeting.draw())
+// 打印 "***Hello RAVI PATEL!**"
 ```
 
-在这个例子中，`VStack` 使用 `ViewBuilder` 来允许你列出多个视图。每个视图（这里是 `Text`
 
-视图）都由 `ViewBuilder` 自动处理并构建成一个视图层次结构。
+- `makeGreeting(for:)` 函数将传入的 `name` 形参用于绘制个性化问候。
+- `draw(_:)` 和 `caps(_:)` 函数都传入应用 ``@DrawingBuilder`` 特性的单一闭包实参。
+- 当调用这些函数时，要使用 `DrawingBuilder` 定义的特殊语法。
+- Swift 将绘制的声明式描述转换为一系列 `DrawingBuilder` 的方法调用，构造成最终传递进函数的实参值。
 
-### 结果构造器的高级用法
-除了基本的构建块外，结果构造器还提供了如 `buildOptional`、`buildEither`、`buildArray` 等高级功能，用于处理更复杂的条件和集合。
+例如，Swift 将例子中的 `caps(_:)` 的调用转换为下面的代码：
 
-例如，可以用 `buildOptional` 来处理可能为空的内容：
 
 ```swift
-@resultBuilder
-struct StringListBuilder {
-    static func buildBlock(_ components: String...) -> [String] {
-        return components
+let capsDrawing = caps {
+    let partialDrawing: Drawable
+    if let name = name {
+        let text = Text(name + "!")
+        partialDrawing = DrawingBuilder.buildEither(first: text)
+    } else {
+        let text = Text("World!")
+        partialDrawing = DrawingBuilder.buildEither(second: text)
     }
-
-    static func buildOptional(_ component: [String]?) -> [String] {
-        return component ?? []
-    }
+    return partialDrawing
 }
-
-@StringListBuilder
-func buildOptionalStringList(includeMore: Bool) -> [String] {
-    "Apple"
-    "Banana"
-    if includeMore {
-        "Cherry"
-    }
-}
-
-let moreFruits = buildOptionalStringList(includeMore: true)
-print(moreFruits)  // 输出：["Apple", "Banana", "Cherry"]
-let lessFruits = buildOptionalStringList(includeMore: false)
-print(lessFruits)  // 输出：["Apple", "Banana"]
 ```
 
-在这个示例中，`buildOptional` 方法允许 `if` 语句中的结果被可选地包含在最终结果中，这对于创建基于条件的动态数据结构非常有用。
+::: info
+Swift 将 `if-else` 方法块转换成调用 `buildEither(first:)` 和 `buildEither(second:)` 方法。
 
+虽然不会在自己的代码中调用这些方法，但是转换后的结果可以更清晰的理解在使用 `DrawingBuilder` 语法时 Swift 是如何进行转换的。
+
+:::
+
+为了支持 `for` 循环来满足某些特殊的绘制语法，需要添加 `buildArray(_:)` 方法。
+
+
+```swift
+extension DrawingBuilder {
+    static func buildArray(_ components: [Drawable]) -> Drawable {
+        return Line(elements: components)
+    }
+}
+let manyStars = draw {
+    Text("Stars:")
+    for length in 1...3 {
+        Space()
+        Stars(length: length)
+    }
+}
+```
+
+上面的代码中，使用 `for` 循环创建了一个绘制数组，`buildArray(_:)` 方法将该数组构建成 `Line`。
