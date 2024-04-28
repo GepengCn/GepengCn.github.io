@@ -522,8 +522,10 @@ prefix operator +++
 ::: info 对这个示例来讲，`+++` 被实现为「前缀双自增」运算符。
 它使用了前面定义的复合加法运算符来让矩阵与自身进行相加，从而让 `Vector2D` 实例的 `x` 属性和 `y` 属性值翻倍。
 :::
+
+
 你可以像下面这样通过对 `Vector2D` 添加一个 `+++` 类方法，来实现 `+++` 运算符：
--
+
 ```swift
 extension Vector2D {
     static prefix func +++ (vector: inout Vector2D) -> Vector2D {
