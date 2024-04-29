@@ -32,7 +32,6 @@ export default defineConfig({
             '/swift/': [
                 {
                     text: 'Swift',
-                    collapsed: true,
                     items: [
                         {text: '导航', link: '/swift/index.md'},
                         {text: '基础部分', link: '/swift/basic.md'},
@@ -71,7 +70,11 @@ export default defineConfig({
                 {
                     text: 'SwiftUI',
                     items: [
-                        {text: 'SwiftUI Index', link: '/swiftui/index.md'}
+                        {text: '导航', link: '/swiftui/index.md'},
+                        {text: 'App structure', items: [
+                            {text: 'App organization', link: '/swiftui/app_organization.md'},
+                            {text: 'Scenes', link: '/swiftui/scenes.md'},
+                        ]},
                     ]
                 },
             ],
