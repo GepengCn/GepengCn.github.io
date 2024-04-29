@@ -1,4 +1,4 @@
-# WindowsGroup <Badge type="tip" text="macOS" />
+# WindowsGroup
 
 在应用程序界面中呈现视图层次结构的最常见方法是使用 `WindowGroup`，它会生成特定于平台的行为和外观。
 

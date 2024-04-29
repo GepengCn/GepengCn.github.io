@@ -71,14 +71,31 @@ export default defineConfig({
                     text: 'SwiftUI',
                     items: [
                         {text: '导航', link: '/swiftui/index.md'},
-                        {text: 'App structure', items: [
-                            {text: 'App organization', link: '/swiftui/app_organization.md'},
-                            {text: 'Scenes', link: '/swiftui/scenes.md'},
-                            {text: 'Windows', items: [
-                                {text: 'WindowGroup', link: '/swiftui/windows/windowgroup.md'},
-                                {text: 'Window', link: '/swiftui/windows/window.md'},
-                            ]},
-                        ]},
+                        {
+                            text: 'App structure', items: [
+                                {text: 'App organization', link: '/swiftui/app_organization.md'},
+                                {text: 'Scenes', link: '/swiftui/scenes.md'},
+                                {
+                                    text: 'Windows', items: [
+
+                                        {
+                                            text: 'Creating windows', items: [
+
+                                                {text: 'WindowGroup', link: '/swiftui/windows/windowgroup.md'},
+                                                {text: 'Window', link: '/swiftui/windows/window.md'},
+
+                                                {text: 'WindowStyle', link: '/swiftui/windows/window_style.md'},
+                                            ]
+                                        },
+
+                                        {text: 'Styling the associated toolbar', link: '/swiftui/windows/styling_the_associated_toolbar.md'},
+                                        {text: 'Opening windows', link: '/swiftui/windows/opening_windows.md'},
+                                        {text: 'Closing windows', link: '/swiftui/windows/closing_windows.md'},
+                                        {text: 'Positioning and sizing a window', link: '/swiftui/windows/pos_sizing_window.md'},
+                                    ]
+                                },
+                            ]
+                        },
                     ]
                 },
             ],
