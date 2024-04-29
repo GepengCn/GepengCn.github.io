@@ -74,6 +74,10 @@ export default defineConfig({
                         {text: 'App structure', items: [
                             {text: 'App organization', link: '/swiftui/app_organization.md'},
                             {text: 'Scenes', link: '/swiftui/scenes.md'},
+                            {text: 'Windows', items: [
+                                {text: 'WindowGroup', link: '/swiftui/windows/windowgroup.md'},
+                                {text: 'Window', link: '/swiftui/windows/window.md'},
+                            ]},
                         ]},
                     ]
                 },
