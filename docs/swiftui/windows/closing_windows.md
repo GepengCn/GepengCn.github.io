@@ -2,7 +2,7 @@
 
 ## `DismissWindow`
 
-存储于 Environment 中的用于关闭窗口组或窗口的功能。
+存储于 `Environment` 中的用于关闭窗口组或窗口的功能。
 
 使用 `dismissWindow` 环境值获取给定环境的 `DismissWindowAction` 实例，然后调用实例来关闭窗口。
 
