@@ -135,8 +135,16 @@ export default defineConfig({
                                             link: '/swiftui/navigation/presenting_views_in_columns.md'
                                         },
                                         {
-                                        text: 'Stacking views in one column',
-                                        link: '/swiftui/navigation/stacking_views_in_one_column.md'
+                                            text: 'Stacking views in one column',
+                                            link: '/swiftui/navigation/stacking_views_in_one_column.md'
+                                        },
+                                        {
+                                            text: 'Managing column collapse',
+                                            link: '/swiftui/navigation/managing_column_collapse.md'
+                                        },
+                                        {
+                                            text: 'Setting titles for navigation content',
+                                            link: '/swiftui/navigation/setting_titles_for_navigation_content.md'
                                         },
                                     ]
                                 },

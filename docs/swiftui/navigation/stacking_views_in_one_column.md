@@ -91,3 +91,106 @@ func showParks() {
 该堆栈根据各自的数据类型将导航链接与导航目的地进行匹配。
 
 要创建包含多种数据的编程导航路径，你可以使用 `NavigationPath` 实例作为路径。
+
+
+## `NavigationDestination`
+
+### `navigationDestination(for:destination:)`
+
+```swift
+func navigationDestination<D, C>(
+    for data: D.Type,
+    @ViewBuilder destination: @escaping (D) -> C
+) -> some View where D : Hashable, C : View
+```
+将目标视图与呈现的数据类型相关联，以便在导航堆栈中使用。
+
+```swift
+NavigationStack {
+    List {
+        NavigationLink("Mint", value: Color.mint)
+        NavigationLink("Pink", value: Color.pink)
+        NavigationLink("Teal", value: Color.teal)
+    }
+    .navigationDestination(for: Color.self) { color in
+        ColorDetail(color: color)
+    }
+    .navigationTitle("Colors")
+}
+```
+
+如果需要显示不止一种数据，你可以向堆栈添加多个导航目标修饰符。
+
+::: danger 注意
+不要将导航目标修饰符放在「惰性」容器内，例如 `List` 或 `LazyVStack`。
+
+这些容器仅在需要在屏幕上渲染时创建子视图，在这些容器外部添加导航目的地修饰符，以便导航堆栈始终可以看到目的地。
+:::
+
+### `navigationDestination(isPresented:destination:)`
+
+```swift
+func navigationDestination<V>(
+    isPresented: Binding<Bool>,
+    @ViewBuilder destination: () -> V
+) -> some View where V : View
+```
+
+将目标视图与可用于将视图推送到 `NavigationStack` 的绑定相关联。
+
+
+```swift
+@State private var showDetails = false
+var favoriteColor: Color
+
+
+NavigationStack {
+    VStack {
+        Circle()
+            .fill(favoriteColor)
+        Button("Show details") {
+            showDetails = true
+        }
+    }
+    .navigationDestination(isPresented: $showDetails) {
+        ColorDetail(color: favoriteColor)
+    }
+    .navigationTitle("My Favorite Color")
+}
+```
+
+### `navigationDestination(item:destination:)`
+
+```swift
+func navigationDestination<D, C>(
+    item: Binding<Optional<D>>,
+    @ViewBuilder destination: @escaping (D) -> C
+) -> some View where D : Hashable, C : View
+```
+
+将目标视图与绑定值关联以在导航堆栈或导航拆分视图中使用。
+
+```swift
+@State private var colorShown: Color?
+
+
+NavigationSplitView {
+    List {
+        Button("Mint") { colorShown = .mint }
+        Button("Pink") { colorShown = .pink }
+        Button("Teal") { colorShown = .teal }
+    }
+    .navigationDestination(item: $colorShown) { color in
+        ColorDetail(color: color)
+    }
+} detail: {
+    Text("Select a color")
+}
+```
+
+
+当使用该应用程序的人点击 `Mint` 按钮时，薄荷色会显示在详细信息中，并且 `colorShown` 会获取值 `Color.mint`。
+
+你可以通过将 `colorShown` 设置回 `nil` 来重置导航拆分视图以显示消息「`Select a color`」。
+
+如果需要显示不止一种数据，你可以向堆栈添加多个导航目标修饰符。
