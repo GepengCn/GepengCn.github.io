@@ -127,6 +127,19 @@ export default defineConfig({
                                     ]
                                 },
                                 {text: 'Documents', link: '/swiftui/documents.md'},
+                                {
+                                    text: 'Navigation', items: [
+
+                                        {
+                                            text: 'Presenting views in columns',
+                                            link: '/swiftui/navigation/presenting_views_in_columns.md'
+                                        },
+                                        {
+                                        text: 'Stacking views in one column',
+                                        link: '/swiftui/navigation/stacking_views_in_one_column.md'
+                                        },
+                                    ]
+                                },
                             ]
                         },
                     ]
