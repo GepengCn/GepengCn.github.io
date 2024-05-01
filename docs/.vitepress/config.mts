@@ -126,6 +126,7 @@ export default defineConfig({
                                         },
                                     ]
                                 },
+                                {text: 'Documents', link: '/swiftui/documents.md'},
                             ]
                         },
                     ]
