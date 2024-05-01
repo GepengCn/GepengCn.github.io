@@ -88,10 +88,42 @@ export default defineConfig({
                                             ]
                                         },
 
-                                        {text: 'Styling the associated toolbar', link: '/swiftui/windows/styling_the_associated_toolbar.md'},
+                                        {
+                                            text: 'Styling the associated toolbar',
+                                            link: '/swiftui/windows/styling_the_associated_toolbar.md'
+                                        },
                                         {text: 'Opening windows', link: '/swiftui/windows/opening_windows.md'},
                                         {text: 'Closing windows', link: '/swiftui/windows/closing_windows.md'},
-                                        {text: 'Positioning and sizing a window', link: '/swiftui/windows/pos_sizing_window.md'},
+                                        {
+                                            text: 'Positioning and sizing a window',
+                                            link: '/swiftui/windows/pos_sizing_window.md'
+                                        },
+                                    ]
+                                },
+
+                                {
+                                    text: 'Immersive spaces', items: [
+
+                                        {
+                                            text: 'Creating an immersive space',
+                                            link: '/swiftui/immersive_spaces/creating_an_immersive_space.md'
+                                        },
+                                        {
+                                            text: 'Opening an immersive space',
+                                            link: '/swiftui/immersive_spaces/opening_an_immersive_space.md'
+                                        },
+                                        {
+                                            text: 'Closing the immersive space',
+                                            link: '/swiftui/immersive_spaces/closing_the_immersive_space.md'
+                                        },
+                                        {
+                                            text: 'Hiding upper limbs during immersion',
+                                            link: '/swiftui/immersive_spaces/hiding_upper_limbs_during_immersion.md'
+                                        },
+                                        {
+                                            text: 'Adjusting content brightness',
+                                            link: '/swiftui/immersive_spaces/adjusting_content_brightness.md'
+                                        },
                                     ]
                                 },
                             ]
