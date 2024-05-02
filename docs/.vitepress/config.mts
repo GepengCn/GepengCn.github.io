@@ -172,6 +172,10 @@ export default defineConfig({
                                             text: 'Adapting a presentation to size classes',
                                             link: '/swiftui/modal_presentations/adapting_a_presentation_to_size_classes.md'
                                         },
+                                        {
+                                            text: 'Configuring a sheet’s height',
+                                            link: '/swiftui/modal_presentations/configuring_a_sheets_height.md'
+                                        },
                                     ]
                                 },
                             ]
