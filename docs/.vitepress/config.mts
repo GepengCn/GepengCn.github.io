@@ -178,7 +178,6 @@ export default defineConfig({
                                         },
                                         {
                                             text: 'Styling a sheet and its background',
-                                            link: '/swiftui/modal_presentations/styling_a_sheet_and_its_background.md'
                                         },
                                         {
                                             text: 'Presenting an alert',
@@ -187,6 +186,10 @@ export default defineConfig({
                                         {
                                             text: 'Presenting an alert with a message',
                                             link: '/swiftui/modal_presentations/presenting_an_alert_with_a_message.md'
+                                        },
+                                        {
+                                            text: 'Getting confirmation for an action',
+                                            link: '/swiftui/modal_presentations/getting_confirmation_for_an_action.md'
                                         },
                                     ]
                                 },
