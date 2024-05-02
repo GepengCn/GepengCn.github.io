@@ -208,6 +208,10 @@ export default defineConfig({
                                             text: 'Importing from file',
                                             link: '/swiftui/modal_presentations/importing_from_file.md'
                                         },
+                                        {
+                                        text: 'Moving a file',
+                                        link: '/swiftui/modal_presentations/moving_a_file.md'
+                                        },
                                     ]
                                 },
                             ]
