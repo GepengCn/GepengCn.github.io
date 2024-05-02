@@ -195,6 +195,10 @@ export default defineConfig({
                                             text: 'Showing a confirmation dialog with a message',
                                             link: '/swiftui/modal_presentations/showing_a_confirmation_dialog_with_a_message.md'
                                         },
+                                        {
+                                            text: 'Configuring a dialog',
+                                            link: '/swiftui/modal_presentations/configuring_a_dialog.md'
+                                        },
                                     ]
                                 },
                             ]
