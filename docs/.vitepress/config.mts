@@ -184,6 +184,10 @@ export default defineConfig({
                                             text: 'Presenting an alert',
                                             link: '/swiftui/modal_presentations/presenting_an_alert.md'
                                         },
+                                        {
+                                            text: 'Presenting an alert with a message',
+                                            link: '/swiftui/modal_presentations/presenting_an_alert_with_a_message.md'
+                                        },
                                     ]
                                 },
                             ]
