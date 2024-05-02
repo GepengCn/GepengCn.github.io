@@ -150,6 +150,10 @@ export default defineConfig({
                                             text: 'Configuring the navigation bar',
                                             link: '/swiftui/navigation/configuring_the_navigation_bar.md'
                                         },
+                                        {
+                                            text: 'Presenting views in tabs',
+                                            link: '/swiftui/navigation/presenting_views_in_tabs.md'
+                                        },
                                     ]
                                 },
                             ]
