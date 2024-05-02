@@ -154,6 +154,10 @@ export default defineConfig({
                                             text: 'Presenting views in tabs',
                                             link: '/swiftui/navigation/presenting_views_in_tabs.md'
                                         },
+                                        {
+                                            text: 'Displaying views in multiple panes',
+                                            link: '/swiftui/navigation/displaying_views_in_multiple_panes.md'
+                                        },
                                     ]
                                 },
                             ]
