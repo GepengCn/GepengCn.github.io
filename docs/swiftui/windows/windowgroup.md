@@ -76,7 +76,7 @@ struct NewViewerButton: View {
 
 你可以基于类型来创建 `WindowGroup`，当你打开窗口时 `openWindow`时，传递匹配的类型就可以打开对应的那个窗口。
 
-例如，您可以为邮件应用程序定义 `WindowGroup(for: Message.ID.self)`，类型为 `Message.ID`：
+例如，你可以为邮件应用程序定义 `WindowGroup(for: Message.ID.self)`，类型为 `Message.ID`：
 
 ```swift
 @main

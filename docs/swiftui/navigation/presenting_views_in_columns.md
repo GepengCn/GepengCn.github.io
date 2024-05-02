@@ -9,7 +9,7 @@
 
 在容器内的视图上使用其他修饰符可以影响容器在显示该视图时的行为。
 
-例如，您可以在视图上使用 `navigationTitle(_:)` 来提供在显示该视图时显示的工具栏标题。
+例如，你可以在视图上使用 `navigationTitle(_:)` 来提供在显示该视图时显示的工具栏标题。
 
 
 ## `NavigationSplitView`
@@ -47,7 +47,7 @@ NavigationSplitView {
 
 ### Control column visibility
 
-您可以通过创建 `NavigationSplitViewVisibility` 类型的 `State` 值以编程方式控制导航拆分视图列的可见性。
+你可以通过创建 `NavigationSplitViewVisibility` 类型的 `State` 值以编程方式控制导航拆分视图列的可见性。
 
 然后将该状态的 `Binding` 传递给适当的初始化程序 - 例如两列的 `init(columnVisibility:sidebar:detail:)` 或三列的 `init(columnVisibility:sidebar:content:detail:)`。
 
@@ -81,7 +81,7 @@ var body: some View {
 
 通常，SwiftUI 根据拆分视图列的内容自动选择要在该单个堆栈顶部显示的视图。
 
-对于自定义导航体验，您可以提供更多信息来帮助 SwiftUI 选择正确的列。
+对于自定义导航体验，你可以提供更多信息来帮助 SwiftUI 选择正确的列。
 
 创建 `NavigationSplitViewColumn` 类型的 `State` 值，然后将该状态的 `Binding` 传递给适当的初始值设定项，例如 `init(preferredCompactColumn:sidebar:detail:)` 或 `init(preferredCompactColumn:sidebar:content:detail:)`。
 
@@ -138,7 +138,7 @@ struct NavigationLink<Label, Destination> where Label : View, Destination : View
 
 你可以通过在 `NavigationLink` 的闭合方法中提供视图内容来控制 `NavigationLink` 的视觉外观。
 
-例如，您可以使用 `Label` 来显示链接：
+例如，你可以使用 `Label` 来显示链接：
 
 ```swift
 NavigationLink {
@@ -248,7 +248,7 @@ func showBlue() {
 
 ### Coordinate with a list
 
-您还可以使用导航链接来控制 `NavigationSplitView` 中的列表选择：
+你还可以使用导航链接来控制 `NavigationSplitView` 中的列表选择：
 
 
 ```swift

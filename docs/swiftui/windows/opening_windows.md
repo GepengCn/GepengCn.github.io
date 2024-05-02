@@ -39,7 +39,7 @@ struct NewMailViewerButton: View {
 
 ::: danger
 
-如果该值为 `false` 并且您尝试打开窗口，SwiftUI 将忽略该操作并记录运行时错误。
+如果该值为 `false` 并且你尝试打开窗口，SwiftUI 将忽略该操作并记录运行时错误。
 
 :::
 
@@ -87,7 +87,7 @@ var openWindow: OpenWindowAction { get }
 ```
 
 
-例如，您可以定义一个打开新邮件查看器窗口的按钮：
+例如，你可以定义一个打开新邮件查看器窗口的按钮：
 
 ```swift
 @main

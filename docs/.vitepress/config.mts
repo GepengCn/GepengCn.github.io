@@ -160,6 +160,20 @@ export default defineConfig({
                                         },
                                     ]
                                 },
+
+                                {
+                                    text: 'Modal presentations', items: [
+
+                                        {
+                                            text: 'Showing a sheet, cover, or popover',
+                                            link: '/swiftui/modal_presentations/showing_a_sheet_cover_or_popover.md'
+                                        },
+                                        {
+                                            text: 'Adapting a presentation to size classes',
+                                            link: '/swiftui/modal_presentations/adapting_a_presentation_to_size_classes.md'
+                                        },
+                                    ]
+                                },
                             ]
                         },
                     ]

@@ -12,9 +12,9 @@ struct OpenImmersiveSpaceAction
 
 然后调用实例呈现一个空间。
 
-你可以直接调用该实例，因为它定义了 `callAsFunction()` 方法，当您调用该实例时，Swift 会调用该方法。
+你可以直接调用该实例，因为它定义了 `callAsFunction()` 方法，当你调用该实例时，Swift 会调用该方法。
 
-例如，您可以定义一个在沉浸式空间中打开指定星球的按钮：
+例如，你可以定义一个在沉浸式空间中打开指定星球的按钮：
 
 
 ```swift

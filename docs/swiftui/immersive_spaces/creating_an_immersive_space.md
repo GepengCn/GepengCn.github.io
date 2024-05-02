@@ -98,7 +98,7 @@ struct NewSolarSystemImmersiveSpace: View {
 
 你可以通过从环境中调用 `dismissImmersiveSpace` 操作来关闭沉浸式空间。
 
-例如，您可以定义一个按钮来关闭沉浸式空间：
+例如，你可以定义一个按钮来关闭沉浸式空间：
 
 
 ```swift
