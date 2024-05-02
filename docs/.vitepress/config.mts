@@ -176,6 +176,10 @@ export default defineConfig({
                                             text: 'Configuring a sheet’s height',
                                             link: '/swiftui/modal_presentations/configuring_a_sheets_height.md'
                                         },
+                                        {
+                                        text: 'Styling a sheet and its background',
+                                        link: '/swiftui/modal_presentations/styling_a_sheet_and_its_background.md'
+                                        },
                                     ]
                                 },
                             ]
