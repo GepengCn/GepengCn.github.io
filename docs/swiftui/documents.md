@@ -398,3 +398,15 @@ ContentView()
         RenameButton()
     }
 ```
+
+
+::: warning 为你的应用程序定义文件和数据类型
+
+应用程序若要保存、加载或传输具有专有数据格式的文档，可以通过以下方式定义每种格式的文件或数据类型：
+1. 在项目的 Info.plist 文件中声明应用的自定义类型。
+2. 为导出类型创建新的标识符，或使用现有的标识符来定义导入类型。
+3. 定义每种类型对系统声明类型的符合性。
+4. 列出任何相关的文件扩展名或 MIME 类型。
+
+详情访问 [Article](https://developer.apple.com/documentation/uniformtypeidentifiers/defining_file_and_data_types_for_your_app)
+:::

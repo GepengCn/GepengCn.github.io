@@ -178,6 +178,7 @@ export default defineConfig({
                                         },
                                         {
                                             text: 'Styling a sheet and its background',
+                                            link: '/swiftui/modal_presentations/styling_a_sheet_and_its_background.md'
                                         },
                                         {
                                             text: 'Presenting an alert',
@@ -198,6 +199,10 @@ export default defineConfig({
                                         {
                                             text: 'Configuring a dialog',
                                             link: '/swiftui/modal_presentations/configuring_a_dialog.md'
+                                        },
+                                        {
+                                            text: 'Exporting to file',
+                                            link: '/swiftui/modal_presentations/exporting_to_file.md'
                                         },
                                     ]
                                 },
