@@ -146,6 +146,10 @@ export default defineConfig({
                                             text: 'Setting titles for navigation content',
                                             link: '/swiftui/navigation/setting_titles_for_navigation_content.md'
                                         },
+                                        {
+                                            text: 'Configuring the navigation bar',
+                                            link: '/swiftui/navigation/configuring_the_navigation_bar.md'
+                                        },
                                     ]
                                 },
                             ]
