@@ -220,6 +220,10 @@ export default defineConfig({
                                             text: 'Presenting an inspector',
                                             link: '/swiftui/modal_presentations/presenting_an_inspector.md'
                                         },
+                                        {
+                                        text: 'Dismissing a presentation',
+                                        link: '/swiftui/modal_presentations/dismissing_a_presentation.md'
+                                        },
                                     ]
                                 },
                             ]
