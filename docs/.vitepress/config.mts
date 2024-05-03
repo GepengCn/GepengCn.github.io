@@ -212,6 +212,10 @@ export default defineConfig({
                                         text: 'Moving a file',
                                         link: '/swiftui/modal_presentations/moving_a_file.md'
                                         },
+                                        {
+                                        text: 'Configuring a file dialog',
+                                        link: '/swiftui/modal_presentations/configuring_a_file_dialog.md'
+                                        },
                                     ]
                                 },
                             ]
