@@ -209,12 +209,16 @@ export default defineConfig({
                                             link: '/swiftui/modal_presentations/importing_from_file.md'
                                         },
                                         {
-                                        text: 'Moving a file',
-                                        link: '/swiftui/modal_presentations/moving_a_file.md'
+                                            text: 'Moving a file',
+                                            link: '/swiftui/modal_presentations/moving_a_file.md'
                                         },
                                         {
-                                        text: 'Configuring a file dialog',
-                                        link: '/swiftui/modal_presentations/configuring_a_file_dialog.md'
+                                            text: 'Configuring a file dialog',
+                                            link: '/swiftui/modal_presentations/configuring_a_file_dialog.md'
+                                        },
+                                        {
+                                            text: 'Presenting an inspector',
+                                            link: '/swiftui/modal_presentations/presenting_an_inspector.md'
                                         },
                                     ]
                                 },
