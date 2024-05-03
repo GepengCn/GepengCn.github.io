@@ -76,7 +76,7 @@ export default defineConfig({
                                 {text: 'App organization', link: '/swiftui/app_organization.md'},
                                 {text: 'Scenes', link: '/swiftui/scenes.md'},
                                 {
-                                    text: 'Windows', items: [
+                                    text: 'Windows', collapsed: true, items: [
 
                                         {
                                             text: 'Creating windows', items: [
@@ -102,7 +102,7 @@ export default defineConfig({
                                 },
 
                                 {
-                                    text: 'Immersive spaces', items: [
+                                    text: 'Immersive spaces', collapsed: true, items: [
 
                                         {
                                             text: 'Creating an immersive space',
@@ -128,7 +128,7 @@ export default defineConfig({
                                 },
                                 {text: 'Documents', link: '/swiftui/documents.md'},
                                 {
-                                    text: 'Navigation', items: [
+                                    text: 'Navigation', collapsed: true, items: [
 
                                         {
                                             text: 'Presenting views in columns',
@@ -162,7 +162,7 @@ export default defineConfig({
                                 },
 
                                 {
-                                    text: 'Modal presentations', items: [
+                                    text: 'Modal presentations', collapsed: true, items: [
 
                                         {
                                             text: 'Showing a sheet, cover, or popover',
@@ -221,8 +221,46 @@ export default defineConfig({
                                             link: '/swiftui/modal_presentations/presenting_an_inspector.md'
                                         },
                                         {
-                                        text: 'Dismissing a presentation',
-                                        link: '/swiftui/modal_presentations/dismissing_a_presentation.md'
+                                            text: 'Dismissing a presentation',
+                                            link: '/swiftui/modal_presentations/dismissing_a_presentation.md'
+                                        },
+                                    ]
+                                },
+                                {
+                                    text: 'Toolbars', items: [
+
+                                        {
+                                            text: 'Populating a toolbar',
+                                            link: '/swiftui/toolbars/populating_a_toolbar.md'
+                                        },
+                                        {
+                                            text: 'Populating a customizable toolbar',
+                                            link: '/swiftui/toolbars/populating_a_toolbar.md'
+                                        },
+                                        {
+                                            text: 'Removing default items',
+                                            link: '/swiftui/toolbars/populating_a_toolbar.md'
+                                        },
+                                        {
+                                            text: 'Setting toolbar visibility',
+                                            link: '/swiftui/toolbars/populating_a_toolbar.md'
+                                        },
+                                        {
+                                            text: 'Specifying the role of toolbar content',
+                                            link: '/swiftui/toolbars/populating_a_toolbar.md'
+                                        },
+                                        {text: 'Styling a toolbar', link: '/swiftui/toolbars/populating_a_toolbar.md'},
+                                        {
+                                            text: 'Configuring the toolbar title display mode',
+                                            link: '/swiftui/toolbars/populating_a_toolbar.md'
+                                        },
+                                        {
+                                            text: 'Setting the toolbar title menu',
+                                            link: '/swiftui/toolbars/populating_a_toolbar.md'
+                                        },
+                                        {
+                                            text: 'Creating an ornament',
+                                            link: '/swiftui/toolbars/populating_a_toolbar.md'
                                         },
                                     ]
                                 },
