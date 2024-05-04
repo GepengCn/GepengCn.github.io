@@ -235,7 +235,7 @@ export default defineConfig({
                                         },
                                         {
                                             text: 'Populating a customizable toolbar',
-                                            link: '/swiftui/toolbars/populating_a_toolbar.md'
+                                            link: '/swiftui/toolbars/populating_a_customizable_toolbar.md'
                                         },
                                         {
                                             text: 'Removing default items',
