@@ -256,11 +256,11 @@ export default defineConfig({
                                         },
                                         {
                                             text: 'Setting the toolbar title menu',
-                                            link: '/swiftui/toolbars/populating_a_toolbar.md'
+                                            link: '/swiftui/toolbars/setting_the_toolbar_title_menu.md'
                                         },
                                         {
                                             text: 'Creating an ornament',
-                                            link: '/swiftui/toolbars/populating_a_toolbar.md'
+                                            link: '/swiftui/toolbars/creating_an_ornament.md'
                                         },
                                     ]
                                 },
