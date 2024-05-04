@@ -1,7 +1,9 @@
 
 # visionOS
 
-欢迎来到visionOS，这是一个记录我从零开始学习iOS技术的旅程的平台。在这里，你将找到关于Swift、SwiftUI、RealityKit、ARKit和辅助功能等技术的深入探讨，无论是初学者还是有经验的开发者都适用。
+欢迎来到 visionOS，这是一个记录我从零开始学习 visionOS 开发的旅程的平台。
+
+在这里，你将找到关于 Swift、SwiftUI、RealityKit、ARKit 和辅助功能等技术的深入探讨，无论是初学者还是有经验的开发者都适用。
 
 ## 特点
 
