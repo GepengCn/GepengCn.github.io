@@ -239,11 +239,11 @@ export default defineConfig({
                                         },
                                         {
                                             text: 'Removing default items',
-                                            link: '/swiftui/toolbars/populating_a_toolbar.md'
+                                            link: '/swiftui/toolbars/removing_default_items.md'
                                         },
                                         {
                                             text: 'Setting toolbar visibility',
-                                            link: '/swiftui/toolbars/populating_a_toolbar.md'
+                                            link: '/swiftui/toolbars/setting_toolbar_visibility.md'
                                         },
                                         {
                                             text: 'Specifying the role of toolbar content',
