@@ -24,9 +24,9 @@ WindowGroup() {
 
 ```swift
 WindowGroup() {
-        ContentView().toolbar(content: {
-            ...      
-        })
+    ContentView().toolbar(content: {
+        ...
+    })
 }.windowToolbarStyle(.expanded)
 ```
 
@@ -39,9 +39,9 @@ WindowGroup() {
 
 ```swift
 WindowGroup() {
-        ContentView().toolbar(content: {
-            ...      
-        })
+    ContentView().toolbar(content: {
+        ...
+    })
 }.windowToolbarStyle(.expanded)
 ```
 
@@ -56,9 +56,9 @@ WindowGroup() {
 
 ```swift
 WindowGroup() {
-        ContentView().toolbar(content: {
-            ...      
-        })
+    ContentView().toolbar(content: {
+        ...
+    })
 }.windowToolbarStyle(.unified(showsTitle: false))
 ```
 
@@ -71,9 +71,9 @@ WindowGroup() {
 
 ```swift
 WindowGroup() {
-        ContentView().toolbar(content: {
-            ...      
-        })
+    ContentView().toolbar(content: {
+        ...
+    })
 }.windowToolbarStyle(.unifiedCompact)
 ```
 
@@ -89,9 +89,9 @@ WindowGroup() {
 
 ```swift
 WindowGroup() {
-        ContentView().toolbar(content: {
-            ...      
-        })
+    ContentView().toolbar(content: {
+        ...
+    })
 }.windowToolbarStyle(.unifiedCompact(showsTitle: false))
 ```
 

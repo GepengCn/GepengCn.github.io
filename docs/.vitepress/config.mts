@@ -247,9 +247,9 @@ export default defineConfig({
                                         },
                                         {
                                             text: 'Specifying the role of toolbar content',
-                                            link: '/swiftui/toolbars/populating_a_toolbar.md'
+                                            link: '/swiftui/toolbars/specifying_the_role_of_toolbar_content.md'
                                         },
-                                        {text: 'Styling a toolbar', link: '/swiftui/toolbars/populating_a_toolbar.md'},
+                                        {text: 'Styling a toolbar', link: '/swiftui/toolbars/styling_a_toolbar.md'},
                                         {
                                             text: 'Configuring the toolbar title display mode',
                                             link: '/swiftui/toolbars/populating_a_toolbar.md'
