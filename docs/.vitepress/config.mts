@@ -252,7 +252,7 @@ export default defineConfig({
                                         {text: 'Styling a toolbar', link: '/swiftui/toolbars/styling_a_toolbar.md'},
                                         {
                                             text: 'Configuring the toolbar title display mode',
-                                            link: '/swiftui/toolbars/populating_a_toolbar.md'
+                                            link: '/swiftui/toolbars/configuring_the_toolbar_title_display_mode.md'
                                         },
                                         {
                                             text: 'Setting the toolbar title menu',
