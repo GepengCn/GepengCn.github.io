@@ -136,7 +136,7 @@ ContentView()
 
 ```
 
-为了确保即使用户从可自定义工具栏中移除了某个具有默认可定制性的项目，也能始终使用它，您可以采用 `alwaysAvailable` 选项。与使用 `ToolbarCustomizationBehavior/none` 定制行为始终保持在工具栏内的项目不同，设置了 `alwaysAvailable` 的项目在被用户从工具栏移除后，会保留在溢出菜单中。
+为了确保即使用户从可自定义工具栏中移除了某个具有默认可定制性的项目，也能始终使用它，你可以采用 `alwaysAvailable` 选项。与使用 `ToolbarCustomizationBehavior/none` 定制行为始终保持在工具栏内的项目不同，设置了 `alwaysAvailable` 的项目在被用户从工具栏移除后，会保留在溢出菜单中。
 
 要在该修饰符的 `options` 参数中启用此功能，请提供 `alwaysAvailable` 值。
 
