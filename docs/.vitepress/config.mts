@@ -264,6 +264,7 @@ export default defineConfig({
                                         },
                                     ]
                                 },
+                                {text: 'Search', link: '/swiftui/search.md'},
                             ]
                         },
                     ]
