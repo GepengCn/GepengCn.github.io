@@ -227,7 +227,7 @@ export default defineConfig({
                                     ]
                                 },
                                 {
-                                    text: 'Toolbars', items: [
+                                    text: 'Toolbars', collapsed: true, items: [
 
                                         {
                                             text: 'Populating a toolbar',

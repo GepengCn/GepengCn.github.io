@@ -213,10 +213,10 @@ NavigationStack {
     }.navigationTitle("100 Rows")
         .searchable(text: $text)
         .searchSuggestions {
-                Text("🍎").searchCompletion("apple")
-                Text("🍐").searchCompletion("pear")
-                Text("🍌").searchCompletion("banana")
-            }
+            Text("🍎").searchCompletion("apple")
+            Text("🍐").searchCompletion("pear")
+            Text("🍌").searchCompletion("banana")
+        }
 }
 ```
 
@@ -301,7 +301,7 @@ func searchScopes<V, S>(
 ) -> some View where V : Hashable, S : View
 ```
 
-为了让用户能够缩小搜索范围，您可以创建一种表示可能搜索范围的类型，然后创建一个状态变量来保存当前的选择。例如，您可以限制产品搜索范围只包括水果或蔬菜：
+为了让用户能够缩小搜索范围，你可以创建一种表示可能搜索范围的类型，然后创建一个状态变量来保存当前的选择。例如，你可以限制产品搜索范围只包括水果或蔬菜：
 
 
 ```swift
@@ -443,7 +443,7 @@ SwiftUI 使用提供的绑定和视图在搜索字段下方添加一个选择器
 var isSearching: Bool { get }
 ```
 
-您可以像读取其他 `EnvironmentValues` 一样读取此布尔值，只需通过创建一个使用 `Environment` 属性包装器的属性即可：
+你可以像读取其他 `EnvironmentValues` 一样读取此布尔值，只需通过创建一个使用 `Environment` 属性包装器的属性即可：
 
 ```swift
 @Environment(\.isSearching) private var isSearching
@@ -481,3 +481,252 @@ struct SearchedView: View {
 ::: warning 重要
 正如上述示例所示，应该从被搜索的视图内部访问该值，而不是从被搜索视图的父视图中访问。SwiftUI 将该值设置在应用了 `searchable` 修饰符的视图的环境中，而不会将该值沿视图层级向上传播。因此，要在用户与搜索字段交互时做出响应，应当在包含搜索功能的视图内部读取 `isSearching` 属性的值。
 :::
+
+
+### `dismissSearch`
+
+一个结束当前搜索交互的动作。
+
+使用这个环境值可以从当前环境中获取到 `DismissSearchAction` 实例，然后调用该实例以结束当前的搜索交互。
+
+由于 `DismissSearchAction` 定义了一个 `callAsFunction()` 方法，所以可以直接调用该实例，Swift 会自动调用其 `callAsFunction()` 方法。
+
+当你调用该方法来结束搜索时，SwiftUI 会执行以下操作：
+
+- 将 `isSearching` 设置为 `false`。
+- 清除搜索字段中的任何文本内容。
+- 移除搜索字段的焦点。
+
+::: tip
+如果用户当前并未与搜索字段进行交互，调用这个实例将不会产生任何效果。
+:::
+
+你可以使用这个动作来基于用户的其他交互来关闭搜索操作。例如，假设有一个带有搜索功能的视图，视图中还有一个按钮，该按钮的作用是显示集合中第一个匹配项的更多详细信息：
+
+
+```swift
+struct ContentView: View {
+    @State private var searchText = ""
+
+
+    var body: some View {
+        NavigationStack {
+            SearchedView(searchText: searchText)
+                .searchable(text: $searchText)
+        }
+    }
+}
+
+
+private struct SearchedView: View {
+    let searchText: String
+
+
+    let items = ["a", "b", "c"]
+    var filteredItems: [String] { items.filter { $0 == searchText.lowercased() } }
+
+
+    @State private var isPresented = false
+    @Environment(\.dismissSearch) private var dismissSearch
+
+
+    var body: some View {
+        if let item = filteredItems.first {
+            Button("Details about \(item)") {
+                isPresented = true
+            }
+            .sheet(isPresented: $isPresented) {
+                NavigationStack {
+                    DetailView(item: item, dismissSearch: dismissSearch)
+                }
+            }
+        }
+    }
+}
+
+private struct DetailView: View {
+    var item: String
+    var dismissSearch: DismissSearchAction
+
+
+    @Environment(\.dismiss) private var dismiss
+
+
+    var body: some View {
+        Text("Information about \(item).")
+            .toolbar {
+                Button("Add") {
+                    // Store the item here...
+
+
+                    dismiss()
+                    dismissSearch()
+                }
+            }
+    }
+}
+```
+<video src="../video/DismissSearch.mp4" controls="controls"></video>
+
+用户可以通过向下拖动来关闭表单（ `sheet` ），这实际上相当于取消了当前操作，但保留了正在进行的搜索交互状态。另外，用户也可以点击“添加”按钮来保存该条目。考虑到用户在点击保存后很可能既完成了详情查看也结束了搜索操作，因此按钮的闭包除了关闭表单之外，还会使用 `dismissSearch` 属性重置搜索字段，使得搜索视图恢复至初始状态。
+
+
+::: warning
+如同上面的示例所示，应当从被搜索视图自身内部访问这个动作，而不是从被搜索视图的父视图或其他视图层级（例如弹出窗口 `sheet` 的层级）中访问。
+
+SwiftUI 将这个动作值设置在应用了 `searchable` 修饰符的视图环境中，且不向上级视图层级传播该值。因此，只有在包含了搜索功能的视图中才能直接访问并调用 `dismissSearch` 动作来结束搜索交互。
+
+:::
+
+
+### `searchable(text:isPresented:placement:prompt:)`
+
+
+标记此视图具有可编程性地显示搜索字段的搜索功能。
+
+
+```swift
+func searchable(
+    text: Binding<String>,
+    isPresented: Binding<Bool>,
+    placement: SearchFieldPlacement = .automatic,
+    prompt: LocalizedStringKey
+) -> some View
+```
+
+
+你可以通过向 `searchable` 修饰符的 `isPresented` 参数提供一个绑定到布尔值的 `Binding`，以程序化地控制搜索界面的激活。
+
+例如，为了显示一个已经激活搜索界面的弹出视图（ `sheet` ），可以创建一个初始值为 `true` 的绑定：
+
+
+```swift
+struct SheetView: View {
+
+    @State private var isPresented = false
+
+    @State private var text = ""
+
+
+    var body: some View {
+        NavigationStack {
+            Form{
+
+                Toggle("是否搜索", isOn: $isPresented)
+            }.searchable(text: $text, isPresented: $isPresented)
+        }
+    }
+}
+```
+<video src="../video/SearchableIsPresented.mp4" controls="controls"></video>
+
+
+### React to search submission
+
+若要指定当用户提交搜索查询（通常是按回车键）时 SwiftUI 调用的动作，可以添加 `onSubmit(of:_:)` 修饰符：
+
+```swift
+SearchedView()
+    .searchable(text: $searchText)
+    .onSubmit(of: .search) {
+        submitCurrentSearchQuery()
+    }
+```
+
+
+根据你的应用程序结构，你可以以多种方式使用搜索提交功能。例如，你可以利用提交搜索查询的机会，在搜索字符串中查找子串，并将其转换为令牌。另外，对于那些可能因为需要网络访问而导致速度较慢的搜索操作，你可以等到接收到提交事件后再执行搜索。
+
+
+
+## `Displaying toolbar content during search`
+
+
+### `searchPresentationToolbarBehavior(_:)`
+
+配置此视图中任何搜索修饰符的搜索工具栏展示行为。
+
+
+```swift
+func searchPresentationToolbarBehavior(_ behavior: SearchPresentationToolbarBehavior) -> some View
+```
+
+
+默认情况下，在 iOS 平台上，当展示搜索功能时，工具栏可能会隐藏部分内容以聚焦于搜索。若要覆盖这一默认行为，你可以为此修饰符提供一个 `avoidHidingContent` 值。
+
+```swift
+NavigationStack {
+    List {
+        Text("Hello World")
+    }.navigationTitle("100 Rows")
+        .searchable(text: $text)
+        .searchPresentationToolbarBehavior(.avoidHidingContent)
+}
+```
+<video src="../video/SearchPresentationToolbarBehavior.mp4" controls="controls"></video>
+
+## Searching for text in a view with find and replace
+
+### `findNavigator(isPresented:)`
+
+以编程方式展示文本编辑器视图上的查找和替换界面。
+
+```swift
+func findNavigator(isPresented: Binding<Bool>) -> some View
+```
+
+
+向 `TextEditor` 或至少包含一个文本编辑器的视图层级添加此修饰符，以控制查找和替换界面的展示。当你将 `isPresented` 绑定设置为 `true` 时，系统会显示该界面，而设置为 `false` 时，系统则会隐藏该界面。
+
+下面的示例展示了如何基于工具栏按钮的状态显示或隐藏界面：
+
+```swift
+struct ContentView: View {
+
+    @State private var text = "Hello SwiftUI"
+
+    @State private var isPresented = false
+
+    var body: some View {
+        NavigationStack {
+            TextEditor(text: $text)
+                .findNavigator(isPresented: $isPresented)
+                .toolbar {
+                    Toggle(isOn: $isPresented) {
+                        Label("Find", systemImage: "magnifyingglass")
+                    }
+                }
+        }
+    }
+}
+```
+<video src="../video/FindNavigator.mp4" controls="controls"></video>
+
+
+### `findDisabled(_:)`
+
+阻止在文本编辑器中进行查找和替换操作。
+
+```swift
+func findDisabled(_ isDisabled: Bool = true) -> some View
+```
+
+
+```swift
+TextEditor(text: $text)
+    .findDisabled(isDisabled)
+    .findNavigator(isPresented: $isPresented)
+```
+
+### `replaceDisabled(_:)`
+
+防止在文本编辑器中进行替换操作。
+
+```swift
+func replaceDisabled(_ isDisabled: Bool = true) -> some View
+```
+
+```swift
+TextEditor(text: $text)
+    .replaceDisabled(isDisabled)
+    .findNavigator(isPresented: $isPresented)
+```
