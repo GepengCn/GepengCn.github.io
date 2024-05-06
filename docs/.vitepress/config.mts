@@ -291,7 +291,10 @@ export default defineConfig({
                                 },
                                 {
                                     text: 'Preferences', link: '/swiftui/preferences.md'
-                                }
+                                },
+                                {
+                                    text: 'Persistent storage', link: '/swiftui/persistent_storage.md'
+                                },
 
                             ]
 
