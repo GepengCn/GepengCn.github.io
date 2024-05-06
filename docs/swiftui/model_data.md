@@ -756,3 +756,174 @@ MyInitializableView(name: name, isEnabled: isEnabled)
 
 每次输入变化时重新初始化状态对象请注意其带来的性能开销。此外，改变视图身份可能会带来副作用。例如，如果视图的身份同时发生变化，SwiftUI 不会自动对视图内部的变化进行动画处理。而且，改变身份会重置视图保存的所有状态，包括你作为 `State`、`FocusState`、`GestureState` 等管理的值。
 
+
+## `ObservedObject`
+
+一种属性包装器类型，它订阅一个可观测对象并在该对象发生改变时使视图失效。
+
+```swift
+@propertyWrapper @frozen
+struct ObservedObject<ObjectType> where ObjectType : ObservableObject
+```
+
+
+当输入是一个 `ObservableObject` 且你希望视图在对象的已发布属性变化时更新时，向 SwiftUI 视图的参数添加 `@ObservedObject` 属性。通常，这是为了将一个 `StateObject` 传入子视图。
+
+以下示例定义了一个作为可观测对象的数据模型，在视图中实例化该模型为状态对象，然后将其实例作为被观察对象传递给子视图：
+
+
+```swift
+class DataModel: ObservableObject {
+    @Published var name = "Some Name"
+    @Published var isEnabled = false
+}
+
+struct MyView: View {
+    @StateObject private var model = DataModel()
+
+    var body: some View {
+        Text(model.name)
+        MySubView(model: model)
+    }
+}
+
+struct MySubView: View {
+    @ObservedObject var model: DataModel
+
+    var body: some View {
+        Toggle("Enabled", isOn: $model.isEnabled)
+    }
+}
+```
+
+当可观测对象的任何已发布属性发生变化时，SwiftUI 会更新依赖于该对象的任何视图。子视图也可以对模型属性进行更新，正如上述示例中的 `Toggle` 那样，这些更新会传播到视图层级结构中的其他观察者。
+
+对于被观察对象，不要指定默认值或初始值。此属性仅应用于作为视图输入的属性，如上述示例所示。
+
+::: danger 注意
+
+不要使用 `@ObservedObject` 包裹遵循 `Observable` 协议的对象。SwiftUI 会自动跟踪在 `body` 内部使用的可观测对象的依赖关系，并在数据变化时更新相关依赖视图。尝试使用 `@ObservedObject` 包裹一个可观测对象可能会导致编译错误，因为它要求被包裹的对象必须遵循 `ObservableObject` 协议。
+
+如果视图在其 `body` 中需要绑定到可观测对象的某个属性，应改用 `@Bindable` 属性包装器来包裹该对象；例如，`@Bindable var model: DataModel`。更多信息，请参阅「[Managing model data in your app](https://developer.apple.com/documentation/swiftui/managing-model-data-in-your-app)」。
+
+:::
+
+## `ObservableObject`
+
+一种具有发布者类型的对象，在对象发生更改之前发出信号。
+
+```swift
+protocol ObservableObject : AnyObject
+```
+
+默认情况下，`ObservableObject` 会合成一个 `objectWillChange` 发布者，该发布者在它的任何 `@Published` 属性更改之前发出即将更改的通知。
+
+```swift
+class Contact: ObservableObject {
+    @Published var name: String
+    @Published var age: Int
+
+    init(name: String, age: Int) {
+        self.name = name
+        self.age = age
+    }
+
+    func haveBirthday() -> Int {
+        age += 1
+        return age
+    }
+}
+
+let john = Contact(name: "John Appleseed", age: 24)
+cancellable = john.objectWillChange
+    .sink { _ in
+        print("\(john.age) will change")
+}
+print(john.haveBirthday())
+// Prints "24 will change"
+// Prints "25"
+```
+
+## `onChange(of:initial:_:)`
+
+为该视图添加一个修饰符，当特定值发生变化时触发一个动作。
+
+```swift
+func onChange<V>(
+    of value: V,
+    initial: Bool = false,
+    _ action: @escaping () -> Void
+) -> some View where V : Equatable
+```
+
+
+你可以使用 `onChange` 在某个值变化时触发副作用，比如环境键( `Environment key` )或绑定( `Binding` )的变化。
+
+系统可能会在主线程执行器上调用动作闭包，因此请避免在闭包中执行长时间运行的任务。如果需要执行这类任务，请分离出一个异步后台任务。
+
+当值发生变化时，闭包的新版本会被调用，所以任何被捕获的值都将采用观察值拥有新值时的值。在下面的代码示例中，当 `playState` 变化时，`PlayerView` 会调用其模型( `model` )。
+
+```swift
+struct PlayerView: View {
+    var episode: Episode
+    @State private var playState: PlayState = .paused
+
+    var body: some View {
+        VStack {
+            Text(episode.title)
+            Text(episode.showTitle)
+            PlayButton(playState: $playState)
+        }
+        .onChange(of: playState) {
+            model.playStateDidChange(state: playState)
+        }
+    }
+}
+```
+
+## `onReceive(_:perform:)`
+
+当此视图检测到由给定发布者发出的数据时，添加一个执行的动作。
+
+```swift
+func onReceive<P>(
+    _ publisher: P,
+    perform action: @escaping (P.Output) -> Void
+) -> some View where P : Publisher, P.Failure == Never
+```
+
+假设你有一个定时器作为数据源，它每秒发出当前的日期和时间。你可以这样使用 `onReceive` 来更新你的视图：
+
+```swift
+import SwiftUI
+import Combine
+
+struct ContentView: View {
+    @State private var currentTime = Date()
+
+    var body: some View {
+        Text("Current time: \(currentTime)")
+            .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect(), perform: { time in
+                self.currentTime = time
+            })
+    }
+}
+
+```
+
+## `environmentObject(_:)`
+
+为视图层次结构提供一个可观测对象。
+
+```swift
+func environmentObject<T>(_ object: T) -> some View where T : ObservableObject
+```
+
+使用此修饰符将一个可观测对象添加到视图的环境之中。该对象必须遵循 `ObservableObject` 协议。
+
+将对象添加到视图的环境后，视图层级中的子视图就可以访问到这个对象。要在子视图中检索这个对象，使用 `@EnvironmentObject` 属性包装器。
+
+::: info
+如果可观测对象遵循 `Observable` 协议，可以使用 `environment(_:)` 或 `environment(_:default:)` 修饰符将对象添加到视图的环境中。
+:::
+
