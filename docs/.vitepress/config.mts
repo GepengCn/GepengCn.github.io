@@ -265,6 +265,19 @@ export default defineConfig({
                                     ]
                                 },
                                 {text: 'Search', link: '/swiftui/search.md'},
+                                {
+                                    text: 'App extensions', collapsed: true, items: [
+                                        {text: 'App extensions', link: '/swiftui/app_extensions/app_extensions.md'},
+                                        {
+                                            text: 'Creating a widget extension',
+                                            link: '/swiftui/app_extensions/creating_a_widget_extension.md'
+                                        },
+                                        {
+                                            text: 'Supporting additional widget sizes',
+                                            link: '/swiftui/app_extensions/supporting_additional_widget_sizes.md'
+                                        },
+                                    ]
+                                },
                             ]
                         },
                     ]
