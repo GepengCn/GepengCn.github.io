@@ -285,6 +285,9 @@ export default defineConfig({
 
                                 {
                                     text: 'Model data', link: '/swiftui/model_data.md'
+                                },
+                                {
+                                text: 'Environment values', link: '/swiftui/environment_values.md'
                                 }
 
                             ]

@@ -270,7 +270,7 @@ struct PlayerView: View {
 
 ### Store observable objects
 
-您也可以在 `State` 中存储使用 `@Observable()` 宏创建的可观察对象；例如：
+你也可以在 `State` 中存储使用 `@Observable()` 宏创建的可观察对象；例如：
 
 ```swift
 @Observable
