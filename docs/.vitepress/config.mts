@@ -72,7 +72,7 @@ export default defineConfig({
                     items: [
                         {text: '导航', link: '/swiftui/index.md'},
                         {
-                            text: 'App structure', items: [
+                            text: 'App structure',collapsed: true, items: [
                                 {text: 'App organization', link: '/swiftui/app_organization.md'},
                                 {text: 'Scenes', link: '/swiftui/scenes.md'},
                                 {
@@ -280,6 +280,16 @@ export default defineConfig({
                                 },
                             ]
                         },
+                        {
+                            text: 'Data and storage', collapsed: true, items: [
+
+                                {
+                                    text: 'Model data', link: '/swiftui/model_data.md'
+                                }
+
+                            ]
+
+                        }
                     ]
                 },
             ],
