@@ -298,7 +298,8 @@ export default defineConfig({
 
                             ]
 
-                        }
+                        },
+                        {text: 'View fundamentals', link: '/swiftui/view_fundamentals'}
                     ]
                 },
             ],
