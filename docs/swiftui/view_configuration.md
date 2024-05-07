@@ -164,3 +164,71 @@ Menu {
 
 在 tvOS 上，标准按钮样式不包含菜单指示器，因此在使用内置按钮样式时，此修饰符将不起作用。你可以在自己的 `ButtonStyle` 实现中通过检查 `menuIndicatorVisibility` 环境值来实现指示器。
 :::
+
+
+### `statusBarHidden(_:)`
+
+设置状态栏的可见性。
+
+```swift
+func statusBarHidden(_ hidden: Bool = true) -> some View
+```
+
+
+<video src="../video/StatusBarHidden.mp4" controls="controls"></video>
+
+
+### `persistentSystemOverlays(_:)`
+
+设置覆盖在应用程序上的非临时系统视图（如状态栏和导航栏）的首选可见性。
+
+```swift
+func persistentSystemOverlays(_ visibility: Visibility) -> some View
+```
+
+如果你希望通过对隐藏或显示可能影响用户体验的系统叠加层来自定义应用的沉浸式体验，请使用此修改器。以下示例隐藏所有持久性的系统叠加。
+
+```swift
+struct ContentView: View {
+
+    var body: some View {
+
+        Text("This needs to take up lots of space")
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(.yellow)
+            .persistentSystemOverlays(.hidden)
+    }
+}
+
+```
+
+请注意，此修改器仅设置一个偏好设置，最终系统将决定是否遵守该偏好。这些非临时系统视图包括：
+
+- `Home` 指示器
+- `SharePlay` 指示器
+- iPad 上的多任务指示器和画中画功能
+
+系统可能会根据运行时的情况（如系统政策、用户设置或特定交互需求）来决定是否遵循你设置的偏好。
+
+![PersistentSystemOverlays](../images/PersistentSystemOverlays.png)
+
+
+## Managing view interaction
+
+### `disabled(_:)`
+
+添加了一个条件，用于控制用户是否可以与该视图进行交互。
+
+```swift
+func disabled(_ disabled: Bool) -> some View
+```
+
+在视图层级结构中，位于较高等级的视图可以覆盖你在此视图上设置的值。在以下示例中，按钮不是可交互的，因为外部的 `disabled(_:)`修饰符覆盖了内部的修饰符：
+
+```swift
+HStack {
+    Button(Text("Press")) {}
+    .disabled(false)
+}
+.disabled(true)
+```
