@@ -323,3 +323,121 @@ NotificationCenter.default.post(notification)
 
 
 附加到 `Text` 视图的任务会从通知的用户信息字典中获取并显示状态值。当用户选择不同的服务器时，SwiftUI 会取消现有任务并创建一个新的任务，新任务将等待来自新服务器的通知。
+
+
+## `id(_:)`
+
+将视图的身份绑定到给定的代理值上。
+
+```swift
+func id<ID>(_ id: ID) -> some View where ID : Hashable
+```
+
+当 `id` 参数指定的代理值发生变化时，视图的身份（例如，它的状态）将被重置。
+
+## `tag(_:)`
+
+为该视图设置唯一的标签值。
+
+```swift
+func tag<V>(_ tag: V) -> some View where V : Hashable
+```
+
+使用此修饰符可以区分某些可选中的视图，如 `Picker` 的可能值或 `TabView` 的标签页。标签值可以是遵循 `Hashable` 协议的任何类型。
+
+在下面的例子中，`Picker` 视图构建器中的 `ForEach` 循环遍历 `Flavor` 枚举。它提取每个枚举元素的字符串值用于构建行标签，并使用作为可选值的枚举值作为 `tag(_:)`修饰符的输入。`Picker` 要求标签的类型必须与选择类型完全匹配，在这个例子中是一个可选的 `Flavor`。
+
+
+```swift
+struct FlavorPicker: View {
+    enum Flavor: String, CaseIterable, Identifiable {
+        case chocolate, vanilla, strawberry
+        var id: Self { self }
+    }
+
+    @State private var selectedFlavor: Flavor? = nil
+
+    var body: some View {
+        Picker("Flavor", selection: $selectedFlavor) {
+            ForEach(Flavor.allCases) { flavor in
+                Text(flavor.rawValue).tag(Optional(flavor))
+            }
+        }
+    }
+}
+```
+
+如果你将 `selectedFlavor` 更改为非可选类型，则需要从 `tag` 输入中移除 `Optional` 类型转换以保持匹配。
+
+`ForEach` 会自动为每个枚举视图应用一个默认标签，使用相应元素的 `id` 参数。如果元素的 `id` 参数和 `picker` 的选择输入具有完全相同的类型，你可以省略显式的 `tag` 修饰符。
+
+## `equatable()`
+
+当视图的新值与其旧值相同时，阻止视图更新其子视图。
+
+```swift
+func equatable() -> EquatableView<Self>
+```
+
+当自身遵循 `Equatable` 协议时可用。
+
+## `AnyView`
+
+一个类型擦除的视图。
+
+```swift
+@frozen
+struct AnyView
+```
+
+`AnyView` 允许更改给定视图层次结构中使用的视图类型。每当与 `AnyView` 一起使用的视图类型发生变化时，旧的层次结构将被销毁，并为新类型创建一个新的层次结构。
+
+## `EmptyView`
+
+一个不包含任何内容的视图。
+
+```swift
+@frozen
+struct EmptyView
+```
+
+
+你几乎不需要直接创建 `EmptyView`。相反，`EmptyView` 代表视图的缺失。
+
+SwiftUI 在以下情形下会使用 `EmptyView` ：当 SwiftUI 视图类型定义了一个或多个带有泛型参数的子视图，并且允许这些子视图不存在时。当子视图不存在时，泛型类型参数中的子视图类型就是 `EmptyView`。
+
+以下示例创建了一个没有标签的不确定进度条 `ProgressView`。`ProgressView` 类型为其子视图声明了两个泛型参数 `Label` 和 `CurrentValueLabel` ，用于子视图的类型。当这两个子视图都缺失时（就像这里的例子），最终类型就是 `ProgressView<EmptyView, EmptyView>`，正如示例输出所示：
+
+```swift
+let progressView = ProgressView()
+print("\(type(of:progressView))")
+// Prints: ProgressView<EmptyView, EmptyView>
+```
+
+## `EquatableView`
+
+一种视图类型，它会将自己与其先前的值进行比较，如果新值与其旧值相同，则阻止其子视图更新。
+
+```swift
+@frozen
+struct EquatableView<Content> where Content : Equatable, Content : View
+```
+
+## `SubscriptionView`
+
+
+一种视图，它通过一个动作订阅发布者（ `publisher` ）。
+
+```swift
+@frozen
+struct SubscriptionView<PublisherType, Content> where PublisherType : Publisher, Content : View, PublisherType.Failure == Never
+```
+
+## `TupleView`
+
+由 Swift 元组中的多个 `View` 值创建的 `View`。
+
+```swift
+@frozen
+struct TupleView<T>
+```
