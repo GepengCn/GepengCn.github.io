@@ -299,7 +299,8 @@ export default defineConfig({
                             ]
 
                         },
-                        {text: 'View fundamentals', link: '/swiftui/view_fundamentals'}
+                        {text: 'View fundamentals', link: '/swiftui/view_fundamentals'},
+                        {text: 'View configuration', link: '/swiftui/view_configuration'}
                     ]
                 },
             ],
