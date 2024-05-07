@@ -232,3 +232,122 @@ HStack {
 }
 .disabled(true)
 ```
+
+### `isEnabled`
+
+一个布尔值，表示与此环境关联的视图是否允许用户交互。默认为 `true`。
+
+
+```swift
+var isEnabled: Bool { get set }
+```
+
+### `interactionActivityTrackingTag(_:)`
+
+设置一个用于跟踪交互性的标签。
+
+```swift
+func interactionActivityTrackingTag(_ tag: String) -> some View
+```
+
+以下示例跟踪列表的滚动活动：
+
+```swift
+List {
+    Section("Today") {
+        ForEach(messageStore.today) { message in
+            Text(message.title)
+        }
+    }
+}
+.interactionActivityTrackingTag("MessagesList")
+```
+
+解决的活动跟踪标签是累加的，所以在视图层级结构中使用此修饰符会从上到下构建标签。下面的例子展示了这个修饰符的层次结构用法，产生的标签为 `Home-Feed`：
+
+```swift
+var body: some View {
+    Home()
+        .interactionActivityTrackingTag("Home")
+}
+
+
+struct Home: View {
+    var body: some View {
+        List {
+            Text("A List Item")
+            Text("A Second List Item")
+            Text("A Third List Item")
+        }
+        .interactionActivityTrackingTag("Feed")
+    }
+}
+```
+
+::: info
+在 SwiftUI 中，`interactionActivityTrackingTag` 是用于跟踪视图内的用户交互活动的标签。它可以帮助开发者识别和分析用户如何与应用的不同部分进行交互。这个功能主要用于性能监控和用户行为分析，可以与 App 的分析工具集成，收集关于视图如何被用户使用的详细数据。
+
+通过给视图添加 `interactionActivityTrackingTag` 标签，开发者可以在用户与这个特定视图交互时启动数据收集。例如，可以跟踪点击事件、滑动行为或任何其他交互类型，这有助于了解用户的行为模式，从而优化用户体验和应用性能。这个标签提供了一种简单的方式来分类和标记用户交互，使得在大型项目中进行用户行为分析和性能跟踪更加高效。
+:::
+
+### `invalidatableContent(_:)`
+
+标记接收者，表示其内容可能会失效。
+
+```swift
+func invalidatableContent(_ invalidatable: Bool = true) -> some View
+```
+
+使用此修饰符来注解显示从数据当前状态派生的值的视图，这些值可能会在响应用户交互等情况时失效。
+
+当环境中存在 `RedactionReasons.invalidated` 时，视图将改变其外观。
+
+在交互式部件中，从用户与部件上的控件交互开始，直到呈现新的时间线更新为止，视图都将处于失效状态。
+
+
+::: info
+
+在 SwiftUI 中，`invalidatableContent(_:)` 是一个用于标记视图内容可能需要在未来被更新或无效化的修饰符。这通常用于那些因为用户交互或外部数据变化而可能需要更新显示的视图。例如，当数据状态发生改变时，通过此修饰符，视图可以表明其内容可能需要更新，从而触发界面的重新渲染。这在动态的用户界面中特别有用，例如在使用小组件或实时数据更新的应用中。
+
+这个修饰符特别适用于提高应用的反应速度和减少感知延迟，因为它允许开发者明确哪些视图的内容是基于动态数据的，并且可能在短时间内频繁更新。通过标记这些内容为可无效化，可以优化应用的性能，尤其是在处理复杂或高频更新的界面时。
+:::
+
+
+## Providing contextual help
+
+### `help(_:)`
+
+使用您提供的本地化字符串为视图添加帮助文本。
+
+```swift
+func help(_ textKey: LocalizedStringKey) -> some View
+```
+
+为视图添加帮助会配置该视图的辅助功能提示以及在 macOS 或 visionOS 中的帮助标签（也称为工具提示）。
+
+
+```swift
+Button(action: composeMessage) {
+    Image(systemName: "square.and.pencil")
+}
+.help("Compose a new message")
+```
+
+![Help](../images/Help.png)
+
+## Adding a glass background
+
+### `glassBackgroundEffect(displayMode:)` <Badge type="info" text="visionOS" />
+
+使用容器相对的圆角矩形形状的玻璃材质填充视图的背景。
+
+```swift
+func glassBackgroundEffect(displayMode: GlassBackgroundDisplayMode = .always) -> some View
+```
+
+
+使用此修饰符添加一个具有厚度、镜面反射、玻璃模糊、阴影等效果的 `3D` 玻璃背景材质。由于其具有物理深度，玻璃背景会影响 $z$ 轴方向的布局。
+
+为了确保当您将其添加到 `ZStack` 中的一组视图时效果能正确渲染，应将修饰符添加到堆栈本身，而不是堆栈中的某个视图。这包括当您使用诸如 `overlay(alignment:content:)` 或 `background(alignment:content:)` 这样的视图修饰符隐式创建堆栈时。在这种情况下，您可能需要在内容闭包内创建一个显式的 `ZStack`，以便有地方可以添加玻璃背景修饰符。
+
+![GlassBackgroundEffect](../images/GlassBackgroundEffect.png)
