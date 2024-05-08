@@ -317,7 +317,7 @@ func invalidatableContent(_ invalidatable: Bool = true) -> some View
 
 ### `help(_:)`
 
-使用您提供的本地化字符串为视图添加帮助文本。
+使用你提供的本地化字符串为视图添加帮助文本。
 
 ```swift
 func help(_ textKey: LocalizedStringKey) -> some View
@@ -348,6 +348,240 @@ func glassBackgroundEffect(displayMode: GlassBackgroundDisplayMode = .always) ->
 
 使用此修饰符添加一个具有厚度、镜面反射、玻璃模糊、阴影等效果的 `3D` 玻璃背景材质。由于其具有物理深度，玻璃背景会影响 $z$ 轴方向的布局。
 
-为了确保当您将其添加到 `ZStack` 中的一组视图时效果能正确渲染，应将修饰符添加到堆栈本身，而不是堆栈中的某个视图。这包括当您使用诸如 `overlay(alignment:content:)` 或 `background(alignment:content:)` 这样的视图修饰符隐式创建堆栈时。在这种情况下，您可能需要在内容闭包内创建一个显式的 `ZStack`，以便有地方可以添加玻璃背景修饰符。
+为了确保当你将其添加到 `ZStack` 中的一组视图时效果能正确渲染，应将修饰符添加到堆栈本身，而不是堆栈中的某个视图。这包括当你使用诸如 `overlay(alignment:content:)` 或 `background(alignment:content:)` 这样的视图修饰符隐式创建堆栈时。在这种情况下，你可能需要在内容闭包内创建一个显式的 `ZStack`，以便有地方可以添加玻璃背景修饰符。
 
 ![GlassBackgroundEffect](../images/GlassBackgroundEffect.png)
+
+
+## Detecting and requesting the light or dark appearance
+
+### `preferredColorScheme(_:)`
+
+为本次演示设置首选的色彩方案。
+
+```swift
+func preferredColorScheme(_ colorScheme: ColorScheme?) -> some View
+```
+
+
+使用此修饰符配合 `ColorScheme` 中的一个值来为最近的包含内容设置首选的色彩方案，比如弹出窗口、浮层或窗口。你设置的值会覆盖用户针对该展示所选择的深色模式。在下面的例子中，切换控件控制着一个名为 `isDarkMode` 的状态变量，而这个变量进而控制着包含该切换控件的浮层的颜色方案：
+
+```swift
+@State private var isPresented = false
+@State private var isDarkMode = true
+
+var body: some View {
+    Button("Show Sheet") {
+        isPresented = true
+    }
+    .sheet(isPresented: $isPresented) {
+        List {
+            Toggle("Dark Mode", isOn: $isDarkMode)
+        }
+        .preferredColorScheme(isDarkMode ? .dark : .light)
+    }
+}
+```
+
+<video src="../video/PreferredColorScheme.mp4" controls="controls"></video>
+
+
+如果你将此修饰符应用于浮层中的任何视图——在这个例子中是一个列表（ `List` ）和一个切换开关（ `Toggle` ）——你设置的值会沿着视图层级向上传播到最外层的展示容器，或者直到遇到层级中更高级别上另一个覆盖它的色彩方案修饰符。你设置的值同样会流向该包裹性展示所有子视图。
+
+此修饰符的一个常见用途是在同一视图旁边创建浅色和深色外观的预览：
+
+```swift
+#Preview {
+    ContentView().preferredColorScheme(.light)
+}
+
+#Preview {
+    ContentView().preferredColorScheme(.dark)
+}
+
+```
+
+
+<video src="../video/PreferredColorSchemePreview.mp4" controls="controls"></video>
+
+如果你需要检测当前应用到视图上的色彩方案，可以读取 `colorScheme` 环境值：
+
+```swift
+@Environment(\.colorScheme) private var colorScheme
+
+var body: some View {
+    Text(colorScheme == .dark ? "Dark" : "Light")
+}
+```
+
+## Getting the color scheme contrast
+
+### `colorSchemeContrast`
+
+与此环境的颜色方案相关的对比度。
+
+```swift
+var colorSchemeContrast: ColorSchemeContrast { get }
+```
+
+在视图内部读取此环境值以确定 SwiftUI 当前是否正在使用标准（ `ColorSchemeContrast.standard` ）或增强（ `ColorSchemeContrast.increased` ）对比度显示该视图。你读取的值完全取决于用户的设置，并且无法更改它。
+
+可以在「设置」->「辅助功能」->「显示与文字大小」->「增强对比度」来调整对比度设置。
+
+![ColorSchemeContrast](../images/ColorSchemeContrast.png)
+
+
+```swift
+@Environment(\.colorSchemeContrast) private var colorSchemeContrast
+
+var body: some View {
+    Text(colorSchemeContrast == .standard ? "Standard" : "Increased")
+}
+
+```
+<video src="../video/ColorSchemeContrastCompare.mp4" controls="controls"></video>
+
+在调整应用程序用户界面以匹配对比度时，还应考虑检查 `colorScheme` 属性，以确定 SwiftUI 是以浅色还是深色外观显示视图。
+
+::: warning 注意
+如果只需要为不同的色彩方案和对比度设置提供不同的颜色或图片，你可以在应用程序的资源目录（Asset Catalog）中完成这一操作。
+
+:::
+
+## Configuring passthrough
+
+### `preferredSurroundingsEffect(_:)` <Badge type="info" text="visionOS" />
+
+对透传视频应用视觉效果。
+
+```swift
+func preferredSurroundingsEffect(_ effect: SurroundingsEffect?) -> some View
+```
+
+使用此修饰符来指示在显示修改后的视图时，对透传视频外观的偏好设置。例如，你可以对使用默认混合沉浸风格的场景中的视图应用系统深色偏好，以增强场景的沉浸感：
+
+```swift
+ImmersiveSpace(id: "orbit") {
+    Orbit()
+        .preferredSurroundingsEffect(.systemDark)
+}
+```
+
+
+
+<video src="../video/PreferredSurroundingsEffect.mp4" controls="controls"></video>
+
+
+当系统在上述代码中展示轨道视图时，它也会使透传视频变暗。这样做有助于吸引用户注意场景中的虚拟内容，同时仍能让用户保持对周围环境的感知。
+
+::: info
+此修改器表达了一种偏好设置，但系统可能无法始终满足这一需求。
+:::
+
+使用 `nil` 值表示没有特定偏好。你通常这样做是为了抵消视图层级中较低位置视图所表达的偏好设置。
+
+
+## Redacting private content
+
+### `privacySensitive(_:)`
+
+标记视图为包含敏感、私人的用户数据。
+
+```swift
+func privacySensitive(_ sensitive: Bool = true) -> some View
+```
+
+当你应用隐私遮盖原因时，SwiftUI 会对带有此修饰符标记的视图进行遮盖处理。
+
+
+```swift
+struct BankAccountView: View {
+    var body: some View {
+        VStack {
+            Text("Account #")
+
+            Text(accountNumber)
+                .font(.headline)
+                .privacySensitive() // Hide only the account number.
+        }
+    }
+}
+```
+
+![PrivacySensitive](../images/PrivacySensitive.png)
+
+
+### `redacted(reason:)`
+
+为对此视图层级应用遮盖处理添加一个理由。
+
+```swift
+func redacted(reason: RedactionReasons) -> some View
+```
+
+应用遮盖是一个累加过程：提供的任何遮盖理由都将被添加到父视图所提供的理由中。
+
+```swift{13}
+struct ContentView: View {
+
+    @State private var accountNumber: String = "6223334455544332"
+
+    var body: some View {
+        VStack {
+        Text("Account #")
+
+        Text(accountNumber)
+            .font(.headline)
+            .privacySensitive() // Hide only the account number.
+        }.font(.largeTitle)
+            .redacted(reason: .privacy)
+    }
+
+}
+```
+
+### `unredacted()`
+
+从该视图层级中移除所有应用遮盖的理由。
+
+```swift
+func unredacted() -> some View
+```
+
+### `redactionReasons`
+
+当前应用于该视图层级的遮盖理由。
+
+```swift
+var redactionReasons: RedactionReasons { get set }
+```
+
+- `invalidated`: 显示的数据应呈现为已失效并等待新更新的状态。
+- `placeholder`: 显示的数据应呈现为通用占位符。文本和图像将自动被遮罩成通用占位符的样式，同时保持其原始大小和形状。使用此功能可以在不直接向用户暴露占位符数据的情况下创建占位符用户界面。
+- `privacy`: 显示的数据应被遮蔽以保护私人信息。标有 `privacySensitive` 的视图将使用标准样式自动进行遮盖处理。要应用自定义处理，可以从环境读取遮盖理由。
+
+```swift
+struct BankingContentView: View {
+    @Environment(\.redactionReasons) var redactionReasons
+
+    var body: some View {
+        if redactionReasons.contains(.privacy) {
+            FullAppCover()
+        } else {
+            AppContent()
+        }
+    }
+}
+```
+
+### `isSceneCaptured`
+
+当前的采集状态。
+
+```swift
+var isSceneCaptured: Bool { get set }
+```
+
+使用此值来判断场景是否正在被克隆到另一个目的地（如在使用 `AirPlay` 时）或正在进行镜像投屏或录制。
+
+你的应用可以根据此值的变化采取适当的行动，比如遮盖内容以保护隐私。
