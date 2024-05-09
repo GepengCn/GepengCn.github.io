@@ -1521,3 +1521,138 @@ struct MyControlGroupStyle: ControlGroupStyle {
 ```
 
 ![ControlGroupStyleCustom](../images/ControlGroupStyleCustom.png)
+
+
+### `formStyle(_:)`
+
+为视图层次结构中的表单设置样式。
+
+
+```swift
+func formStyle<S>(_ style: S) -> some View where S : FormStyle
+```
+
+#### `automatic`
+
+```swift
+Form {
+    Toggle("开关", isOn: .constant(true))
+    LabeledContent("备注", value: "123456")
+}.formStyle(.automatic)
+```
+
+![FormStyleAutomatic](../images/FormStyleAutomatic.png)
+
+#### `columns`
+
+一种非滚动的表单样式，其中标签列与值列并排显示，标签列靠右对齐，值列靠左对齐。
+
+```swift
+Form {
+    Toggle("开关", isOn: .constant(true))
+    LabeledContent("备注", value: "123456")
+}.formStyle(.columns)
+```
+
+![FormStyleColumns](../images/FormStyleColumns.png)
+
+#### `grouped`
+
+一种具有分组行的表单样式。
+
+```swift
+Form {
+    Toggle("开关", isOn: .constant(true))
+    LabeledContent("备注", value: "123456")
+}.formStyle(.grouped)
+```
+
+![FormStyleGrouped](../images/FormStyleAutomatic.png)
+
+
+#### Creating custom form styles
+
+```swift
+struct MyFormStyle: FormStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.content
+            .padding()
+            .background(.linearGradient(colors: [.blue, .green, .white], startPoint: .topLeading, endPoint: .bottomTrailing))
+
+    }
+}
+```
+
+![FormStyleCustom](../images/FormStyleCustom.png)
+
+
+### `groupBoxStyle(_:)`
+
+此操作为在该视图中设置组合框的样式。
+
+
+```swift
+GroupBox(label:
+    Label("End-User Agreement", systemImage: "building.columns")
+    ) {
+        ScrollView(.vertical, showsIndicators: true) {
+            Text(agreementText)
+                .font(.footnote)
+        }
+        .frame(height: 100)
+        Toggle(isOn: $userAgreed) {
+            Text("I agree to the above terms")
+        }
+}.padding()
+```
+
+![GroupBoxStyleAutomatic](../images/GroupBoxStyleAutomatic.png)
+
+#### Creating custom group box styles
+
+```swift
+struct MyGroupBoxStyle: GroupBoxStyle {
+    func makeBody(configuration: Configuration) -> some View {
+
+        VStack {
+            configuration.label
+            configuration.content
+        }.padding().background(.linearGradient(colors: [.blue, .green, .white], startPoint: .topLeading, endPoint: .bottomTrailing), in: .rect(cornerRadius: 25))
+    }
+}
+```
+
+![GroupBoxStyleCustom](../images/GroupBoxStyleCustom.png)
+
+
+### `labeledContentStyle(_:)`
+
+此操作用于设置带有标签内容的样式。
+
+```swift
+func labeledContentStyle<S>(_ style: S) -> some View where S : LabeledContentStyle
+```
+
+#### Creating custom labeled content styles
+
+```swift
+struct MyLabeledContentStyle: LabeledContentStyle {
+    func makeBody(configuration: Configuration) -> some View {
+
+        HStack {
+            configuration.label.bold()
+            Spacer()
+            configuration.content.fontWeight(.heavy)
+                .foregroundStyle(.linearGradient(colors: [.green, .blue,  .orange], startPoint: .topLeading, endPoint: .bottomTrailing))
+                .underline()
+        }
+
+    }
+}
+```
+
+![LabeledContentStyleCustom](../images/LabeledContentStyleCustom.png)
+
+
+## Styling windows from a view inside the window
+
