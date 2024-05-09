@@ -1143,7 +1143,7 @@ struct MyDisclosureStyle: DisclosureGroupStyle {
 }
 ```
 
-<video src="../video/DisclosureGroupStyleStruct.mp4" controls="controls"></video>
+<video src="../video/DisclosureGroupStyleCustom.mp4" controls="controls"></video>
 
 
 ## Styling navigation views
