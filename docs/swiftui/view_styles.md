@@ -677,3 +677,847 @@ func progressViewStyle<S>(_ style: S) -> some View where S : ProgressViewStyle
 一种进度视图，使用水平条形来直观地指示进度情况。
 
 ![ProgressViewStyleLinear](../images/ProgressViewStyleLinear.png)
+
+## Styling views that display text
+
+### `labelStyle(_:)`
+
+此操作为该视图中的标签设置样式。
+
+```swift
+func labelStyle<S>(_ style: S) -> some View where S : LabelStyle
+```
+
+#### `automatic`
+
+一种根据当前上下自动确定其外观的标签样式。
+
+```swift
+VStack {
+    Label("Fire", systemImage: "flame.fill")
+    Label("Lightning", systemImage: "bolt.fill")
+}
+.labelStyle(.automatic)
+```
+![LabelStyleAutomatic](../images/LabelStyleAutomatic.png)
+
+#### `iconOnly`
+
+一种仅显示标签图标的标签样式。
+
+![LabelStyleIconOnly](../images/LabelStyleIconOnly.png)
+
+
+#### `titleAndIcon`
+
+一种使用系统标准布局同时显示标签的标题和图标的标签样式。
+
+在大多数情况下，默认情况下标签都会同时显示其标题和图标。然而，某些容器可能对其内容应用了不同的默认标签样式，例如在 macOS 和 iOS 上仅在工具栏中显示图标。为了选择同时显示标题和图标，你可以应用 `titleAndIcon` 标签样式：
+
+```swift
+Label("Lightning", systemImage: "bolt.fill")
+    .labelStyle(.titleAndIcon)
+```
+
+要将 `titleAndIcon` 样式应用于一组标签，需将其应用于包含这些标签的视图层次结构中：
+
+```swift
+VStack {
+    Label("Rain", systemImage: "cloud.rain")
+    Label("Snow", systemImage: "snow")
+    Label("Sun", systemImage: "sun.max")
+}
+.labelStyle(.titleAndIcon)
+```
+
+标题和图标的相对布局取决于其显示的上下文环境。然而，在大多数情况下，标签是水平排列的，图标位于前方。
+
+![LabelStyleTitleAndIcon](../images/LabelStyleTitleAndIcon.png)
+
+#### `titleOnly`
+
+一种仅显示标签标题的标签样式。
+
+![LabelStyleTitleOnly](../images/LabelStyleTitleOnly.png)
+
+
+#### Creating custom label styles
+
+```swift
+struct MyLabelStyle: LabelStyle {
+
+    func makeBody(configuration: Configuration) -> some View {
+
+        RoundedRectangle(cornerRadius: 25.0)
+            .fill(.green.gradient)
+            .overlay {
+                VStack {
+                    configuration.icon
+                    configuration.title
+                        .bold()
+                }.foregroundStyle(.white)
+
+            }.padding()
+    }
+}
+```
+
+![LabelStyleCustom](../images/LabelStyleCustom.png)
+
+
+### `textFieldStyle(_:)`
+
+此操作为该视图中的文本字段设置样式。
+
+```swift
+func textFieldStyle<S>(_ style: S) -> some View where S : TextFieldStyle
+```
+
+#### `automatic`
+
+根据文本字段所在上下文环境的默认文本字段样式。
+
+默认样式代表了根据当前平台及文本字段在视图层级结构中的上下文环境所推荐的样式。
+
+```swift
+Form {
+    TextField("请输入", text: $text)
+        .textFieldStyle(.automatic)
+}
+```
+
+![TextFieldStyleAutomatic](../images/TextFieldStyleAutomatic.png)
+
+
+#### `plain`
+
+一种无装饰的文本字段样式。
+
+```swift
+Form {
+    TextField("请输入", text: $text)
+        .textFieldStyle(.plain)
+}
+```
+
+#### `roundedBorder`
+
+一种带有系统定义圆角边框的文本字段样式。
+
+```swift
+ScrollView {
+    TextField("请输入", text: $text)
+        .textFieldStyle(.roundedBorder)
+        .font(.largeTitle)
+}.padding()
+```
+
+![TextFieldStyleRoundedBorder](../images/TextFieldStyleRoundedBorder.png)
+
+
+#### `squareBorder` <Badge type="tip" text="macOS" />
+
+一种带有系统定义方形边框的文本字段样式。
+
+```swift
+ TextField("请输入", text: $text)
+    .textFieldStyle(.squareBorder)
+    .frame(width: 200)
+```
+
+![TextFieldStyleSquareBorder](../images/TextFieldStyleSquareBorder.png)
+
+
+### `textEditorStyle(_:)`
+
+此操作为该视图中的文本编辑器设置样式。
+
+
+```swift
+func textEditorStyle(_ style: some TextEditorStyle) -> some View
+```
+
+
+#### `automatic`
+
+根据文本编辑器上下文环境的默认文本编辑器样式。
+
+
+#### `plain`
+
+一种无装饰的文本编辑器样式。
+
+```swift
+TextEditor(text: $text)
+    .textEditorStyle(.plain)
+    .border(Color.black)
+    .padding()
+```
+
+![TextEditorStylePlain](../images/TextEditorStylePlain.png)
+
+
+#### `roundedBorder` <Badge type="info" text="visionOS" />
+
+一种带有系统定义圆角边框的文本编辑器样式。
+
+![TextEditorStyleRoundedBorder](../images/TextEditorStyleRoundedBorder.png)
+
+## Styling collection views
+
+### `listStyle(_:)`
+
+此操作为该视图中的列表设置样式。
+
+```swift
+func listStyle<S>(_ style: S) -> some View where S : ListStyle
+```
+
+#### `automatic`
+
+描述平台对于列表的默认行为和外观的列表样式。
+
+#### `bordered` <Badge type="tip" text="macOS" />
+
+描述具有标准边框的列表的行为和外观的列表样式。
+
+```swift
+List{
+    Toggle("开关", isOn: .constant(true))
+    LabeledContent("备注", value: "列表")
+}.listStyle(.bordered)
+```
+
+![ListStyleBordered](../images/ListStyleBordered.png)
+
+
+#### `carousel` <Badge type="warning" text="watchOS" />
+
+轮播列表样式。
+
+
+```swift
+List{
+    Toggle("开关", isOn: .constant(true))
+    LabeledContent("信息", value: "5")
+    LabeledContent("备注", value: "轮播")
+    LabeledContent("设置", value: "空")
+}.listStyle(.carousel)
+```
+
+<video src="../video/ListStyleCarousel.mp4" controls="controls"></video>
+
+
+#### `elliptical` <Badge type="warning" text="watchOS" />
+
+描述椭圆列表的行为和外观的列表样式。
+
+```swift
+List{
+    Toggle("开关", isOn: .constant(true))
+    LabeledContent("信息", value: "5")
+    LabeledContent("备注", value: "椭圆列表")
+    LabeledContent("设置", value: "空")
+}.listStyle(.elliptical)
+```
+
+<video src="../video/ListStyleElliptical.mp4" controls="controls"></video>
+
+
+
+#### `grouped`
+
+描述分组列表的行为与外观的列表样式。
+
+在 iOS 上，分组列表样式会显示比普通样式更大的标题和页脚，这在视觉上使不同部分的成员相互分开。
+
+```swift
+List{
+    Toggle("开关", isOn: .constant(true))
+    LabeledContent("信息", value: "5")
+    LabeledContent("备注", value: "iOS")
+    LabeledContent("设置", value: "空")
+}.listStyle(.grouped)
+```
+
+![ListStyleGrouped](../images/ListStyleGrouped.png)
+
+
+#### `inset`
+
+描述嵌入式列表的行为与外观的列表样式。
+
+```swift
+List{
+    Toggle("开关", isOn: .constant(true))
+    LabeledContent("信息", value: "5")
+    LabeledContent("备注", value: "iOS")
+    LabeledContent("设置", value: "空")
+}.listStyle(.inset)
+```
+
+![ListStyleInset](../images/ListStyleInset.png)
+
+
+#### `insetGrouped`
+
+描述嵌入式分组列表的行为与外观的列表样式。
+
+在iOS上，嵌入式分组列表样式会显示一个连续的背景色，这个颜色从章节标题开始，环绕章节内列表项的两侧，并一直延伸到章节页脚。这种视觉效果比单独使用嵌入式或分组样式更能程度地将项目进行分组。
+
+```swift
+List{
+    Toggle("开关", isOn: .constant(true))
+    LabeledContent("信息", value: "5")
+    LabeledContent("备注", value: "iOS")
+    LabeledContent("设置", value: "空")
+}.listStyle(.insetGrouped)
+```
+
+![ListStyleInsetGrouped](../images/ListStyleInsetGrouped.png)
+
+
+#### `plain`
+
+描述简约列表的行为与外观的列表样式。
+
+```swift
+List{
+    Toggle("开关", isOn: .constant(true))
+    LabeledContent("信息", value: "5")
+    LabeledContent("备注", value: "iOS")
+    LabeledContent("设置", value: "空")
+}.listStyle(.plain)
+```
+
+![ListStylePlain](../images/ListStylePlain.png)
+
+
+#### `sidebar`
+
+描述侧边栏列表的行为与外观的列表样式。
+
+在 macOS 和 iOS 上，侧边栏列表样式在章节标题中显示展开指示器，允许用户折叠和展开章节。
+
+
+<video src="../video/ListStyleSidebar.mp4" controls="controls"></video>
+
+### `tableStyle(_:)`
+
+
+此操作为该视图中的表格设置样式。
+
+
+```swift
+func tableStyle<S>(_ style: S) -> some View where S : TableStyle
+```
+
+#### `automatic`
+
+当前上下文中默认的表格样式。
+
+#### `inset`
+
+描述内容及其选择与表格边缘嵌入的表格的行为和外观的表格样式。
+
+要自定义表格的行是否应交替其背景色，请使用 `alternatingRowBackgrounds(_:)` 方法。
+
+
+```swift
+struct ContentView: View {
+
+    struct Person: Identifiable {
+        let givenName: String
+        let familyName: String
+        let emailAddress: String
+        let id = UUID()
+
+        var fullName: String { givenName + " " + familyName }
+    }
+
+    @State private var people = [
+        Person(givenName: "Juan", familyName: "Chavez", emailAddress: "juanchavez@icloud.com"),
+        Person(givenName: "Mei", familyName: "Chen", emailAddress: "meichen@icloud.com"),
+        Person(givenName: "Tom", familyName: "Clark", emailAddress: "tomclark@icloud.com"),
+        Person(givenName: "Gita", familyName: "Kumar", emailAddress: "gitakumar@icloud.com")
+    ]
+
+    var body: some View {
+
+        Table(people) {
+            TableColumn("Given Name", value: \.givenName)
+            TableColumn("Family Name", value: \.familyName)
+            TableColumn("E-Mail Address", value: \.emailAddress)
+        }.tableStyle(.inset).alternatingRowBackgrounds()
+    }
+}
+```
+
+![TableStyleInset](../images/TableStyleInset.png)
+
+
+#### `bordered` <Badge type="tip" text="macOS" />
+
+描述具有标准边框的表格的行为和外观的表格样式。
+
+带边框的表格预期会与其外部容器缩进，但其行或选择不具备内嵌样式。
+
+![TableStyleBordered](../images/TableStyleBordered.png)
+
+### `disclosureGroupStyle(_:)`
+
+此操作为该视图中的 `DisclosureGroup` 设置样式。
+
+```swift
+func disclosureGroupStyle<S>(_ style: S) -> some View where S : DisclosureGroupStyle
+```
+
+```swift
+struct ContentView: View {
+
+    struct ToggleStates {
+        var oneIsOn: Bool = false
+        var twoIsOn: Bool = true
+    }
+    @State private var toggleStates = ToggleStates()
+    @State private var topExpanded: Bool = true
+
+    var body: some View {
+
+        Form {
+            DisclosureGroup("Items", isExpanded: $topExpanded) {
+                Toggle("Toggle 1", isOn: $toggleStates.oneIsOn)
+                Toggle("Toggle 2", isOn: $toggleStates.twoIsOn)
+                DisclosureGroup("Sub-items") {
+                    Text("Sub-item 1")
+                }
+            }
+        }
+
+    }
+}
+```
+
+<video src="../video/DisclosureGroupStyle.mp4" controls="controls"></video>
+
+#### Creating custom disclosure group styles
+
+
+```swift
+ Form {
+    DisclosureGroup("Items", isExpanded: $topExpanded) {
+        Toggle("Toggle 1", isOn: $toggleStates.oneIsOn)
+        Toggle("Toggle 2", isOn: $toggleStates.twoIsOn)
+        DisclosureGroup("Sub-items") {
+            Text("Sub-item 1")
+        }
+    }.disclosureGroupStyle(MyDisclosureStyle())
+}
+```
+
+```swift
+struct MyDisclosureStyle: DisclosureGroupStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        VStack {
+            Button {
+                withAnimation {
+                    configuration.isExpanded.toggle()
+                }
+            } label: {
+                HStack(alignment: .firstTextBaseline) {
+                    configuration.label
+                    Spacer()
+                    Text(configuration.isExpanded ? "hide" : "show")
+                        .foregroundColor(.accentColor)
+                        .font(.caption.lowercaseSmallCaps())
+                        .animation(nil, value: configuration.isExpanded)
+                }
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            if configuration.isExpanded {
+                configuration.content
+            }
+        }
+    }
+}
+```
+
+<video src="../video/DisclosureGroupStyleStruct.mp4" controls="controls"></video>
+
+
+## Styling navigation views
+
+### `navigationSplitViewStyle(_:)`
+
+此操作为该视图中的导航分割视图设置样式。
+
+```swift
+func navigationSplitViewStyle<S>(_ style: S) -> some View where S : NavigationSplitViewStyle
+```
+
+#### `automatic`
+
+一种根据当前上下文自动确定其外观的导航分割样式。
+
+```swift
+NavigationSplitView {
+    Text("Sidebar")
+} content: {
+    Text("Content")
+} detail: {
+    Text("Detail")
+}
+.navigationSplitViewStyle(.automatic)
+```
+
+![NavigationSplitViewStyleAutomatic](../images/NavigationSplitViewStyleAutomatic.png)
+
+#### `balanced`
+
+一种导航分割样式，当显示 `leading` 列或多列时，会减小详情内容的大小以腾出空间。
+
+```swift
+NavigationSplitView {
+    Text("Sidebar")
+} content: {
+    Text("Content")
+} detail: {
+    Text("Detail")
+}
+.navigationSplitViewStyle(.balanced)
+```
+
+![NavigationSplitViewStyleAutomatic](../images/NavigationSplitViewStyleBalanced.png)
+
+
+#### `prominentDetail`
+
+一种导航分割样式，尝试在隐藏或显示 `leading` 列时保持详情内容的大小不变。
+
+![NavigationSplitViewStyleAutomatic](../images/NavigationSplitViewStyleAutomatic.png)
+
+
+### `tabViewStyle(_:)`
+
+此操作为当前环境中的标签视图设置样式。
+
+```swift
+func tabViewStyle<S>(_ style: S) -> some View where S : TabViewStyle
+```
+
+#### `automatic`
+
+默认的 `TabView` 样式。
+
+```swift
+struct ContentView: View {
+
+    var body: some View {
+        TabView {
+
+            List{
+                LabeledContent("备注", value: "12345")
+            }.tabItem {
+                Label("首页", systemImage: "1.circle")
+            }
+
+            List{
+                Toggle("开关", isOn: .constant(true))
+            }.tabItem {
+                Label("设置", systemImage: "gear")
+            }
+
+        }.tabViewStyle(.automatic)
+    }
+}
+```
+<video src="../video/TabViewStyleAutomatic.mp4" controls="controls"></video>
+
+#### `page`
+
+实现分页滚动的 `TabView` 样式。
+
+```swift
+TabView {
+    Color.blue
+    Color.yellow
+}.tabViewStyle(.page)
+```
+
+<video src="../video/TabViewStylePage.mp4" controls="controls"></video>
+
+
+#### `page(indexDisplayMode:)`
+
+实现带有索引显示模式的分页滚动的 `TabView` 样式。
+
+<video src="../video/TabViewStylePageIndex.mp4" controls="controls"></video>
+
+```swift
+TabView {
+    Color.blue
+    Color.yellow
+}.tabViewStyle(.page(indexDisplayMode: .never))
+```
+
+
+#### `verticalPage` <Badge type="warning" text="watchOS" />
+
+实现垂直页面交互和外观的 `TabView` 样式。
+
+```swift
+TabView {
+
+    Color.blue
+    Color.yellow
+    Color.white
+
+}.tabViewStyle(.verticalPage)
+```
+<video src="../video/TabViewStyleVerticalPage.mp4" controls="controls"></video>
+
+#### `verticalPage(transitionStyle:)` <Badge type="warning" text="watchOS" />
+
+```swift
+TabView {
+
+    Color.blue
+    Color.yellow
+    Color.white
+
+}.tabViewStyle(.verticalPage(transitionStyle: .identity))
+```
+<video src="../video/TabViewStyleVerticalPageIdentity.mp4" controls="controls"></video>
+
+
+## Styling groups
+
+### `controlGroupStyle(_:)`
+
+此操作为该视图中的控件组设置样式。
+
+```swift
+func controlGroupStyle<S>(_ style: S) -> some View where S : ControlGroupStyle
+```
+
+#### `automatic`
+
+默认的控件组样式。
+
+默认的控件组样式可能会因平台而异。默认情况下，两个平台都使用适合其渲染环境的瞬时分段控件样式。
+
+你可以覆盖控件组的样式。要将默认样式应用于控件组或包含控件组的视图，请使用controlGroupStyle(_:)修饰符。
+
+```swift
+
+Menu {
+    ControlGroup {
+        Button("1", systemImage: "1.circle") {}
+        Button("2", systemImage: "2.circle") {}
+        Button("3", systemImage: "3.circle") {}
+    }.controlGroupStyle(.automatic)
+} label: {
+    Label("菜单", systemImage: "checkmark")
+}
+```
+
+![ControlGroupStyleAutomatic](../images/ControlGroupStyleAutomatic.png)
+
+#### `compactMenu`
+
+一种控件组样式，当用户按下控件时，以其内容呈现为紧凑型菜单；当嵌套在较大的菜单中时，则作为子菜单呈现。
+
+```swift
+
+Menu {
+    ControlGroup {
+        Button("1", systemImage: "1.circle") {}
+        Button("2", systemImage: "2.circle") {}
+        Button("3", systemImage: "3.circle") {}
+    }.controlGroupStyle(.compactMenu)
+} label: {
+    Label("菜单", systemImage: "checkmark")
+}
+```
+
+![ControlGroupStyleCompactMenu](../images/ControlGroupStyleCompactMenu.png)
+
+
+#### `menu`
+
+一种控件组样式，当用户按下控件时，以其内容呈现为菜单；当嵌套在较大的菜单中时，则作为子菜单呈现。
+
+```swift
+
+Menu {
+    ControlGroup {
+        Button("1", systemImage: "1.circle") {}
+        Button("2", systemImage: "2.circle") {}
+        Button("3", systemImage: "3.circle") {}
+    }.controlGroupStyle(.menu)
+} label: {
+    Label("菜单", systemImage: "checkmark")
+}
+```
+
+![ControlGroupStyleAutomatic](../images/ControlGroupStyleAutomatic.png)
+
+
+#### `navigation`
+
+使用此样式对与导航相关的控件进行分组，如前进/后退按钮或时间线导航控件。
+
+导航控件组样式可能会根据平台有所不同。在 iOS 上，它呈现为无边框的独立按钮；而在 macOS 上，则显示为分隔的瞬时分段控件。
+
+```swift
+
+Menu {
+    ControlGroup {
+        Button("1", systemImage: "1.circle") {}
+        Button("2", systemImage: "2.circle") {}
+        Button("3", systemImage: "3.circle") {}
+    }.controlGroupStyle(.navigation)
+} label: {
+    Label("菜单", systemImage: "checkmark")
+}
+```
+![ControlGroupStyleNavigation](../images/ControlGroupStyleNavigation.png)
+
+
+#### `palette`
+
+一种控制组样式，以调色板的形式展示其内容。
+
+::: info
+当在菜单外部使用时，这种样式呈现为分段控件。
+:::
+
+使用此风格来渲染一个多选菜单或无状态调色板。下面的例子创建了一个控制组，该组同时包含了两种类型的组件：
+
+```swift
+struct ContentView: View {
+
+    // 定义颜色标签的枚举
+    enum ColorTags: CaseIterable {
+        case red, orange, yellow, green, blue, purple
+
+        var name: String {
+            switch self {
+            case .red:
+                return "Red"
+            case .orange:
+                return "Orange"
+            case .yellow:
+                return "Yellow"
+            case .green:
+                return "Green"
+            case .blue:
+                return "Blue"
+            case .purple:
+                return "Purple"
+            }
+        }
+
+        var color: Color {
+            switch self {
+            case .red:
+                return .red
+            case .orange:
+                return .orange
+            case .yellow:
+                return .yellow
+            case .green:
+                return .green
+            case .blue:
+                return .blue
+            case .purple:
+                return .purple
+            }
+        }
+    }
+
+    // 定义表情符号的枚举
+    enum Emotes: CaseIterable {
+        case smile, wink, frown
+
+        var name: String {
+            switch self {
+            case .smile:
+                return "Smile"
+            case .wink:
+                return "Wink"
+            case .frown:
+                return "Frown"
+            }
+        }
+
+        var systemImage: String {
+            switch self {
+            case .smile:
+                return "face.smiling"
+            case .wink:
+                return "face.smiling.fill"
+            case .frown:
+                return "face.dashed"
+            }
+        }
+    }
+
+    @State var selectedColorTags: [ColorTags: Bool] = [.red: false, .orange: false, .yellow: false, .green: false, .blue: false, .purple: false]
+
+    var body: some View {
+        Menu("菜单") {
+            // 多选调色板
+            ControlGroup {
+                ForEach(ColorTags.allCases, id: \.self) { colorTag in
+                    Toggle(isOn: .constant(true)) {
+                        Label(colorTag.name, systemImage: "circle")
+                    }
+                    .tint(colorTag.color)
+                }
+            }
+            .controlGroupStyle(.palette)
+            .paletteSelectionEffect(.symbolVariant(.fill))
+
+            // 瞬时/无状态调色板
+            ControlGroup {
+                ForEach(Emotes.allCases, id: \.self) { emote in
+                    Button {
+                        sendEmote(emote)
+                    } label: {
+                        Label(emote.name, systemImage: emote.systemImage)
+                    }
+                }
+            }
+            .controlGroupStyle(.palette)
+        }
+    }
+
+    // 发送表情符号的动作
+    func sendEmote(_ emote: Emotes) {
+        // 实现发送表情的逻辑
+        print("Emote sent: \(emote.name)")
+    }
+}
+```
+
+![ControlGroupStylePalette](../images/ControlGroupStylePalette.png)
+
+
+#### Creating custom control group styles
+
+```swift
+struct MyControlGroupStyle: ControlGroupStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        VStack {
+            configuration.label
+            Divider()
+            configuration.content
+        }
+
+    }
+}
+```
+
+![ControlGroupStyleCustom](../images/ControlGroupStyleCustom.png)
