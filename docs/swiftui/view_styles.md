@@ -1654,5 +1654,3 @@ struct MyLabeledContentStyle: LabeledContentStyle {
 ![LabeledContentStyleCustom](../images/LabeledContentStyleCustom.png)
 
 
-## Styling windows from a view inside the window
-
