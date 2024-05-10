@@ -301,18 +301,45 @@ export default defineConfig({
                         },
                         {text: 'View fundamentals', link: '/swiftui/view_fundamentals'},
                         {text: 'View configuration', link: '/swiftui/view_configuration'},
-                        {text: 'View styles', collapsed: true, items: [
-                            {text: 'Styling buttons', link: '/swiftui/view_styles/styling_buttons'},
-                            {text: 'Styling pickers', link: '/swiftui/view_styles/styling_pickers'},
-                            {text: 'Styling menus', link: '/swiftui/view_styles/styling_menus'},
-                            {text: 'Styling toggles', link: '/swiftui/view_styles/styling_toggles'},
-                            {text: 'Styling indicators', link: '/swiftui/view_styles/styling_indicators'},
-                            {text: 'Styling views that display text', link: '/swiftui/view_styles/styling_views_that_display_text'},
-                            {text: 'Styling collection views', link: '/swiftui/view_styles/styling_collection_views'},
-                            {text: 'Styling navigation views', link: '/swiftui/view_styles/styling_navigation_views'},
-                            {text: 'Styling groups', link: '/swiftui/view_styles/styling_groups'},
+                        {
+                            text: 'View styles', collapsed: true, items: [
+                                {text: 'Styling buttons', link: '/swiftui/view_styles/styling_buttons'},
+                                {text: 'Styling pickers', link: '/swiftui/view_styles/styling_pickers'},
+                                {text: 'Styling menus', link: '/swiftui/view_styles/styling_menus'},
+                                {text: 'Styling toggles', link: '/swiftui/view_styles/styling_toggles'},
+                                {text: 'Styling indicators', link: '/swiftui/view_styles/styling_indicators'},
+                                {
+                                    text: 'Styling views that display text',
+                                    link: '/swiftui/view_styles/styling_views_that_display_text'
+                                },
+                                {
+                                    text: 'Styling collection views',
+                                    link: '/swiftui/view_styles/styling_collection_views'
+                                },
+                                {
+                                    text: 'Styling navigation views',
+                                    link: '/swiftui/view_styles/styling_navigation_views'
+                                },
+                                {text: 'Styling groups', link: '/swiftui/view_styles/styling_groups'},
 
-                        ]}
+                            ]
+                        },
+                        {
+                            text: 'Animations',
+                            collapsed: true,
+                            items: [
+                                {
+                                    text: 'Index',
+                                    link: '/swiftui/animations/index'
+                                },
+                                {
+                                    text: 'Adding state-based animation to an action',
+                                    link: '/swiftui/animations/adding_state_based_animation_to_an_action'
+                                }
+
+                            ]
+
+                        }
                     ]
                 },
             ],
