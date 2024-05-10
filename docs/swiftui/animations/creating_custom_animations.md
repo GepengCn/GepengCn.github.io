@@ -449,3 +449,66 @@ func unitPosition(time: TimeInterval) -> Double {
     return spring.position(target: 1.0, time: time)
 }
 ```
+
+### `init(duration:bounce:)`
+
+创建一个具有指定持续时间和弹跳的弹簧。
+
+```swift
+init(
+    duration: TimeInterval = 0.5,
+    bounce: Double = 0.0
+)
+```
+
+- `duration`：定义弹簧的速度。这大约等于稳定时间，但对于具有非常大弹跳值的弹簧，将是弹簧振荡周期的持续时间。
+- `bounce`：弹簧的弹性应该有多大。值为 $0$ 表示没有弹跳（临界阻尼弹簧），正值表示越来越多的弹性，最大值为 $1.0$（对应无阻尼振荡），负值表示过阻尼弹簧，最小值为 $-1.0$。
+
+### `init(mass:stiffness:damping:allowOverDamping:)`
+
+创建一个具有指定质量、刚度和阻尼的弹簧。
+
+
+```swift
+init(
+    mass: Double = 1.0,
+    stiffness: Double,
+    damping: Double,
+    allowOverDamping: Bool = false
+)
+```
+
+- `mass` ：指定连接到弹簧末端的物体的该属性。
+- `stiffness` ：相应的弹簧系数。
+- `damping` ：定义由于摩擦力的作用，弹簧的运动应该如何衰减。
+- `allowOverdamping` ：值为 `true` 表示在适当的情况下应允许过阻尼，根据其他输入，值为 `false` 表示此类情况应视为临界阻尼。
+
+### `init(response:dampingRatio:)`
+
+创建一个具有指定响应和阻尼比的弹簧。
+
+```swift
+init(
+    response: Double,
+    dampingRatio: Double
+)
+```
+
+- `response` ：将弹簧的刚度定义为近似的秒持续时间。
+- `dampingRatio` ：将施加的阻力量定义为产生临界阻尼所需量的一小部分。
+
+### `init(settlingDuration:dampingRatio:epsilon:)`
+
+创建一个具有指定持续时间和阻尼比的弹簧。
+
+```swift
+init(
+    settlingDuration: TimeInterval,
+    dampingRatio: Double,
+    epsilon: Double = 0.001
+)
+```
+
+- `settlingDuration` ：弹簧静止所需的大致时间。
+- `dampingRatio` ：作为产生临界阻尼所需量的一小部分施加的阻力量。
+- `epsilon` ：在弹簧被认为已稳定之前，所有后续值需要多小的阈值。
