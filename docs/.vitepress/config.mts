@@ -343,6 +343,10 @@ export default defineConfig({
                                 {
                                     text: 'Creating phase-based animation',
                                     link: '/swiftui/animations/creating_phase_based_animation'
+                                },
+                                {
+                                text: 'Creating custom animations',
+                                link: '/swiftui/animations/creating_custom_animations'
                                 }
 
                             ]
