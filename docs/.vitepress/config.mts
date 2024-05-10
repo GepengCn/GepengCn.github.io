@@ -335,6 +335,14 @@ export default defineConfig({
                                 {
                                     text: 'Adding state-based animation to an action',
                                     link: '/swiftui/animations/adding_state_based_animation_to_an_action'
+                                },
+                                {
+                                    text: 'Adding state-based animation to a view',
+                                    link: '/swiftui/animations/adding_state_based_animation_to_a_view'
+                                },
+                                {
+                                    text: 'Creating phase-based animation',
+                                    link: '/swiftui/animations/creating_phase_based_animation'
                                 }
 
                             ]
