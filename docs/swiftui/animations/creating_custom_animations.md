@@ -158,3 +158,294 @@ func shouldMerge<V>(
 如果此方法返回 `false`，系统不会将动画与先前的动画合并。相反，两个动画一起运行，系统会组合它们的结果。
 
 如果自定义动画需要在调用 `shouldMerge(previous:value:time:context:)` 方法之间维护状态，请将状态数据存储在 `context` 中。这样，下次系统调用该方法时，数据就可供该方法使用。要了解更多信息，请参阅 `AnimationContext`。
+
+
+## `AnimationContext`
+
+自定义动画可以用来管理状态和访问视图环境的上下文值。
+
+```swift
+struct AnimationContext<Value> where Value : VectorArithmetic
+```
+
+系统向 `CustomAnimation` 实例提供了一个 `AnimationContext`，以便动画可以在 `AnimationState` 的实例中存储和检索值。要访问这些值，请使用上下文的 `state` 属性。
+
+为了更方便地访问状态，可以创建一个 `AnimationStateKey`，并扩展 `AnimationContext` 以包括一个计算属性，该属性用于获取和设置 `AnimationState` 值。然后，使用此属性而不是 `state` 来检索自定义动画的状态。例如，以下代码创建了一个名为 `PausableState` 的动画状态键。然后，代码扩展了 `AnimationContext` 以包括 `pausableState` 属性：
+
+```swift
+private struct PausableState<Value: VectorArithmetic>: AnimationStateKey {
+    var paused = false
+    var pauseTime: TimeInterval = 0.0
+
+    static var defaultValue: Self { .init() }
+}
+
+
+extension AnimationContext {
+    fileprivate var pausableState: PausableState<Value> {
+        get { state[PausableState<Value>.self] }
+        set { state[PausableState<Value>.self] = newValue }
+    }
+}
+```
+
+要访问可暂停状态，自定义动画 `PausableAnimation` 使用 `pausableState` 属性而不是 `state` 属性：
+
+
+```swift
+struct PausableAnimation: CustomAnimation {
+    let base: Animation
+
+    func animate<V>(value: V, time: TimeInterval, context: inout AnimationContext<V>) -> V? where V : VectorArithmetic {
+        let paused = context.environment.animationPaused
+
+        let pausableState = context.pausableState
+        var pauseTime = pausableState.pauseTime
+        if pausableState.paused != paused {
+            pauseTime = time - pauseTime
+            context.pausableState = PausableState(paused: paused, pauseTime: pauseTime)
+        }
+
+        let effectiveTime = paused ? pauseTime : time - pauseTime
+        let result = base.animate(value: value, time: effectiveTime, context: &context)
+        return result
+    }
+}
+```
+
+
+动画还可以检索创建动画的视图的环境值。要检索视图的环境值，请使用上下文的 `environment` 属性。例如，以下代码创建了一个名为 `AnimationPausedKey` 的自定义 `EnvironmentKey`，并且视图 `PausableAnimationView` 使用该键来存储暂停状态：
+
+```swift
+struct AnimationPausedKey: EnvironmentKey {
+    static let defaultValue = false
+}
+
+extension EnvironmentValues {
+    var animationPaused: Bool {
+        get { self[AnimationPausedKey.self] }
+        set { self[AnimationPausedKey.self] = newValue }
+    }
+}
+
+struct PausableAnimationView: View {
+    @State private var paused = false
+
+    var body: some View {
+        VStack {
+            ...
+        }
+        .environment(\.animationPaused, paused)
+    }
+}
+```
+
+然后，自定义动画 `PausableAnimation` 使用 `environment` 属性从视图的环境中检索暂停状态：
+
+```swift
+struct PausableAnimation: CustomAnimation {
+    func animate<V>(value: V, time: TimeInterval, context: inout AnimationContext<V>) -> V? where V : VectorArithmetic {
+        let paused = context.environment.animationPaused
+        ...
+    }
+}
+```
+
+
+## `AnimationState`
+
+用于存储自定义动画状态的容器。
+
+```swift
+struct AnimationState<Value> where Value : VectorArithmetic
+```
+
+`AnimationContext` 使用此类型为 `CustomAnimation` 存储状态。要检索上下文存储的状态，可以使用 `state` 属性。但是，访问动画状态的更方便的方法是定义一个 `AnimationStateKey`，并使用计算属性扩展 `AnimationContext` 以获取和设置动画状态，如下所示代码所示：
+
+
+```swift
+private struct PausableState<Value: VectorArithmetic>: AnimationStateKey {
+    static var defaultValue: Self { .init() }
+}
+
+
+extension AnimationContext {
+    fileprivate var pausableState: PausableState<Value> {
+        get { state[PausableState<Value>.self] }
+        set { state[PausableState<Value>.self] = newValue }
+    }
+}
+```
+
+在创建 `AnimationStateKey` 时，方便的是定义自定义动画所需的状态值。例如，以下代码向 `PausableState` 动画状态键添加了 `paused` 和 `pauseTime` 属性：
+
+
+```swift
+private struct PausableState<Value: VectorArithmetic>: AnimationStateKey {
+    var paused = false
+    var pauseTime: TimeInterval = 0.0
+
+
+    static var defaultValue: Self { .init() }
+}
+```
+
+要在 `PausableAnimation` 中访问可暂停状态，可以使用以下代码调用 `pausableState`，而不是使用上下文的 `state` 属性。由于动画状态键 `PausableState` 为状态值定义了属性，因此自定义动画可以读取和写入这些值。
+
+```swift
+struct PausableAnimation: CustomAnimation {
+    let base: Animation
+
+    func animate<V>(value: V, time: TimeInterval, context: inout AnimationContext<V>) -> V? where V : VectorArithmetic {
+        let paused = context.environment.animationPaused
+
+        let pausableState = context.pausableState
+        var pauseTime = pausableState.pauseTime
+        if pausableState.paused != paused {
+            pauseTime = time - pauseTime
+            context.pausableState = PausableState(paused: paused, pauseTime: pauseTime)
+        }
+
+        let effectiveTime = paused ? pauseTime : time - pauseTime
+        let result = base.animate(value: value, time: effectiveTime, context: &context)
+        return result
+    }
+}
+```
+
+### Storing state for secondary animations
+
+自定义动画还可以使用 `AnimationState` 存储次要动画的状态。例如，以下代码创建了一个 `AnimationStateKey`，其中包含 `secondaryState` 属性，自定义动画可以使用该属性存储其他状态：
+
+```swift
+private struct TargetState<Value: VectorArithmetic>: AnimationStateKey {
+    var timeDelta = 0.0
+    var valueDelta = Value.zero
+    var secondaryState: AnimationState<Value>? = .init()
+
+    static var defaultValue: Self { .init() }
+}
+
+extension AnimationContext {
+    fileprivate var targetState: TargetState<Value> {
+        get { state[TargetState<Value>.self] }
+        set { state[TargetState<Value>.self] = newValue }
+    }
+}
+```
+
+自定义动画 `TargetAnimation` 使用 `TargetState` 在 `secondaryState` 中存储状态数据，用于作为目标动画一部分运行的另一个动画。
+
+```swift
+struct TargetAnimation: CustomAnimation {
+    var base: Animation
+    var secondary: Animation
+
+
+    func animate<V: VectorArithmetic>(value: V, time: Double, context: inout AnimationContext<V>) -> V? {
+        var targetValue = value
+        if let secondaryState = context.targetState.secondaryState {
+            var secondaryContext = context
+            secondaryContext.state = secondaryState
+            let secondaryValue = value - context.targetState.valueDelta
+            let result = secondary.animate(
+                value: secondaryValue, time: time - context.targetState.timeDelta,
+                context: &secondaryContext)
+            if let result = result {
+                context.targetState.secondaryState = secondaryContext.state
+                targetValue = result + context.targetState.valueDelta
+            } else {
+                context.targetState.secondaryState = nil
+            }
+        }
+        let result = base.animate(value: targetValue, time: time, context: &context)
+        if let result = result {
+            targetValue = result
+        } else if context.targetState.secondaryState == nil {
+            return nil
+        }
+        return targetValue
+}
+
+
+    func shouldMerge<V: VectorArithmetic>(previous: Animation, value: V, time: Double, context: inout AnimationContext<V>) -> Bool {
+        guard let previous = previous.base as? Self else { return false }
+        var secondaryContext = context
+        if let secondaryState = context.targetState.secondaryState {
+            secondaryContext.state = secondaryState
+            context.targetState.valueDelta = secondary.animate(
+                value: value, time: time - context.targetState.timeDelta,
+                context: &secondaryContext) ?? value
+        } else {
+            context.targetState.valueDelta = value
+        }
+        // Reset the target each time a merge occurs.
+        context.targetState.secondaryState = .init()
+        context.targetState.timeDelta = time
+        return base.shouldMerge(
+            previous: previous.base, value: value, time: time,
+            context: &context)
+    }
+}
+```
+
+## `UnitCurve`
+
+由二维曲线定义的函数，将输入进度（范围为 $[0,1]$ ）映射到输出进度，输出进度也在范围 $[0,1]$ 内。通过改变曲线的形状，可以改变动画或其他插值的有效速度。
+
+```swift
+struct UnitCurve
+```
+
+水平（ $x$ ）轴定义输入进度：评估曲线时，必须提供范围为 $[0,1]$ 的单个输入进度值。
+
+垂直（ $y$ ）轴映射到输出进度：评估曲线时，返回与输入进度相交的点的 $y$ 分量。
+
+
+- `linear`: 由于线性曲线是从 $(0,0)$ 到 $(1,1)$ 的一条直线，输出进度始终等于输入进度，速度始终等于 $1.0$。
+- `easeIn`: 一条贝塞尔曲线，开始时缓慢，然后在结束时加速。起始和结束控制点位于 $(x: 0.42, y: 0)$ 和 $(x: 1, y: 1)$。
+- `easeOut`: 一条贝塞尔曲线，开始时很快，然后在接近结束时减慢。起始和结束控制点位于 $(x: 0, y: 0)$ 和 $(x: 0.58, y: 1)$。
+- `easeInOut`: 一条贝塞尔曲线，开始时缓慢，在中间加速，然后在接近结束时再次减慢。起始和结束控制点位于 $(x: 0.42, y: 0)$ 和 $(x: 0.58, y: 1)$。
+- `circularEaseIn`: 一条开始缓慢，然后在结束时加速的曲线。曲线的形状等于单位圆的第四象限（右下象限）。
+- `circularEaseOut`: 一条圆形曲线，开始时很快，然后在接近结束时减慢。曲线的形状等于单位圆的第二象限（左上角）。
+- `circularEaseInOut`: 一条圆形曲线，开始时缓慢，在中间加速，然后在接近结束时再次减慢。曲线的形状由圆形缓入和圆形缓出的分段组合定义。
+- `bezier(startControlPoint:endControlPoint:)`: 使用贝塞尔控制点创建新曲线。在评估曲线时，控制点的 $x$ 分量被钳制在范围 $[0,1]$ 内。
+    - `startControlPoint`：与曲线起点 $(0,0)$ 相关联的三次贝塞尔控制点。从起点到其控制点的切线向量定义了计时函数的初始速度。
+    - `endControlPoint`：与曲线终点 $(1,1)$ 相关联的三次贝塞尔控制点。从终点到其控制点的切线向量定义了计时函数的最终速度。
+- `inverse`: 返回曲线的副本，其 $x$ 和 $y$ 分量交换。逆函数可用于反向求解曲线：给定已知的输出（ $y$ ）值，可以通过使用逆函数找到相应的输入（ $x$ ）值：
+    ```swift
+    let curve = UnitCurve.easeInOut
+
+    /// The input time for which an easeInOut curve returns 0.6.
+    let inputTime = curve.inverse.evaluate(at: 0.6)
+    ```
+
+## `Spring`
+
+弹簧运动的一种表示。
+
+```swift
+struct Spring
+```
+
+使用此类型在不同的弹簧参数表示之间进行转换：
+
+```swift
+let spring = Spring(duration: 0.5, bounce: 0.3)
+let (mass, stiffness, damping) = (spring.mass, spring.stiffness, spring.damping)
+// (1.0, 157.9, 17.6)
+
+
+let spring2 = Spring(mass: 1, stiffness: 100, damping: 10)
+let (duration, bounce) = (spring2.duration, spring2.bounce)
+// (0.63, 0.5)
+```
+
+你还可以使用它来查询给定输入集的弹簧位置及其其他属性：
+
+```swift
+func unitPosition(time: TimeInterval) -> Double {
+    let spring = Spring(duration: 0.5, bounce: 0.3)
+    return spring.position(target: 1.0, time: time)
+}
+```
