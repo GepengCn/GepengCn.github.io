@@ -562,3 +562,239 @@ static func interpolatingSpring(
 - `stiffness`：弹簧的硬度。
 - `damping`：弹簧的阻尼值。
 - `initialVelocity`：弹簧的初始速度，作为范围在 $[0,1]$ 内的值，表示正在动画的值的幅度。
+
+### `timingCurve(_:duration:)`
+
+创建一个速度由给定曲线控制的新动画。
+
+```swift
+static func timingCurve(
+    _ curve: UnitCurve,
+    duration: TimeInterval
+) -> Animation
+```
+
+- `timingCurve`：描述动画在其持续时间内速度的曲线。
+- `duration`：动画的持续时间，以秒为单位。
+### `timingCurve(_:_:_:_:duration:)`
+
+一个由三次贝塞尔定时曲线创建的动画。
+
+```swift
+static func timingCurve(
+    _ p1x: Double,
+    _ p1y: Double,
+    _ p2x: Double,
+    _ p2y: Double,
+    duration: TimeInterval = 0.35
+) -> Animation
+```
+
+- `p1x`：三次贝塞尔曲线的第一个控制点的 $x$ 坐标。
+- `p1y`：三次贝塞尔曲线的第一个控制点的 $y$ 坐标。
+- `p2x`：三次贝塞尔曲线的第二个控制点的 $x$ 坐标。
+- `p2y`：三次贝塞尔曲线的第二个控制点的 $y$ 坐标。
+- `duration`：动画完成所需的时间，以秒为单位。
+
+
+### `delay(_:)`
+
+将动画的开始延迟指定的秒数。
+
+
+```swift
+func delay(_ delay: TimeInterval) -> Animation
+```
+
+使用此方法延迟动画的开始。例如，以下代码对两个胶囊的高度变化进行动画处理。第一个胶囊的动画立即开始。但是，第二个胶囊的动画要到半秒后才开始。
+
+```swift
+struct ContentView: View {
+    @State private var adjustBy = 100.0
+
+
+    var body: some View {
+        VStack(spacing: 40) {
+            HStack(alignment: .bottom) {
+                Capsule()
+                    .frame(width: 50, height: 175 - adjustBy)
+                    .animation(.easeInOut, value: adjustBy)
+                Capsule()
+                    .frame(width: 50, height: 175 + adjustBy)
+                    .animation(.easeInOut.delay(0.5), value: adjustBy)
+            }
+
+
+            Button("Animate") {
+                adjustBy *= -1
+            }
+        }
+    }
+}
+```
+<video src="../../video/AnimationDelay.mp4" controls="controls"></video>
+
+### `repeatCount(_:autoreverses:)`
+
+将动画重复特定的次数。
+
+```swift
+func repeatCount(
+    _ repeatCount: Int,
+    autoreverses: Bool = true
+) -> Animation
+```
+
+- `repeatCount`：动画重复的次数。当 `autoreverse` 为 `false` 时，每次重复的序列都从开头开始。
+- `autoreverses`：一个布尔值，指示动画序列在向前播放后是否反向播放。`autoreverse` 会计算到 `repeatCount` 中。例如，`repeatCount` 为 $1$ 时，动画向前播放一次，但即使 `autoreverse` 为 `true`，它也不会反向播放。当 `autoreverse` 为 `true` 且 `repeatCount` 为 $2$ 时，动画先向前移动，然后反向移动，然后停止。
+
+使用此方法将动画重复特定次数。例如，在以下代码中，动画将卡车从视图的一侧移动到另一侧。它将此动画重复三次。
+
+```swift
+struct ContentView: View {
+    @State private var driveForward = true
+
+
+    private var driveAnimation: Animation {
+        .easeInOut
+        .repeatCount(3, autoreverses: true)
+        .speed(0.5)
+    }
+
+
+    var body: some View {
+        VStack(alignment: driveForward ? .leading : .trailing, spacing: 40) {
+            Image(systemName: "box.truck")
+                .font(.system(size: 48))
+                .animation(driveAnimation, value: driveForward)
+
+
+            HStack {
+                Spacer()
+                Button("Animate") {
+                    driveForward.toggle()
+                }
+                Spacer()
+            }
+        }
+    }
+}
+```
+
+<video src="../../video/AnimationRepeatCountCar.mp4" controls="controls"></video>
+
+动画第一次运行时，卡车从视图的前缘移动到后缘。动画第二次运行时，卡车从后缘移动到前缘，因为 `autoreverse` 为 `true`。如果 `autoreverse` 为 `false`，卡车会在移动到后缘之前跳回前缘。动画第三次运行时，卡车从视图的前缘移动到后缘。
+
+
+### `repeatForever(autoreverses:)`
+
+在包含动画的视图的生命周期内重复动画。
+
+```swift
+func repeatForever(autoreverses: Bool = true) -> Animation
+```
+
+使用此方法重复动画，直到视图实例不再存在，或者视图的显式或结构标识更改。例如，以下代码在视图的生命周期内不断旋转齿轮符号。
+
+```swift
+struct ContentView: View {
+    @State private var rotationDegrees = 0.0
+
+
+    private var animation: Animation {
+        .linear
+        .speed(0.1)
+        .repeatForever(autoreverses: false)
+    }
+
+
+    var body: some View {
+        Image(systemName: "gear")
+            .font(.system(size: 86))
+            .rotationEffect(.degrees(rotationDegrees))
+            .onAppear {
+                withAnimation(animation) {
+                    rotationDegrees = 360.0
+                }
+            }
+    }
+}
+
+```
+<video src="../../video/AnimationRepeatForever.mp4" controls="controls"></video>
+
+### `speed(_:)`
+
+通过调整速度来更改动画的持续时间。
+
+```swift
+func speed(_ speed: Double) -> Animation
+```
+
+设置动画的速度会以速度因子改变动画的持续时间。较高的速度值会导致较快的动画序列，因为持续时间较短。例如，速度为 $2.0$ 的一秒动画会在一半的时间（半秒）内完成。
+
+```swift
+struct ContentView: View {
+    @State private var adjustBy = 100.0
+
+
+    private var oneSecondAnimation: Animation {
+    .easeInOut(duration: 1.0)
+    }
+
+
+    var body: some View {
+        VStack(spacing: 40) {
+            HStack(alignment: .bottom) {
+                Capsule()
+                    .frame(width: 50, height: 175 - adjustBy)
+                Capsule()
+                    .frame(width: 50, height: 175 + adjustBy)
+            }
+            .animation(oneSecondAnimation.speed(2.0), value: adjustBy)
+
+
+            Button("Animate") {
+                adjustBy *= -1
+            }
+        }
+    }
+}
+```
+<video src="../../video/AnimationSpeed.mp4" controls="controls"></video>
+
+将速度设置为较低的数字会减慢动画，延长其持续时间。例如，速度为 $0.25$ 的一秒动画需要四秒才能完成。
+
+```swift
+struct ContentView: View {
+    @State private var adjustBy = 100.0
+
+
+    private var oneSecondAnimation: Animation {
+    .easeInOut(duration: 1.0)
+    }
+
+
+    var body: some View {
+        VStack(spacing: 40) {
+            HStack(alignment: .bottom) {
+                Capsule()
+                    .frame(width: 50, height: 175 - adjustBy)
+                Capsule()
+                    .frame(width: 50, height: 175 + adjustBy)
+            }
+            .animation(oneSecondAnimation.speed(0.25), value: adjustBy)
+
+
+            Button("Animate") {
+                adjustBy *= -1
+            }
+        }
+    }
+}
+
+```
+
+<video src="../../video/AnimationSpeedSlow.mp4" controls="controls"></video>
+
+
