@@ -506,3 +506,150 @@ struct KeyframeAnimationView: View {
 
 <video src="../../video/KeyframeAnimator.mp4" controls="controls"></video>
 
+
+## `phaseAnimator(_:content:animation:)`
+
+为您应用于视图的效果创建动画，这些效果在连续变化的一系列阶段中生效。
+
+```swift
+func phaseAnimator<Phase>(
+    _ phases: some Sequence,
+    @ViewBuilder content: @escaping (PlaceholderContentView<Self>, Phase) -> some View,
+    animation: @escaping (Phase) -> Animation? = { _ in .default }
+) -> some View where Phase : Equatable
+```
+
+- `phases` : 要循环的阶段序列。确保序列不为空。如果为空，SwiftUI 会记录运行时警告，并在输出视图中返回视觉警告。
+- `content` : 一个视图构建器闭包，它接受两个参数：表示修改后的视图的代理值和当前阶段。您可以根据当前阶段对代理应用效果。
+- `animation` : 一个接受当前阶段作为输入的闭包。返回用于过渡到下一阶段的动画。如果返回 nil，则过渡不会动画。如果不设置此参数，SwiftUI 将使用默认动画。
+
+当修改后的视图首次出现时，此修饰符使用第一个阶段作为输入调用其内容闭包，并为修改后的视图提供代理。以适合第一个阶段值的方式将效果应用于代理——从而应用于修改后的视图。
+
+紧接着，修饰符为其内容闭包提供第二个阶段的值。相应地更新应用于代理视图的效果，修饰符会为您动画化更改。动画完成后，该过程立即使用后续阶段重复，直到到达最后一个阶段，此时修饰符循环回到第一个阶段。
+
+
+## `phaseAnimator(_:trigger:content:animation:)`
+
+`trigger` : 一个值，其更改导致动画器使用下一个阶段。
+
+
+当修改后的视图首次出现时，此修饰符使用第一个阶段作为输入调用其内容闭包，并为修改后的视图提供代理。以适合第一个阶段值的方式将效果应用于代理——从而应用于修改后的视图。
+
+稍后，当触发输入的值发生变化时，修饰符为其内容闭包提供第二个阶段的值。相应地更新应用于代理视图的效果，修饰符会为您动画化更改。下一次触发输入更改时，该过程使用后续阶段重复，直到到达最后一个阶段，此时修饰符循环回到第一个阶段。
+
+
+## `keyframeAnimator(initialValue:repeating:content:keyframes:)`
+
+循环给定的关键帧，使用在 `body` 中应用的修饰符更新视图。
+
+```swift
+func keyframeAnimator<Value>(
+    initialValue: Value,
+    repeating: Bool = true,
+    @ViewBuilder content: @escaping (PlaceholderContentView<Self>, Value) -> some View,
+    @KeyframesBuilder<Value> keyframes: @escaping (Value) -> some Keyframes
+) -> some View
+```
+
+
+- `initialValue` : 关键帧将从其动画的初始值。
+- `repeating` : 关键帧当前是否正在重复。如果为 false，则关键帧时间轴开头的值将提供给内容闭包。
+- `content` : 一个视图构建器闭包，它接受两个参数。第一个参数是表示修改后的视图的代理值。第二个参数是关键帧生成的内插值。
+- `keyframes` : 定义值随时间变化方式的关键帧。动画器的当前值是唯一的参数，当视图首次出现时，该值等于 `initialValue`，然后在后续调用中等于上一个关键帧动画的结束值。
+
+请注意，在动画时，内容闭包将在每一帧上更新，因此请避免在内容中直接执行任何昂贵的操作。
+
+
+## `keyframeAnimator(initialValue:trigger:content:keyframes:)`
+
+当给定的触发值发生变化时，播放给定的关键帧，使用在 `body` 中应用的修饰符更新视图。
+
+```swift
+func keyframeAnimator<Value>(
+    initialValue: Value,
+    trigger: some Equatable,
+    @ViewBuilder content: @escaping (PlaceholderContentView<Self>, Value) -> some View,
+    @KeyframesBuilder<Value> keyframes: @escaping (Value) -> some Keyframes
+) -> some View
+```
+
+请注意，在动画时，内容闭包将在每一帧上更新，因此请避免在内容中直接执行任何昂贵的操作。
+
+如果在动画时触发值发生变化，关键帧闭包将使用当前的内插值调用，并且返回的关键帧将定义一个替换旧动画的新动画。先前的速度将被保留，因此，如果立方或弹簧关键帧没有指定自定义初始速度，它们将从先前的动画保持连续性。
+
+当关键帧动画完成时，动画器将保持在结束值，该值成为下一个动画的初始值。
+
+
+## `KeyframeTimeline`
+
+
+使用关键帧建模的关于值随时间变化的描述。
+
+与 SwiftUI 中的其他动画（使用 `Animation`）不同，关键帧不会在 SwiftUI 作为状态更改提供的 `from` 和 `to` 值之间进行插值。相反，关键帧使用组成其主体的轨道完全定义了值随时间变化的路径。
+
+关键帧值大致类似于视频剪辑；它们具有固定的持续时间，您可以在持续时间内的任何时间进行擦洗和评估它们。
+
+`Keyframes` 结构还允许您在特定时间计算内插值，您可以在将关键帧集成到自定义用例中时使用该内插值。
+
+例如，您可以使用 `Keyframes` 实例为符合 `Animatable` 的类型定义动画：
+
+
+```swift
+let keyframes = KeyframeTimeline(initialValue: CGPoint.zero) {
+    CubcKeyframe(.init(x: 0, y: 100), duration: 0.3)
+    CubicKeyframe(.init(x: 0, y: 0), duration: 0.7)
+}
+
+
+let value = keyframes.value(time: 0.45
+
+```
+
+对于涉及多个协调变化的动画，您可以包含多个嵌套轨道：
+
+```swift
+struct Values {
+    var rotation = Angle.zero
+    var scale = 1.0
+}
+
+
+let keyframes = KeyframeTimeline(initialValue: Values()) {
+    KeyframeTrack(\.rotation) {
+        CubicKeyframe(.zero, duration: 0.2)
+        CubicKeyframe(.degrees(45), duration: 0.3)
+    }
+    KeyframeTrack(\.scale) {
+        CubicKeyframe(value: 1.2, duration: 0.5)
+        CubicKeyframe(value: 0.9, duration: 0.2)
+        CubicKeyframe(value: 1.0, duration: 0.3)
+    }
+}
+```
+
+多个嵌套轨道按照它们声明的顺序更新初始值。这意味着，如果多个嵌套轨道更改了根值的相同属性，则将使用来自最后一个竞争轨道的值。
+
+
+## `CubicKeyframe`
+
+一个使用立方曲线在值之间平滑插值的关键帧。
+
+如果您没有指定起始或结束速度，SwiftUI 会自动计算一个曲线，以在关键帧之间保持平滑运动。
+
+相邻的立方关键帧会产生一个 `Catmull-Rom` 样条。
+
+如果一个立方关键帧紧跟在另一种类型的关键帧（如线性关键帧）之后，前一个关键帧定义的段的结束速度将用作起始速度。
+
+同样，如果一个立方关键帧后面跟着另一种类型的关键帧，则下一段的初始速度将用作此关键帧定义的段的结束速度。
+
+## `LinearKeyframe`
+
+一个使用简单线性插值的关键帧。
+
+## `MoveKeyframe`
+
+一个直接移动到给定值而不进行插值的关键帧。
+
+## `SpringKeyframe`
+
+一个使用弹簧函数将值内插到给定值的关键帧。
