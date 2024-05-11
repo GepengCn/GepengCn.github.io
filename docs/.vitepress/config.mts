@@ -351,6 +351,10 @@ export default defineConfig({
                                 {
                                     text: 'Making data animatable',
                                     link: '/swiftui/animations/making_data_animatable'
+                                },
+                                {
+                                text: 'Updating a view on a schedule',
+                                link: '/swiftui/animations/updating_a_view_on_a_schedule'
                                 }
 
                             ]
