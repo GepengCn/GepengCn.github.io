@@ -345,8 +345,12 @@ export default defineConfig({
                                     link: '/swiftui/animations/creating_phase_based_animation'
                                 },
                                 {
-                                text: 'Creating custom animations',
-                                link: '/swiftui/animations/creating_custom_animations'
+                                    text: 'Creating custom animations',
+                                    link: '/swiftui/animations/creating_custom_animations'
+                                },
+                                {
+                                    text: 'Making data animatable',
+                                    link: '/swiftui/animations/making_data_animatable'
                                 }
 
                             ]
