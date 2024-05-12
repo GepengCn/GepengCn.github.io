@@ -353,8 +353,12 @@ export default defineConfig({
                                     link: '/swiftui/animations/making_data_animatable'
                                 },
                                 {
-                                text: 'Updating a view on a schedule',
-                                link: '/swiftui/animations/updating_a_view_on_a_schedule'
+                                    text: 'Updating a view on a schedule',
+                                    link: '/swiftui/animations/updating_a_view_on_a_schedule'
+                                },
+                                {
+                                    text: 'Synchronizing geometries',
+                                    link: '/swiftui/animations/synchronizing_geometries'
                                 }
 
                             ]
