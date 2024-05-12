@@ -359,6 +359,10 @@ export default defineConfig({
                                 {
                                     text: 'Synchronizing geometries',
                                     link: '/swiftui/animations/synchronizing_geometries'
+                                },
+                                {
+                                    text: 'Defining transitions',
+                                    link: '/swiftui/animations/defining_transitions'
                                 }
 
                             ]
