@@ -626,3 +626,90 @@ HStack(alignment: .top) {
 ![TextBaselineOffset](../../images/TextBaselineOffset.png)
 
 具有负偏移的第一个视图向下生长以处理降低的文本。具有正偏移的最后一个视图向上生长。显示为灰色的封闭 `HStack` 实例确保所有文本视图无论偏移量如何都保持在其顶部边缘对齐。
+
+
+## Fitting text into available space
+
+### `textScale(_:isEnabled:)`
+
+对文本应用文本缩放。
+
+```swift
+func textScale(
+    _ scale: Text.Scale,
+    isEnabled: Bool = true
+) -> Text
+```
+
+- `scale`：要应用的文本缩放比例。
+- `isEnabled`：如果为 `true`，则应用文本缩放；否则，文本缩放比例不变。
+
+
+::: info `Text.Scale`
+- `default`: 定义默认文本缩放比例
+- `secondary`: 定义次要文本缩放比例
+
+:::
+
+![TextScale](../../images/TextScale.png)
+
+### `Text.TruncationMode`
+
+当一行文本太长而无法适应可用空间时，要应用于该文本行的截断类型。
+
+```swift
+enum TruncationMode
+```
+
+当文本视图包含的文本超出其能够显示的范围时，视图可能会截断文本，并在截断点处放置省略号 (…)。使用 `.truncationMode(_:)` 修饰符和 `TruncationMode` 的其中一个值来指示要截断文本的哪个部分，要么在开头，要么在中间，要么在结尾。
+
+
+- `head`: 在一行的开头截断。
+- `middle`: 在一行的中间截断。
+- `tail`: 在一行的结尾截断。
+
+```swift
+VStack {
+    Text("Hello SwiftUI")
+        .truncationMode(.head)
+    Text("Hello SwiftUI")
+        .truncationMode(.middle)
+    Text("Hello SwiftUI")
+        .truncationMode(.tail)
+}.frame(width: 150)
+.font(.largeTitle)
+.lineLimit(1)
+```
+
+![TextTruncationMode](../../images/TextTruncationMode.png)
+
+## Localizing text
+
+### `typesettingLanguage(_:isEnabled:)`
+
+指定排版的语言。
+
+```swift
+func typesettingLanguage(
+    _ language: TypesettingLanguage,
+    isEnabled: Bool = true
+) -> Text
+```
+
+- `language`：用于排版的语言。
+- `isEnabled`：一个布尔值，指示是否添加文本语言。
+
+在某些情况下，`Text` 可能包含与设备 UI 语言不匹配的特定语言的文本。在这种情况下，指定一种语言是有用的，以便行高、换行和间距将尊重该语言使用的脚本。例如：
+
+```swift
+Text(verbatim: "แอปเปิล").typesettingLanguage(
+.explicit(.init(languageCode: .thai)))
+.font(.largeTitle)
+```
+
+![TextTypesettingLanguage](../../images/TextTypesettingLanguage.png)
+
+::: warning
+
+此语言不会影响本地化的文本。
+:::
