@@ -363,6 +363,10 @@ export default defineConfig({
                                 {
                                     text: 'Defining transitions',
                                     link: '/swiftui/animations/defining_transitions'
+                                },
+                                {
+                                    text: 'Moving an animation to another view',
+                                    link: '/swiftui/animations/moving_an_animation_to_another_view'
                                 }
 
                             ]
