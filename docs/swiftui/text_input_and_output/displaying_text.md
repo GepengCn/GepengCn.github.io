@@ -1,5 +1,7 @@
 # Displaying text
 
+[[toc]]
+
 ## `Text`
 
 一个显示一行或多行只读文本的视图。
@@ -89,7 +91,7 @@ Text(LocalizedStringKey(writingImplement))
 
 在本地化字符串变量时，你可以省略可选的初始化参数来使用默认表——就像上面的示例中一样——就像对字符串字面量一样。
 
-## AttributedString
+### AttributedString
 
 
 ```swift
@@ -171,9 +173,9 @@ var body: some View {
 
 在你的应用程序的字符串文件中，使用 Markdown 语法对应用程序的本地化字符串应用样式。当你希望对本地化字符串执行自动语法一致性时，你也可以使用这种方法，使用 `^[text](inflect:true)` 语法。
 
-## Creating a text view for a date
+### Creating a text view for a date
 
-### `init(_ dates: ClosedRange<Date>)`
+#### `init(_ dates: ClosedRange<Date>)`
 
 创建一个显示两个日期之间本地化范围的实例。
 
@@ -181,7 +183,7 @@ var body: some View {
 Text(Date()...Date())
 ```
 
-### `init(_ interval: DateInterval)`
+#### `init(_ interval: DateInterval)`
 
 创建一个显示本地化时间间隔的实例。
 
@@ -190,7 +192,7 @@ Text(DateInterval())
 ```
 
 
-### `init(_:style:)`
+#### `init(_:style:)`
 
 创建一个使用特定样式显示本地化日期和时间的实例。
 
@@ -207,9 +209,9 @@ Text(Date(), style: .date)
 
 ![TextDate](../../images/TextDate.png)
 
-## Creating a text view with formatting
+### Creating a text view with formatting
 
-### `init(_:format:)`
+#### `init(_:format:)`
 
 创建一个文本视图，显示由相应格式样式支持的非字符串类型的格式化表示。
 
@@ -239,7 +241,7 @@ var body: some View {
 
 ![FormatStyle](../../images/TextFormatStyle.png)
 
-## Creating a text view from an image
+### Creating a text view from an image
 
 创建一个包装 `Image` 的实例，适合与其他 `Text` 连接。
 
@@ -251,7 +253,7 @@ init(_ image: Image)
 Text(Image(systemName: "checkmark"))
 ```
 
-## Creating a text view with a timer
+### Creating a text view with a timer
 
 创建一个显示在提供的时间间隔内计数的计时器的实例。
 
@@ -278,9 +280,9 @@ Text(
 
 <video src="../../video/TextTimer.mp4" controls="controls"></video>
 
-## Choosing a font
+### Choosing a font
 
-### `font(_:)`
+#### `font(_:)`
 
 设置视图中文本的默认字体。
 
@@ -308,7 +310,7 @@ VStack {
 
 ![TextFontStyle](../../images/TextFontStyle.png)
 
-### `fontWeight(_:)`
+#### `fontWeight(_:)`
 
 设置文本的字体粗细。
 
@@ -326,7 +328,7 @@ func fontWeight(_ weight: Font.Weight?) -> Text
 - `thin`
 - `ultraLight`
 
-### `fontDesign(_:)`
+#### `fontDesign(_:)`
 
 设置文本的字体设计。
 
@@ -341,7 +343,7 @@ func fontDesign(_ design: Font.Design?) -> Text
 
 ![TextFontDesign](../../images/TextFontDesign.png)
 
-### `fontWidth(_:)`
+#### `fontWidth(_:)`
 
 设置文本的字体宽度。
 
@@ -357,9 +359,9 @@ func fontWidth(_ width: Font.Width?) -> Text
 ![FontWidth](../../images/FontWidth.png)
 
 
-## Styling the view’s text
+### Styling the view’s text
 
-### `foregroundStyle(_:)`
+#### `foregroundStyle(_:)`
 
 设置此视图显示的文本的样式。
 
@@ -381,7 +383,7 @@ HStack {
 
 ![TextForegroundStyle](../../images/TextForegroundStyle.png)
 
-### `bold()`
+#### `bold()`
 
 将粗体字体重量应用于文本。
 
@@ -391,7 +393,7 @@ func bold() -> Text
 
 ![TextBold](../../images/TextBold.png)
 
-### `italic()`
+#### `italic()`
 
 对文本应用斜体。
 
@@ -401,7 +403,7 @@ func italic() -> Text
 
 ![TextItalic](../../images/TextItalic.png)
 
-### `strikethrough(_:color:)`
+#### `strikethrough(_:color:)`
 
 对文本应用删除线。
 
@@ -417,7 +419,7 @@ func strikethrough(
 
 ![TextStrikethrough](../../images/TextStrikethrough.png)
 
-### `strikethrough(_:pattern:color:)`
+#### `strikethrough(_:pattern:color:)`
 
 ```swift
 func strikethrough(
@@ -440,7 +442,7 @@ Text("Hello SwiftUI")
 - `dashDot`: 虚线+点线
 - `dashDotDot`: 绘制一条由交替的破折号和两个点组成的线。
 
-### `underline(_:color:)`
+#### `underline(_:color:)`
 
 对文本应用下划线。
 
@@ -451,7 +453,7 @@ func underline(
 ) -> Text
 ```
 
-### `underline(_:pattern:color:)`
+#### `underline(_:pattern:color:)`
 
 对文本应用下划线。
 
@@ -470,7 +472,7 @@ Text("Hello SwiftUI")
 
 ![TextUnderline](../../images/TextUnderline.png)
 
-### `monospaced(_:)`
+#### `monospaced(_:)`
 
 如果可能，将文本的字体修改为当前字体的固定宽度变体。
 
@@ -490,7 +492,7 @@ VStack {
 
 ![TextMonospaced](../../images/TextMonospaced.png)
 
-### `monospacedDigit()`
+#### `monospacedDigit()`
 
 修改文本视图的字体以使用固定宽度的数字，同时使其他字符保持比例间距。
 
@@ -532,7 +534,7 @@ var body: some View {
 如果文本视图的基本字体不支持固定宽度数字，则字体保持不变。
 
 
-### `kerning(_:)`
+#### `kerning(_:)`
 
 设置字符之间的间距或字距调整。
 
@@ -568,7 +570,7 @@ VStack(alignment: .leading) {
 :::
 
 
-### `tracking(_:)`
+#### `tracking(_:)`
 
 设置文本的跟踪。
 
@@ -593,7 +595,7 @@ VStack(alignment: .leading) {
 
 跟踪的效果类似于 `.kerning(_:)` 修饰符，但添加或删除尾随空格，而不是更改字符偏移量。此外，使用任何非零量的跟踪都会禁用非必要的连字，而字距调整则试图保持连字。
 
-### `baselineOffset(_:)`
+#### `baselineOffset(_:)`
 
 设置文本相对于其基线的垂直偏移。
 
@@ -628,9 +630,9 @@ HStack(alignment: .top) {
 具有负偏移的第一个视图向下生长以处理降低的文本。具有正偏移的最后一个视图向上生长。显示为灰色的封闭 `HStack` 实例确保所有文本视图无论偏移量如何都保持在其顶部边缘对齐。
 
 
-## Fitting text into available space
+### Fitting text into available space
 
-### `textScale(_:isEnabled:)`
+#### `textScale(_:isEnabled:)`
 
 对文本应用文本缩放。
 
@@ -653,7 +655,7 @@ func textScale(
 
 ![TextScale](../../images/TextScale.png)
 
-### `Text.TruncationMode`
+#### `Text.TruncationMode`
 
 当一行文本太长而无法适应可用空间时，要应用于该文本行的截断类型。
 
@@ -683,9 +685,9 @@ VStack {
 
 ![TextTruncationMode](../../images/TextTruncationMode.png)
 
-## Localizing text
+### Localizing text
 
-### `typesettingLanguage(_:isEnabled:)`
+#### `typesettingLanguage(_:isEnabled:)`
 
 指定排版的语言。
 
@@ -713,3 +715,251 @@ Text(verbatim: "แอปเปิล").typesettingLanguage(
 
 此语言不会影响本地化的文本。
 :::
+
+
+### Configuring voiceover
+
+#### `speechAdjustedPitch(_:)`
+
+提高或降低朗读文本的音调。
+
+```swift
+func speechAdjustedPitch(_ value: Double) -> Text
+```
+
+- `value`：要提高或降低音调的量。介于 -1 和 0 之间的值会导致音调降低，而介于 0 和 1 之间的值会导致音调升高。该方法将值限制在 -1 到 1 的范围内。
+
+当你想要更改朗读文本的音调时使用此修饰符。该值表示要更改音调的高低程度。
+
+
+#### `speechAlwaysIncludesPunctuation(_:)`
+
+设置 `VoiceOver` 是否应始终朗读文本视图中的所有标点符号。
+
+```swift
+func speechAlwaysIncludesPunctuation(_ value: Bool = true) -> Text
+```
+
+- `value`：一个布尔值，如果你希望 `VoiceOver` 朗读文本中的所有标点符号，则将其设置为 `true`。默认为 `true`。
+
+```swift
+Text("All the world's a stage, " +
+    "And all the men and women merely players;")
+    .speechAlwaysIncludesPunctuation()
+```
+
+`VoiceOver` 会朗读“All the world's a stage, and all the men and women merely players;”。
+
+默认情况下，`VoiceOver` 根据周围上下文朗读标点符号。
+
+#### `speechAnnouncementsQueued(_:)`
+
+控制是否将待处理的公告排在现有语音后面，而不是中断正在进行的语音。
+
+```swift
+func speechAnnouncementsQueued(_ value: Bool = true) -> Text
+```
+
+- `value`：一个布尔值，用于确定 `VoiceOver` 是立即朗读文本的更改，还是将它们排在现有语音后面。默认为 `true`。
+
+当你想要影响辅助功能系统传递朗读文本的顺序时使用此修饰符。当辅助功能元素的标签或值更改时，公告可以自动发生。
+
+#### `speechSpellsOutCharacters(_:)`
+
+设置 `VoiceOver` 是否应逐个字符地朗读文本视图的内容。
+
+```swift
+func speechSpellsOutCharacters(_ value: Bool = true) -> Text
+```
+
+- `value`：一个布尔值，当其为 `true` 时，表示 `VoiceOver` 应该将文本作为单个字符朗读。默认为 `true`。
+
+
+当你希望 `VoiceOver` 将文本作为单个字母逐个朗读时使用此修饰符。这对于不打算一起朗读的文本很重要，例如：
+
+不是单词的缩写，如 `APPL`，读作“A-P-P-L”。
+
+表示一系列数字的数字，如 $25$，读作“two-five”而不是“twenty-five”。
+
+
+### `Providing accessibility information`
+
+#### `accessibilityHeading(_:)`
+
+设置此标题的可访问性级别。
+
+
+```swift
+func accessibilityHeading(_ level: AccessibilityHeadingLevel) -> Text
+```
+
+- `level`：要与此元素关联的标题级别，来自可用的 `AccessibilityHeadingLevel` 级别。
+
+使用此修饰符设置此标题相对于其他标题的级别。系统会说出 `AccessibilityHeadingLevel.h1` 到 `AccessibilityHeadingLevel.h6` 的级别数以及文本。
+
+如果不使用此修饰符，默认标题级别为 `AccessibilityHeadingLevel.unspecified`。
+
+
+#### `accessibilityLabel(_:)`
+
+向视图添加一个描述其内容的标签。
+
+```swift
+func accessibilityLabel<S>(_ label: S) -> Text where S : StringProtocol
+```
+
+- `label`：替代可访问性标签的字符串。
+
+使用此方法为显示的文本提供替代可访问性标签。例如，您可以为导航标题提供替代标签：
+
+
+```swift
+var body: some View {
+    NavigationView {
+        ContentView()
+            .navigationTitle(Text("􀈤").accessibilityLabel("Inbox"))
+    }
+}
+```
+
+#### `accessibilityTextContentType(_:)`
+
+设置可访问性文本内容类型。
+
+```swift
+func accessibilityTextContentType(_ value: AccessibilityTextContentType) -> Text
+```
+
+- `value`：来自可用 `AccessibilityTextContentType` 选项的可访问性内容类型。
+
+使用此修饰符设置此可访问性元素的内容类型。辅助技术可以使用此属性选择输出文本的适当方式。例如，当遇到源编码上下文时，`VoiceOver` 可以选择说出所有标点符号。
+
+如果您不使用此方法设置值，则默认内容类型为普通。
+
+### Combining text views
+
+#### `+(_:_:)`
+
+将两个文本视图中的文本连接到一个新的文本视图中。
+
+```swift
+static func + (lhs: Text, rhs: Text) -> Text
+```
+
+
+```swift
+Text("Hello ")+Text("SwiftUI")
+```
+
+## Label
+
+用户界面项目的标准标签，由一个带有标题的图标组成。
+
+```swift
+struct Label<Title, Icon> where Title : View, Icon : View
+```
+
+最常见和可识别的用户界面组件之一是图标和标签的组合。这种习惯用法出现在许多类型的应用程序中，出现在集合、列表、操作项菜单和可展开列表中，仅举几例。
+
+要创建一个标签，最简单的形式是提供一个标题和一个图像的名称，例如 SF Symbols 集合中的图标：
+
+```swift
+Label("Lightning", systemImage: "bolt.fill")
+```
+
+![Label](../../images/Label.png)
+
+您还可以通过多种方式对标签应用样式。在设备旋转或窗口大小更改后视图发生动态更改的情况下，您可能希望仅使用 `titleOnly` 标签样式显示标签的文本部分：
+
+```swift
+Label("Lightning", systemImage: "bolt.fill")
+.labelStyle(.titleOnly)
+```
+
+![LabelTitleOnly](../../images/LabelTitleOnly.png)
+
+相反，还有一种仅图标的标签样式：
+
+```swift
+Label("Lightning", systemImage: "bolt.fill")
+.labelStyle(.iconOnly)
+```
+![LabelIconOnly](../../images/LabelIconOnly.png)
+
+某些容器可能应用不同的默认标签样式，例如在 macOS 和 iOS 上的工具栏中仅显示图标。要选择同时显示标题和图标，可以应用 `titleAndIcon` 标签样式：
+
+```swift
+Label("Lightning", systemImage: "bolt.fill")
+.labelStyle(.titleAndIcon)
+```
+
+![Label](../../images/Label.png)
+
+您还可以通过修改现有样式来创建自定义标签样式；此示例向默认标签样式添加了一个红色边框：
+
+```swift
+struct LabelView: View {
+    var body: some View {
+        Label("Lightning", systemImage: "bolt.fill")
+        .labelStyle(RedBorderedLabelStyle())
+    }
+}
+
+struct RedBorderedLabelStyle: LabelStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        Label(configuration)
+            .border(Color.red)
+    }
+}
+```
+
+![LabelCustom](../../images/LabelCustom.png)
+
+要进行更广泛的自定义或创建全新的标签样式，您需要采用 `LabelStyle` 协议并为新样式实现 `LabelStyleConfiguration`。
+
+要将常见的标签样式应用于一组标签，请将样式应用于包含标签的视图层次结构：
+
+```swift
+VStack {
+    Label("Rain", systemImage: "cloud.rain")
+    Label("Snow", systemImage: "snow")
+    Label("Sun", systemImage: "sun.max")
+}
+.labelStyle(.iconOnly)
+```
+
+![Labels](../../images/Labels.png)
+
+也可以使用视图以编程方式组合标签的图标，而不是使用预制的图像来创建标签。在这个例子中，标签的图标部分使用一个填充的圆形覆盖用户的首字母：
+
+```swift
+struct LabelView: View {
+
+    let person = Person(fullName: "Mike", title: "标题")
+
+    struct Person {
+        var fullName: String
+        var title: String
+        var profileColor: Color = .blue
+        var initials: String = "M"
+    }
+
+    var body: some View {
+        Label {
+            Text(person.fullName)
+                .font(.body)
+                .foregroundColor(.primary)
+            Text(person.title)
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+        } icon: {
+            Circle()
+                .fill(person.profileColor)
+                .frame(width: 44, height: 44, alignment: .center)
+                .overlay(Text(person.initials))
+        }
+    }
+}
+```
+
+![LabelClosure](../../images/LabelClosure.png)
