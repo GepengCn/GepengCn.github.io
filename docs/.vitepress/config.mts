@@ -371,7 +371,20 @@ export default defineConfig({
 
                             ]
 
+                        },
+                        {
+                            text: 'Text input and output',
+                            collapsed: true,
+                            items: [
+                                {
+                                    text: 'Displaying text',
+                                    link: '/swiftui/text_input_and_output/displaying_text'
+                                },
+
+                            ]
+
                         }
+
                     ]
                 },
             ],
