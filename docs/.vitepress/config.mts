@@ -400,6 +400,14 @@ export default defineConfig({
                                     text: 'Managing text layout',
                                     link: '/swiftui/text_input_and_output/managing_text_layout'
                                 },
+                                {
+                                    text: 'Limiting line count for multiline text',
+                                    link: '/swiftui/text_input_and_output/limiting_line_count_for_multiline_text'
+                                },
+                                {
+                                    text: 'Managing text entry',
+                                    link: '/swiftui/text_input_and_output/managing_text_entry'
+                                },
                             ]
 
                         }
