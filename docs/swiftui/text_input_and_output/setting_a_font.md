@@ -1,5 +1,7 @@
 # Setting a font
 
+[[toc]]
+
 ## Applying custom fonts to text
 
 在你的应用中添加并使用一种字体，该字体能够与动态类型（Dynamic Type）一起缩放。

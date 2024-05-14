@@ -810,7 +810,7 @@ func accessibilityLabel<S>(_ label: S) -> Text where S : StringProtocol
 
 - `label`：替代可访问性标签的字符串。
 
-使用此方法为显示的文本提供替代可访问性标签。例如，您可以为导航标题提供替代标签：
+使用此方法为显示的文本提供替代可访问性标签。例如，你可以为导航标题提供替代标签：
 
 
 ```swift
@@ -834,7 +834,7 @@ func accessibilityTextContentType(_ value: AccessibilityTextContentType) -> Text
 
 使用此修饰符设置此可访问性元素的内容类型。辅助技术可以使用此属性选择输出文本的适当方式。例如，当遇到源编码上下文时，`VoiceOver` 可以选择说出所有标点符号。
 
-如果您不使用此方法设置值，则默认内容类型为普通。
+如果你不使用此方法设置值，则默认内容类型为普通。
 
 ### Combining text views
 
@@ -869,7 +869,7 @@ Label("Lightning", systemImage: "bolt.fill")
 
 ![Label](../../images/Label.png)
 
-您还可以通过多种方式对标签应用样式。在设备旋转或窗口大小更改后视图发生动态更改的情况下，您可能希望仅使用 `titleOnly` 标签样式显示标签的文本部分：
+你还可以通过多种方式对标签应用样式。在设备旋转或窗口大小更改后视图发生动态更改的情况下，你可能希望仅使用 `titleOnly` 标签样式显示标签的文本部分：
 
 ```swift
 Label("Lightning", systemImage: "bolt.fill")
@@ -895,7 +895,7 @@ Label("Lightning", systemImage: "bolt.fill")
 
 ![Label](../../images/Label.png)
 
-您还可以通过修改现有样式来创建自定义标签样式；此示例向默认标签样式添加了一个红色边框：
+你还可以通过修改现有样式来创建自定义标签样式；此示例向默认标签样式添加了一个红色边框：
 
 ```swift
 struct LabelView: View {
@@ -915,7 +915,7 @@ struct RedBorderedLabelStyle: LabelStyle {
 
 ![LabelCustom](../../images/LabelCustom.png)
 
-要进行更广泛的自定义或创建全新的标签样式，您需要采用 `LabelStyle` 协议并为新样式实现 `LabelStyleConfiguration`。
+要进行更广泛的自定义或创建全新的标签样式，你需要采用 `LabelStyle` 协议并为新样式实现 `LabelStyleConfiguration`。
 
 要将常见的标签样式应用于一组标签，请将样式应用于包含标签的视图层次结构：
 

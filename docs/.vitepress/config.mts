@@ -381,16 +381,24 @@ export default defineConfig({
                                     link: '/swiftui/text_input_and_output/displaying_text'
                                 },
                                 {
-                                text: 'Getting text input',
-                                link: '/swiftui/text_input_and_output/getting_text_input'
+                                    text: 'Getting text input',
+                                    link: '/swiftui/text_input_and_output/getting_text_input'
                                 },
                                 {
-                                text: 'Selecting text',
-                                link: '/swiftui/text_input_and_output/selecting_text'
+                                    text: 'Selecting text',
+                                    link: '/swiftui/text_input_and_output/selecting_text'
                                 },
                                 {
-                                text: 'Setting a font',
-                                link: '/swiftui/text_input_and_output/setting_a_font'
+                                    text: 'Setting a font',
+                                    link: '/swiftui/text_input_and_output/setting_a_font'
+                                },
+                                {
+                                    text: 'Adjusting text size',
+                                    link: '/swiftui/text_input_and_output/adjusting_text_size'
+                                },
+                                {
+                                    text: 'Managing text layout',
+                                    link: '/swiftui/text_input_and_output/managing_text_layout'
                                 },
                             ]
 

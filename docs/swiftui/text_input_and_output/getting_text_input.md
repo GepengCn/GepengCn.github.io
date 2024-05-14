@@ -1,5 +1,7 @@
 # Getting text input
 
+[[toc]]
+
 ## `TextField`
 
 一个显示可编辑文本界面的控件。
@@ -8,7 +10,7 @@
 struct TextField<Label> where Label : View
 ```
 
-您可以使用标签和绑定到值的值创建一个文本字段。如果该值是字符串，则当用户键入或其他方式编辑字段中的文本时，文本字段会不断更新该值。对于非字符串类型，当用户提交编辑时，例如按下回车键时，它会更新该值。
+你可以使用标签和绑定到值的值创建一个文本字段。如果该值是字符串，则当用户键入或其他方式编辑字段中的文本时，文本字段会不断更新该值。对于非字符串类型，当用户提交编辑时，例如按下回车键时，它会更新该值。
 
 下面的示例显示了一个接受用户名的文本字段，以及下面的一个 `Text` 视图，该视图会不断更新用户名的值。当用户开始和结束编辑时，`Text` 视图会改变颜色。当用户将其完成的条目提交到文本字段时，`onSubmit(of:_:)` 修饰符会调用内部 `validate(name:)` 方法。
 
@@ -38,7 +40,7 @@ var body: some View {
 
 ![SwiftUI-TextField-echoText@2x](../../images/SwiftUI-TextField-echoText@2x.png)
 
-绑定的值不一定是字符串。通过使用`FormatStyle`，您可以将文本字段绑定到非字符串类型，使用格式样式将键入的文本转换为绑定类型的实例。下面的示例使用`PersonNameComponents.FormatStyle`将在文本字段中键入的名称转换为`PersonNameComponents`实例。文本字段下方的`Text`视图显示了该实例的调试描述字符串。
+绑定的值不一定是字符串。通过使用`FormatStyle`，你可以将文本字段绑定到非字符串类型，使用格式样式将键入的文本转换为绑定类型的实例。下面的示例使用`PersonNameComponents.FormatStyle`将在文本字段中键入的名称转换为`PersonNameComponents`实例。文本字段下方的`Text`视图显示了该实例的调试描述字符串。
 
 ```swift
 @State private var nameComponents = PersonNameComponents()
@@ -64,7 +66,7 @@ var body: some View {
 
 ### Text field prompts
 
-您可以在文本字段上设置一个明确的提示，以指导用户应该提供什么文本。每个文本字段样式都决定了文本字段在何处以及何时使用提示和标签。例如，macOS 上的表单始终将标签放置在字段的前沿，并在可用时将提示用作字段本身内的占位符文本。在 iOS 上的相同上下文中，文本字段根据初始化器是否提供提示，将提示或标签用作占位符文本。
+你可以在文本字段上设置一个明确的提示，以指导用户应该提供什么文本。每个文本字段样式都决定了文本字段在何处以及何时使用提示和标签。例如，macOS 上的表单始终将标签放置在字段的前沿，并在可用时将提示用作字段本身内的占位符文本。在 iOS 上的相同上下文中，文本字段根据初始化器是否提供提示，将提示或标签用作占位符文本。
 
 下面的示例显示了一个带有两个文本字段的表单，每个字段都提供了一个提示，表明该字段是必填的，还有一个视图构建器来提供标签：
 
@@ -93,7 +95,7 @@ struct TextFieldView: View {
 
 ### Styling text fields
 
-SwiftUI 提供了一种默认的文本字段样式，该样式反映了适合平台的外观和行为。默认样式还考虑了当前上下文，例如文本字段是否在以特殊样式呈现文本字段的容器中。除此之外，您还可以使用 `textFieldStyle(_:)` 修饰符来自定义文本字段的外观和交互，传入 `TextFieldStyle` 的实例。下面的示例将 `roundedBorder` 样式应用于 `VStack` 中的两个文本字段。
+SwiftUI 提供了一种默认的文本字段样式，该样式反映了适合平台的外观和行为。默认样式还考虑了当前上下文，例如文本字段是否在以特殊样式呈现文本字段的容器中。除此之外，你还可以使用 `textFieldStyle(_:)` 修饰符来自定义文本字段的外观和交互，传入 `TextFieldStyle` 的实例。下面的示例将 `roundedBorder` 样式应用于 `VStack` 中的两个文本字段。
 
 ```swift
 struct TextFieldView: View {
