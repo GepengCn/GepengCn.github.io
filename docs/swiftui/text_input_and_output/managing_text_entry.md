@@ -71,3 +71,44 @@ ScrollView {
 你还可以使用此修饰符来自定义其他类型的可滚动视图（如 `List` 或 `TextEditor`）的键盘隐藏行为。
 
 默认情况下，`TextEditor` 是交互式的，而其他类型的可滚动内容在链接到 iOS 16 或更高版本时始终在滚动时隐藏键盘。传递 `never` 值表示可滚动内容永远不应该自动隐藏键盘。
+
+## `textContentType(_:)`
+
+设置此视图的文本内容类型，系统在用户在 iOS 或 tvOS 设备上输入文本时使用该类型提供建议。
+
+```swift
+func textContentType(_ textContentType: UITextContentType?) -> some View
+```
+
+- `textContentType`: `UITextContentType` 结构中可用的内容类型之一，用于标识文本输入区域预期的语义含义。其中包括对电子邮件地址、位置名称、URL 和电话号码等的支持。
+
+使用此方法设置输入文本的内容类型。例如，你可以为输入电子邮件地址配置一个 `TextField`：
+
+```swift
+TextField("Enter your email", text: $emailAddress)
+.textContentType(.emailAddress)
+```
+
+## `textInputAutocapitalization(_:)`
+
+设置键盘上的 shift 键自动启用的频率。
+
+```swift
+func textInputAutocapitalization(_ autocapitalization: TextInputAutocapitalization?) -> some View
+```
+
+当你需要自动大写单词、句子或其他文本（如专有名词）时，请使用 `textInputAutocapitalization(_:)`。
+
+在下面的示例中，当用户输入文本时，在每个单词之前自动启用 shift 键：
+
+```swift
+TextField("Last, First", text: $fullName)
+.textInputAutocapitalization(.words)
+```
+
+`TextInputAutocapitalization` 结构定义了可用的自动大写行为。向此视图修饰符提供 `nil` 不会更改自动大写行为。默认值是 `TextInputAutocapitalization.sentences`。
+
+- `characters`: 定义一种自动大写行为，该行为将大写每个字母。
+- `sentences`: 定义一种自动大写行为，该行为将大写每个句子的第一个字母。
+- `words`: 定义一种自动大写行为，该行为将大写每个单词的第一个字母。
+- `never`: 定义一种自动大写行为，该行为不会大写任何内容。
