@@ -408,6 +408,14 @@ export default defineConfig({
                                     text: 'Managing text entry',
                                     link: '/swiftui/text_input_and_output/managing_text_entry'
                                 },
+                                {
+                                    text: 'Dictating text',
+                                    link: '/swiftui/text_input_and_output/dictating_text'
+                                },
+                                {
+                                    text: 'Localizing text',
+                                    link: '/swiftui/text_input_and_output/localizing_text'
+                                },
                             ]
 
                         }
