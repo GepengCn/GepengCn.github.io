@@ -418,6 +418,16 @@ export default defineConfig({
                                 },
                             ]
 
+                        },
+                        {
+                            text: 'Images',
+                            collapsed: true,
+                            items: [
+                                {
+                                    text: 'Creating an image',
+                                    link: '/swiftui/images/creating_an_image'
+                                }
+                            ]
                         }
 
                     ]
