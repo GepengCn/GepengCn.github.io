@@ -513,7 +513,11 @@ export default defineConfig({
                                 {
                                     text: 'Drawing a path',
                                     link: '/swiftui/shapes/drawing_a_path'
-                                }
+                                },
+                                {
+                                                                                                                                                                            text: 'Defining shape behavior',
+                                                                                                                                                                            link: '/swiftui/shapes/defining_shape_behavior'
+                                                                                                                                                            }
                             ]
                         }
 

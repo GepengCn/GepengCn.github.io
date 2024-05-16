@@ -247,3 +247,134 @@ mutating func closeSubpath()
 从当前点到当前子路径的起始点附加一条线，并结束子路径。
 
 关闭子路径后，你的应用程序可以开始一个新的子路径，而无需先调用 `move(to:)`。在这种情况下，会隐式创建一个新的子路径，其起始点和当前点等于前一个子路径的起始点。
+
+
+## `addRoundedRect(in:cornerSize:style:transform:)`
+
+向路径添加一个圆角矩形。
+
+```swift
+mutating func addRoundedRect(
+    in rect: CGRect,
+    cornerSize: CGSize,
+    style: RoundedCornerStyle = .continuous,
+    transform: CGAffineTransform = .identity
+)
+```
+
+- `rect`：一个矩形，在用户空间坐标中指定。
+- `cornerSize`：角的大小，在用户空间坐标中指定。
+- `style`：角的样式。如果未指定，则默认为连续样式。
+- `transform`：在将矩形添加到路径之前应用的仿射变换。如果未指定，则默认为恒等变换。
+
+这是一个便利函数，它将一个圆角矩形添加到路径中，首先移动到右边缘的中心，然后逆时针添加线条和曲线来创建圆角矩形，最后闭合子路径。
+
+## `intersection(_:eoFill:)`
+
+返回一个新路径，该路径具有两个路径共有的填充区域。
+
+```swift
+func intersection(
+    _ other: Path,
+    eoFill: Bool = false
+) -> Path
+```
+
+- `other`：要相交的路径。
+- `eoFill`：是否使用奇偶规则来确定哪些区域视为路径的内部（如果为 `true`），还是使用非零规则（如果为 `false`）。
+
+生成的路径的填充区域是两个路径的填充区域的重叠区域。这可用于将路径的填充裁剪到蒙版。
+
+任何未闭合的子路径都被假定为已闭合。使用奇偶填充规则或非零填充规则填充此路径的结果是相同的。
+
+
+## `lineIntersection(_:eoFill:)`
+
+返回一个新路径，该路径具有与此路径重叠的给定路径的填充区域的线条。
+
+```swift
+func lineIntersection(
+    _ other: Path,
+    eoFill: Bool = false
+) -> Path
+```
+
+生成的路径的线条是此路径与其他路径的填充区域重叠的线条。
+
+被裁剪的相交子路径创建开放子路径。不与其他路径相交的闭合子路径保持闭合。
+
+## `lineSubtraction(_:eoFill:)`
+
+返回一个新路径，该路径具有与此路径不重叠的给定路径的填充区域的线条。
+
+```swift
+func lineSubtraction(
+    _ other: Path,
+    eoFill: Bool = false
+) -> Path
+```
+
+## `normalized(eoFill:)`
+
+返回此路径的一个新的弱简单副本。
+
+```swift
+func normalized(eoFill: Bool = true) -> Path
+```
+
+返回的路径是弱简单路径，没有自相交，并且具有归一化的方向。使用奇偶填充规则或非零填充规则填充此路径的结果是相同的。
+
+## `subtracting(_:eoFill:)`
+
+返回一个新路径，该路径包含此路径中不在给定路径中的填充区域。
+
+```swift
+func subtracting(
+    _ other: Path,
+    eoFill: Bool = false
+) -> Path
+```
+
+生成的路径的填充区域是此路径的填充区域减去其他路径的填充区域。
+
+任何未闭合的子路径都被假定为已闭合。使用奇偶填充规则或非零填充规则填充此路径的结果是相同的。
+
+
+## `symmetricDifference(_:eoFill:)`
+
+返回一个新路径，该路径的填充区域要么来自此路径，要么来自给定路径，但不能同时来自两者。
+
+生成的路径的填充区域是包含在此路径或其他路径中的填充区域，但不是两者都包含。
+
+任何未闭合的子路径都被假定为已闭合。使用奇偶填充规则或非零填充规则填充此路径的结果是相同的。
+
+## `union(_:eoFill:)`
+
+返回一个新路径，该路径的填充区域在此路径或给定路径中。
+
+```swift
+func union(
+    _ other: Path,
+    eoFill: Bool = false
+) -> Path
+```
+
+生成的路径的填充区域是两个路径的填充区域的组合。
+
+任何未闭合的子路径都被假定为已闭合。使用奇偶填充规则或非零填充规则填充此路径的结果是相同的。
+
+## `forEach(_:)`
+
+对路径中的每个元素调用 `body`。
+
+```swift
+func forEach(_ body: (Path.Element) -> Void)
+```
+
+## `strokedPath(_:)`
+
+使用 `style` 定义如何创建描边轮廓，返回路径的描边副本。
+
+```swift
+func strokedPath(_ style: StrokeStyle) -> Path
+```
