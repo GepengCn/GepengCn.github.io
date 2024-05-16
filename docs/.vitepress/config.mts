@@ -515,9 +515,23 @@ export default defineConfig({
                                     link: '/swiftui/shapes/drawing_a_path'
                                 },
                                 {
-                                                                                                                                                                            text: 'Defining shape behavior',
-                                                                                                                                                                            link: '/swiftui/shapes/defining_shape_behavior'
-                                                                                                                                                            }
+                                    text: 'Defining shape behavior',
+                                    link: '/swiftui/shapes/defining_shape_behavior'
+                                }
+                            ]
+                        },
+                        {
+                            text: 'Drawing and graphics',
+                            collapsed: true,
+                            items: [
+                                {
+                                    text: 'Immediate mode drawing',
+                                    link: '/swiftui/drawing_and_graphics/immediate_mode_drawing'
+                                },
+                                {
+                                text: 'Setting a color',
+                                link: '/swiftui/drawing_and_graphics/setting_a_color'
+                                }
                             ]
                         }
 
