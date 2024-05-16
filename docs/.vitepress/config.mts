@@ -464,7 +464,46 @@ export default defineConfig({
                                 {
                                     text: 'Linking to other content',
                                     link: '/swiftui/controls_and_indicators/linking_to_other_content'
+                                },
+                                {
+                                    text: 'Getting numeric inputs',
+                                    link: '/swiftui/controls_and_indicators/getting_numeric_inputs'
+                                },
+                                {
+                                    text: 'Choosing from a set of options',
+                                    link: '/swiftui/controls_and_indicators/choosing_from_a_set_of_options'
+                                },
+                                {
+                                    text: 'Choosing dates',
+                                    link: '/swiftui/controls_and_indicators/choosing_dates'
+                                },
+                                {
+                                    text: 'Choosing a color',
+                                    link: '/swiftui/controls_and_indicators/choosing_a_color'
+                                },
+                                {
+                                    text: 'Indicating a value',
+                                    link: '/swiftui/controls_and_indicators/indicating_a_value'
                                 }
+                            ]
+                        },
+                        {
+                            text: 'Menus and commands',
+                            collapsed: true,
+                            items: [
+                                {
+                                    text: 'Creating a menu',
+                                    link: '/swiftui/menus_and_commands/creating_a_menu'
+                                },
+                                {
+                                    text: 'Creating context menus',
+                                    link: '/swiftui/menus_and_commands/creating_context_menus'
+                                },
+                                {
+                                    text: 'Defining commands',
+                                    link: '/swiftui/menus_and_commands/defining_commands'
+                                },
+
                             ]
                         }
 
