@@ -432,8 +432,12 @@ export default defineConfig({
                                     link: '/swiftui/images/configuring_an_image'
                                 },
                                 {
-                                text: 'Loading images asynchronously',
-                                link: '/swiftui/images/loading_images_asynchronously'
+                                    text: 'Loading images asynchronously',
+                                    link: '/swiftui/images/loading_images_asynchronously'
+                                },
+                                {
+                                    text: 'Setting a symbol variant',
+                                    link: '/swiftui/images/setting_a_symbol_variant'
                                 }
                             ]
                         }
