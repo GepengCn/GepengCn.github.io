@@ -440,13 +440,23 @@ export default defineConfig({
                                     link: '/swiftui/images/setting_a_symbol_variant'
                                 },
                                 {
-                                text: 'Managing symbol effects',
-                                link: '/swiftui/images/managing_symbol_effects'
+                                    text: 'Managing symbol effects',
+                                    link: '/swiftui/images/managing_symbol_effects'
                                 },
                                 {
-                                                                                                                                                            text: 'Rendering images from views',
-                                                                                                                                                            link: '/swiftui/images/rendering_images_from_views'
-                                                                                                                                                            }
+                                    text: 'Rendering images from views',
+                                    link: '/swiftui/images/rendering_images_from_views'
+                                }
+                            ]
+                        },
+                        {
+                            text: 'Controls and indicators',
+                            collapsed: true,
+                            items: [
+                                {
+                                    text: 'Creating buttons',
+                                    link: '/swiftui/controls_and_indicators/creating_buttons'
+                                }
                             ]
                         }
 
