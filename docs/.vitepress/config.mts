@@ -505,6 +505,16 @@ export default defineConfig({
                                 },
 
                             ]
+                        },
+                        {
+                            text: 'Shapes',
+                            collapsed: true,
+                            items: [
+                                {
+                                    text: 'Drawing a path',
+                                    link: '/swiftui/shapes/drawing_a_path'
+                                }
+                            ]
                         }
 
                     ]
