@@ -426,6 +426,10 @@ export default defineConfig({
                                 {
                                     text: 'Creating an image',
                                     link: '/swiftui/images/creating_an_image'
+                                },
+                                {
+                                    text: 'Configuring an image',
+                                    link: '/swiftui/images/configuring_an_image'
                                 }
                             ]
                         }
