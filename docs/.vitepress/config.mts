@@ -529,8 +529,12 @@ export default defineConfig({
                                     link: '/swiftui/drawing_and_graphics/immediate_mode_drawing'
                                 },
                                 {
-                                text: 'Setting a color',
-                                link: '/swiftui/drawing_and_graphics/setting_a_color'
+                                    text: 'Setting a color',
+                                    link: '/swiftui/drawing_and_graphics/setting_a_color'
+                                },
+                                {
+                                text: 'Styling content',
+                                link: '/swiftui/drawing_and_graphics/styling_content'
                                 }
                             ]
                         }
