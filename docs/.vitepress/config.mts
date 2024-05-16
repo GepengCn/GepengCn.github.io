@@ -438,6 +438,10 @@ export default defineConfig({
                                 {
                                     text: 'Setting a symbol variant',
                                     link: '/swiftui/images/setting_a_symbol_variant'
+                                },
+                                {
+                                text: 'Managing symbol effects',
+                                link: '/swiftui/images/managing_symbol_effects'
                                 }
                             ]
                         }
