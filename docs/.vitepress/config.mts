@@ -535,6 +535,10 @@ export default defineConfig({
                                 {
                                 text: 'Styling content',
                                 link: '/swiftui/drawing_and_graphics/styling_content'
+                                },
+                                {
+                                    text: 'Transforming colors',
+                                    link: '/swiftui/drawing_and_graphics/transforming_colors'
                                 }
                             ]
                         }
