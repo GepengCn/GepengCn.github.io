@@ -456,6 +456,10 @@ export default defineConfig({
                                 {
                                     text: 'Creating buttons',
                                     link: '/swiftui/controls_and_indicators/creating_buttons'
+                                },
+                                {
+                                    text: 'Creating special-purpose buttons',
+                                    link: '/swiftui/controls_and_indicators/creating_special_purpose_buttons'
                                 }
                             ]
                         }
