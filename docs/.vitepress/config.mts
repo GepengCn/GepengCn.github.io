@@ -539,6 +539,10 @@ export default defineConfig({
                                 {
                                     text: 'Transforming colors',
                                     link: '/swiftui/drawing_and_graphics/transforming_colors'
+                                },
+                                {
+                                text: 'Scaling, rotating, or transforming a view',
+                                link: '/swiftui/drawing_and_graphics/scaling_rotating_or_transforming_a_view'
                                 }
                             ]
                         }
