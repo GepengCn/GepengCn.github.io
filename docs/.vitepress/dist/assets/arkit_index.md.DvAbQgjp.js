@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as a}from"./chunks/framework.C7sZLB-2.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"arkit/index.md","filePath":"arkit/index.md","lastUpdated":1713680721000}'),r={name:"arkit/index.md"};function n(i,o,s,d,c,p){return a(),t("div")}const f=e(r,[["render",n]]);export{m as __pageData,f as default};

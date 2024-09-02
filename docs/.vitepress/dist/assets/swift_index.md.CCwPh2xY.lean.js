@@ -1,1 +1,0 @@
-import{_ as i,c as t,o as e,a4 as a}from"./chunks/framework.B8OCIuDt.js";const p=JSON.parse('{"title":"导航","description":"","frontmatter":{},"headers":[],"relativePath":"swift/index.md","filePath":"swift/index.md"}'),s={name:"swift/index.md"},o=a("",3),l=[o];function r(n,c,f,h,_,d){return e(),t("div",null,l)}const w=i(s,[["render",r]]);export{p as __pageData,w as default};

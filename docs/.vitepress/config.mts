@@ -2,8 +2,8 @@ import {defineConfig} from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-    base: '/gepengcn.github.io/',
-    title: "gepengcn.github.io",
+    base: '/',
+    title: "visionOS",
     description: "visionOS From Scratch",
     markdown: {
         math: true

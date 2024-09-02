@@ -1,1 +1,0 @@
-import{_ as e,c as t,o as a}from"./chunks/framework.B8OCIuDt.js";const _=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"swiftui/index.md","filePath":"swiftui/index.md"}'),i={name:"swiftui/index.md"};function n(s,r,o,c,d,f){return a(),t("div")}const m=e(i,[["render",n]]);export{_ as __pageData,m as default};
