@@ -2,14 +2,14 @@ import {defineConfig} from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-    base: '/visionOS/',
-    title: "visionOS",
+    base: '/gepengcn.github.io/',
+    title: "gepengcn.github.io",
     description: "visionOS From Scratch",
     markdown: {
         math: true
     },
     lastUpdated: true,
-    head: [['link', {rel: 'icon', href: '/visionOS/favicon.ico'}]],
+    head: [['link', {rel: 'icon', href: '/gepengcn.github.io/favicon.ico'}]],
     themeConfig: {
         // https://vitepress.dev/reference/default-theme-config
         logo: '/favicon.png',
@@ -581,7 +581,7 @@ export default defineConfig({
         },
 
         socialLinks: [
-            {icon: 'github', link: 'https://github.com/GepengCn/visionOS'}
+            {icon: 'github', link: 'https://github.com/GepengCn/gepengcn.github.io'}
         ],
 
         footer: {
