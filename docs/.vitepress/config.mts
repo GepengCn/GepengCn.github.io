@@ -585,8 +585,8 @@ export default defineConfig({
         ],
 
         footer: {
-            message: 'Released under the MIT License.',
-            copyright: 'Copyright © 2024-present Gepeng'
+            message: 'GepengCn',
+            copyright: '<a href="https://beian.miit.gov.cn">京ICP备2023028894号</a> © 2023'
         },
         search: {
             provider: 'local'
